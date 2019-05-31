@@ -1,0 +1,26 @@
+<div class="userrightmenu">
+	<span class="fr">您已发布租车 <span class="orange01"><{$userrentcarcounts.0}></span> 条。</span><a href="<{$weburl}>/index.php?m=user&a=addrentcar">+发布租车</a>
+</div>
+			<table cellspacing="0" cellpadding="0" width="100%"  class="listtable">
+                <tr>
+					<th width="100">图</th>
+                    <th>车型信息</th>
+                    <th>报价</th>
+                    <th width="100">操作</th>
+                </tr>
+                <{foreach from=$rentcarslist item=rentcar}>
+                <tr bgcolor="#ffffff" onmouseover="style.backgroundColor='#f5f5f5'"  onmouseout="style.backgroundColor='#ffffff'">
+					<td align="center" width="100"><{if $rentcar.p_mainpic<>''}><img src="<{$rentcar.p_mainpic}>" width="80" height="60"/><{else}><div class="noimg">未上传图片</div><{/if}></td>
+                    <td align="left">
+						<p><a href="<{$rentcar.p_url}>" target="_blank" class="f14 fb"><{$rentcar.p_title}></a></p> 
+						<p class="gray">品牌：<{$rentcar.p_allname}> / 车型：<{$rentcar.p_modelname}></p>
+						<p class="gray">刷新时间：<{$rentcar.listtime}></p>
+					</td>
+                    <td align="center" class="orange01 f14"><{$rentcar.dayprice}>元/天</td>
+                    <td align="center" class="acmenu"><a href="index.php?m=user&a=editrentcar&id=<{$rentcar.p_id}>&page=<{$currpage}>">编辑</a> | <a href="javascript:if(confirm('确实要删除吗?'))location='index.php?m=user&ac=delrentcar&id=<{$rentcar.p_id}>&page=<{$currpage}>'">删除</a> | <a href="index.php?m=user&a=refreshrentcar&id=<{$rentcar.p_id}>&page=<{$currpage}>">刷新</a>
+                </tr>
+                <{/foreach}>
+            </table>
+			<div class="page_list">
+				<{$button_basic}>
+			</div>

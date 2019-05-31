@@ -1,0 +1,265 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>卖车_南安汽车网|南安二手车|南安车市|南安汽车报价|南安汽车团购服务_南安汽车网_NaQcw.com</title>
+<meta name="keywords" content="南安汽车网,南安二手车,南安车市,南安汽车报价,南安汽车团购服务,南安二手汽车,南安二手车网,南安二手车市场,南安旧车,南安卖车,南安买车,南安购车,南安二手车价格,南安二手车参考价,南安经销商,南安二手车报价,南安二手货车,南安二手面包车,南安二手出租车,南安二手车求购,南安二手车置换,南安二手车评估,南安二手车保险,南安二手车检测,南安二手车资讯,南安二手车新闻,南安二手车杂志,南安二手车网，南安汽车网,南安二手车,南安二手车网,大南安二手车,南安二手估价,南安二手买卖,二手车报价,二手车交易市场,大南安汽车网" />
+<meta name="description" content="南安汽车网,南安二手车,南安车市,南安汽车报价,南安汽车团购服务,南安二手汽车,南安二手车网,南安二手车市场,南安旧车,南安卖车,南安买车,南安购车,南安二手车价格,南安二手车参考价,南安经销商,南安二手车报价,南安二手货车,南安二手面包车,南安二手出租车,南安二手车求购,南安二手车置换,南安二手车评估,南安二手车保险,南安二手车检测,南安二手车资讯,南安二手车新闻,南安二手车杂志,南安二手车网，南安汽车网,南安二手车,南安二手车网,大南安二手车,南安二手估价,南安二手买卖,二手车报价,二手车交易市场,大南安汽车网" />
+<link href="http://car.xqzqc.com/css/css/page.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="http://car.xqzqc.com/static/js/jquery.js"></script>
+<script src="http://car.xqzqc.com/static/js/jquery-ui-1.10.0/ui/jquery.ui.core.js"></script>
+<script src="http://car.xqzqc.com/static/js/jquery-ui-1.10.0/ui/jquery.ui.widget.js"></script>
+<script src="http://car.xqzqc.com/static/js/jquery-ui-1.10.0/ui/jquery.ui.mouse.js"></script>
+<script src="http://car.xqzqc.com/static/js/jquery-ui-1.10.0/ui/jquery.ui.sortable.js"></script>
+<link rel="stylesheet" href="http://car.xqzqc.com/admin/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="http://car.xqzqc.com/admin/kindeditor/kindeditor-all.js"></script>
+<script charset="utf-8" src="http://car.xqzqc.com/admin/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript" src="http://car.xqzqc.com/static/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="http://car.xqzqc.com/static/js/laydate/laydate.js"></script>
+<script type="text/javascript">
+$(function(){
+   //品牌选择
+	$("#brand").change(function(){
+		$.get("/?m=ajax&ajax=1", { 
+			brandid :  $("#brand").val() 
+		}, function (data, textStatus){
+               $("#subbrand").html(data); // 把返回的数据添加到页面上
+			}
+		);
+	});
+	//品牌选择
+	$("#subbrand").change(function(){
+		$.get("/?m=ajax&ajax=1", { 
+			subbrandid :  $("#subbrand").val() 
+		}, function (data, textStatus){
+               $("#subsubbrand").html(data); // 把返回的数据添加到页面上
+			}
+		);
+	});
+	//表单验证
+	$(".carform").Validform({
+		tiptype:3,
+		datatype:{
+			"price": /^\d{1,4}(\.\d{1,2})?$/,
+			"zh":/^[\u4e00-\u9fa5]+$/,
+			"gas":/^\d{1,3}(\.\d{1,2})?$/
+
+		}
+	});
+	
+	//图片删除
+	$("#piclist li div span").live('click', function(){
+		$.get("/?m=sellcar&ajax=1&p_id=<{$cars.p_id}>",{
+			p_pic :  $(this).next().val()
+		}, function (data, textStatus){
+			$("li").remove("#"+data);
+		});
+	});
+
+	
+//设为封面
+	$("#piclist li p span").live('click', function(){
+		$(this).parent().parent().children('.img').addClass("selected");
+		$(this).parent().parent().siblings().children('.img').removeClass("selected");
+		$("#mainpic").empty();
+		$("#mainpic").append('<input type="hidden" name="p_mainpic" value="'+$(this).next().val()+'">');
+	});
+	
+	KindEditor.ready(function(K) {
+	var editor = K.editor({
+		uploadJson : 'index.php?m=upload_car',
+		allowFileManager : false,
+		imageUploadLimit : 10
+	});
+	K('#J_selectImage').click(function() {
+		var inputArr = $("#piclist").children("li");
+			var length = inputArr.length;
+			if(length>=10){
+				alert("您最多只能上传10图片！");
+				exit;
+			}
+		editor.loadPlugin('multiimage', function() {
+			editor.plugin.multiImageDialog({
+				clickFn : function(urlList) {
+					var div = K('#piclist');
+					K.each(urlList, function(i, data) {
+						var arr_picid = data.url.split("/");
+						var arr_length = arr_picid.length;
+						var arr_picids = arr_picid[arr_length-1].split(".");
+						div.append('<li id="'+arr_picids[0]+'"><img src="' + data.url + '" class="vt img"><div><span class="del"></span><input type="hidden" name="p_pics[]" value="'+ data.url +'"></div><p><span>设为封面</span><input type="hidden" name="url" value="'+ data.url +'"></p></li>');
+					});
+					editor.hideDialog();
+				}
+			});
+		});
+	});	
+	});
+	
+});
+</script>
+</head>
+<body>
+<!--内容--> 
+<{include file="default/`$setting.templates`/head.html"}>
+<div class="sell_banner clearfix">
+	<div class="sellbox"><div style="background:#fff;">
+		<div class="form_title"><span>免费登记卖车信息</span></div>
+			<div class="box clearfix">
+			<div class="bottom-tips">
+                <span class="red">*</span>小提醒：建议<a href="/?m=register" target="_blank">[注册]</a>/<a href="/?m=login" target="_blank">[登录]</a>后再发布卖车信息，便于您下次查看和修改卖车信息
+            </div>
+                <form name="carform" class="carform" method="post" action="/?m=sellcar">
+					<table cellspacing="0" cellpadding="0"   class="sell_table">
+						<tr>
+							<th><span class="red">*</span> 品牌型号：</th>
+							<td colspan="3">
+								<select name="p_brand" id="brand" datatype="n" nullmsg="请选择品牌！"  style="width:120px;">
+									<{$selectbrand}>
+								</select>
+								<select class="subbrand" id="subbrand" name="p_subbrand" datatype="n" nullmsg="请选择车系！" style="width:auto;">
+										<option value="" selected>请选择车系</option></select>
+                              <select class="subbrand" id="subsubbrand" name="p_subsubbrand" datatype="n" nullmsg="请选择款式！" style="width:auto;">
+								<option value="" selected>请选择款式</option>
+							</select>
+							</td>
+						</tr>
+                        
+                        <tr>
+							<th><span class="red">*</span> 车型选择：</th>
+							<td><select nullmsg="请选择车型！" datatype="n" name="p_model">
+									<option value="">请选择车型</option>                                   
+									<option value="1">微型车</option>
+									<option value="2">小型车</option>
+									<option value="3">紧凑型车</option>
+									<option value="4">中型车</option>
+									<option value="5">中大型车</option>
+									<option value="6">豪华车</option>
+									<option value="7">MPV</option>
+									<option value="8">SUV</option>
+									<option value="9">跑车</option>
+									<option value="38">皮卡</option>
+									<option value="39">面包车</option>
+								</select>
+                            </td>
+							<th><span class="red">*</span> 预售价格：</th>
+							<td><input type="text" nullmsg="请填写价格！" datatype="s" size="8" name="p_price">
+								<span class="gray">(万元)</span>
+                                
+							</td>
+						</tr>
+                        
+						<tr>
+							<th><span class="red">*</span> 车体颜色：</th>
+							<td>
+								<select nullmsg="请选择颜色！" datatype="s" name="p_color">									
+									<{$select_color}>
+								</select>
+							</td>
+
+							<th><span class="red">*</span> 排放标准：</th>
+							<td>
+								<select nullmsg="请选择排放标准！" datatype="s" name="p_emission">
+									<option value="">请选择</option>
+									<option value="国一">国一</option>
+									<option value="国二">国二</option>
+									<option value="国三">国三</option>
+									<option value="国四">国四</option>
+									<option value="国五">国五</option>
+									<option value="欧四">欧四</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><span class="red">*</span> 排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量：</th>
+							<td>
+								<select nullmsg="请选择排量！" datatype="s" name="p_gas">
+									<{$select_gas}>								
+                                </select>
+							</td>
+						
+							<th><span class="red">*</span> 变&nbsp;速&nbsp;&nbsp;箱：</th>
+							<td><select nullmsg="请选择变速箱！" datatype="*" name="p_transmission">
+									<{$select_transmission}>
+							</td>
+						</tr>
+						<tr>
+							<th><span class="red">*</span> 上牌日期：</th>
+							<td  colspan="3"><select nullmsg="请选择上牌日期！" datatype="n" id="p_year" name="p_year">
+									<{$select_year}>								
+                                </select>
+								<select nullmsg="请选择上牌日期！" datatype="n" id="p_month" name="p_month">
+									<{$select_month}>
+                            </td>
+
+						</tr>
+						<tr>
+							<th><span class="red">*</span> 行驶里程：</th>
+							<td><input type="text" errormsg="行驶里程格式不正确！" nullmsg="请选择行驶里程！！" datatype="gas" size="5" id="p_kilometre" name="p_kilometre">
+								<span class="gray">(万公里)</span></td>
+							<th>国产进口：</th>
+							<td>
+                            	<select name="p_country">
+									<{$select_country}>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片：</th>
+							<td colspan="3">
+								<img src="/templates/default/default/image/cljd.png" />
+							</td>
+						</tr>
+						<tr>
+							<th></th>
+							<td colspan="3">
+								<ul id="piclist" class="clearfix">
+								</ul>
+								<input type="button" class="uploadbut" value="批量上传图片" id="J_selectImage">&nbsp;&nbsp;操作提示："添加图片"-"开始上传"-"全部插入"，完成上传图片！
+								<div id="mainpic">
+									
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>车&nbsp;辆&nbsp;补&nbsp;充&nbsp;<br />&nbsp;描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述：</th>
+							<td colspan="3"><textarea class="textarea01" cols="90" rows="2" name="p_details" style="width:490px;height:40px;"></textarea></td>
+						</tr>
+						<tr>
+							<th><span class="red">*</span> 车主姓名：</th>
+							<td colspan="3"><input type="text" nullmsg="请填写车主姓名！" datatype="s" value="" class="inp01" size="30" name="p_username"><span class="Validform_checktip"></span></td>
+						</tr>
+						<tr>						
+							<th><span class="red">*</span> 手机号：</th>
+							<td colspan="3"><input name="p_tel" type="text" size="30" class="inp01" value="" datatype="m" nullmsg="请填写手机号！" errormsg="手机号码格式不正确！" nullmsg="请填写手机号码！"/></td>
+						</tr>
+						<tr>
+							<th><span class="red">*</span> 验&nbsp;证&nbsp;&nbsp;码：</th>
+							<td colspan="3"><input name="authcode" id="cftcode"  type="text"  class="inp02" datatype="s" ajaxurl="/?m=ajax&ajax=1" nullmsg="请输入验证码！" errormsg="请输入正确的验证码！"/> 
+                            <img src="/include/kcaptcha/" width="70" height="30" onclick="this.src='/include/kcaptcha/?'+Math.random();" title="点击刷新验证码" style="cursor:pointer" id="checkcode" align="absmiddle"></td>
+
+						</tr>
+						<tr>
+							<th></th>
+							<td colspan="3" align="center"><input type="submit" value="立刻发布" class="sell_but02">
+								<input type="hidden" name="action" value="sellcar"></td>
+                            
+						</tr>
+					</table>
+				</form>
+            
+            
+			</div>
+		</div>
+	</div></div>
+
+
+<div class="main mt15">
+	<div class="sellb">
+		
+	</div>
+</div>
+<!--版权--> 
+<{include file="default/`$setting.templates`/foot.html"}>
+</body>
+</html>

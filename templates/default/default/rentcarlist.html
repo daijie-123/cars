@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>泉州租车|泉州汽车网|泉州二手车|泉州新车|泉州二手车市场|泉州二手车网|泉州二手估价|泉州二手车交易市场_泉州汽车网_QZQCW.COM</title>
+<meta name="keywords" content="泉州买车,泉州二手车,泉州新车,泉州汽车网,泉州二手车市场,泉州二手车网,泉州二手估价,泉州二手车交易市场" />
+<meta name="description" content="提供泉州买车、泉州二手车、泉州新车、泉州汽车网、泉州二手车市场、泉州二手车网、泉州二手估价、泉州二手车交易市场" />
+<link href="/css/css/car.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+		<script language="JavaScript">
+			$(function() {
+				//品牌选择
+				$("#brand").change(function(){
+					$.get("/?m=ajax&ajax=1", { 
+						bid :  $("#brand").val() 
+					}, function (data, textStatus){
+						   $("#subbrand").html(data); // 把返回的数据添加到页面上
+						}
+					);
+				});
+				//热门车源
+				$("#hotcar").load("/?m=ajax&ajax=1&cartype=hot");
+			})
+		</script>
+		</head>
+	<body>
+<!--内容--> 
+<{include file="default/`$setting.templates`/head.html"}>
+<div class="nav">您当前的位置：<a href="http://www.qzqcw.com/" target="_blank">泉州汽车网</a> <span>></span> <a href="/">选车中心</a> <span>></span> 泉州租车</div>
+<div class="main clearfix mt10">
+	<div class="main_left">
+		<div class="search_box mb10">
+			<div class="condition">
+				<span class="fr pr10"><a href="/?m=rentcar&clear=1" class="unl blue">清空条件</a></span>
+				<span class="fl">&nbsp;&nbsp;您已选择：</span>
+				<ul class="condition_list fl">
+					<{if $smarty.cookies.area<>''}><li><a href="/?m=rentcar&c=c_0" class="condition"><{$cache.citylist[$smarty.cookies.area]}></a></li><{/if}>
+					<{if $smarty.cookies.keywords<>''}><li><a href="/?m=rentcar&k=" class="condition"><{$smarty.cookies.keywords}></a></li><{/if}>
+					<{if $smarty.cookies.brand<> 0}><li><a href="/?m=rentcar&c=b_0" class="condition"><{$cache.brandlist[$smarty.cookies.brand]}></a></li><{/if}>
+					<{if $smarty.cookies.subbrand<> 0}><li><a href="/?m=rentcar&sb=0" class="condition"><{$subrandname}></a></li><{/if}>
+					<{if $smarty.cookies.model<> 0}><li><a href="/?m=rentcar&c=m_0" class="condition"><{$cache.rentmodellist[$smarty.cookies.model]}></a></li><{/if}>
+					<{if $smarty.cookies.price<>0}><li><a href="/?m=rentcar&c=p_0" class="condition"><{$arr_price[$smarty.cookies.price]}></a></li><{/if}>
+				</ul>
+			</div>
+			<ul class="search_list">
+				<form method="get" action="/">
+				<li>品 牌： <a href="/?m=rentcar&c=b_0" <{if $smarty.cookies.brand==0}>class="here"<{/if}>>全部</a><{foreach from=$arr_brand key=skey item=brandlist}><a href="/?m=rentcar&c=b_<{$skey}>" <{if $smarty.cookies.brand==$skey}>class="here"<{/if}>><{$brandlist}></a><{/foreach}>
+				<select id="brand" name="c">
+					<{$selectbrandsearch}>
+				</select>
+				<select id="subbrand" name="sb">
+					<option value="">请选择车系</option>
+				</select>
+				<input type="hidden" name="m" value="rentcar">
+				<input type="submit" value="搜索" class="cbutton">
+				</li>
+				</form>
+				<li>车 型： <a href="/?m=rentcar&c=m_0" <{if $smarty.cookies.model==0}>class="here"<{/if}>>全部</a><{foreach from=$cache.rentmodellist key=skey item=modellist}><a href="/?m=rentcar&c=m_<{$skey}>" <{if $smarty.cookies.model==$skey}>class="here"<{/if}>><{$modellist}></a><{/foreach}></li>
+				<li>价 格： <a href="/?m=rentcar&c=p_0"  <{if $smarty.cookies.price==0}>class="here"<{/if}>>全部</a><{foreach from=$arr_price key=skey item=pricelist}><a href="/?m=rentcar&c=p_<{$skey}>" <{if $smarty.cookies.price==$skey}>class="here"<{/if}>><{$pricelist}></a><{/foreach}></li>
+			</ul>
+		</div>
+		<{if $setting.version==2 or $setting.version==3}>
+		<div class="cartype">
+			<ul class="clearfix">
+				<li><a href="/?m=rentcar&c=f_0" <{if $smarty.cookies.carfrom==0}>class="here"<{/if}>>全部信息</a></li>
+
+			</ul>
+		</div>
+		<{/if}>
+		<div class="search_big_box">
+			<div class="orderlist">
+				<ul class="fl">
+					<li <{if $smarty.cookies.order==1}>class="or04"<{elseif $smarty.cookies.order==2}>class="or03"<{else}>class="or02"<{/if}>><a href="/?m=rentcar&order=<{if $smarty.cookies.order==1}>2<{elseif $smarty.cookies.order==2}>1<{else}>2<{/if}>" >时间</a></li>
+
+				</ul>
+			</div>
+			<div class="box">
+				<{foreach from=$rentcarslist key=skey item=cars_list}>
+					<div class="listrentcar clearfix">
+						<div class="img">
+							<a href="<{$cars_list.p_url}>" target="_blank"><{if $cars_list.p_mainpic<>""}><img src="<{$cars_list.p_mainpic}>"/><{else}><img src="/static/img/car.jpg"/><{/if}></a>
+						</div>
+						<div class="word">
+							<p class="clearfix"><span class="carname fl"><a href="<{$cars_list.p_url}>" target="_blank"><{$cars_list.p_title}> <{if $cars_list.issell==1}><span class="orange01 f14 pl10 fb fl">[已卖]</span><{/if}></a></span></span></p>
+							<p><{$cars_list.p_details}></p>
+							<p>发布日期：<{$cars_list.listtime}></p>
+						</div>
+						<div class="price">
+							<span class="orange01 fb f14 fr"><{$cars_list.dayprice}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<{$cars_list.monthprice}></span>
+						</div>
+					</div>
+				<{/foreach}>
+				<div class="page_list"><{$button_basic}></div>
+			</div>
+		</div>
+	</div>
+	<div class="main_right">
+		<{include file="default/`$setting.templates`/right.html" }>
+	</div>
+</div>
+<{include file="default/`$setting.templates`/foot.html" }>
+</body>
+</html>

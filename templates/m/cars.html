@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title><{$cars.p_allname}>-泉州汽车网(WWW.QZQCW.COM)-泉州最大汽车门户网</title>
+	<link href="/css/m/css/dqzqcw.css" rel="stylesheet" type="text/css"/>
+	<script src="/css/m/js/jquery.js" type="text/javascript"></script>	
+	<script src="/css/m/js/TouchSlide.1.1.js"></script>
+</head>
+<body>
+<!-- qzqcw.com 二级导航 begin -->
+<div class="nav">
+<ul>
+<li><a href="javascript:history.go(-1)">返回</a></li>
+<li><a href="car.php?m=search">选车</a></li>
+<li><a href="car.php?m=search&gas=1">新车</a></li>
+<li><a href="car.php?m=search&gas=2">二手车</a></li>
+<li><a href="http://news.qzqcw.com/m/">新闻</a></li>
+</ul>
+<span><a href="javascript:void(0);" id="reg_mune_box1" ><i class="ms-pull"></i></a></span>
+</div>
+</div>
+<!-- qzqcw.com 二级导航 end -->
+<!--主体-->
+<{if $cars.p_mainpic<>""}>
+<div class="main">
+	<div id="focus" class="carpic">
+		<div class="hd">
+			<ul></ul>
+		</div>
+		<div class="bd">
+			<ul class="gallery">
+				<{foreach from=$pic_list item=pic}>
+				<li><a href="#"><img src="<{$pic}>" ></a></li>
+				<{/foreach}>
+			</ul>
+		</div>
+	</div>
+	<script type="text/javascript">
+		TouchSlide({ 
+			slideCell:"#focus",
+			titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+			mainCell:".bd ul", 
+			effect:"left", 
+			autoPlay:true,//自动播放
+			autoPage:true, //自动分页
+			switchLoad:"_src" //切换加载，真实图片路径为"_src" 
+		});
+	</script>
+</div>
+<{/if}>
+<div class="carname">
+	<{$cars.p_allname}>
+</div>
+<div class="detailbox">
+	<div class="box">
+		<p class="pl10">报价：<span class="orange01 fb f16"><{$cars.p_price}></span></p>
+		<ul class="detaillist clearfix">
+			<li><span class="fb">上牌日期：</span><{$cars.p_year}>年<{$cars.p_month}>月</li>
+			<li><span class="fb">发布日期：</span><{$cars.listtime}></li>
+		</ul>
+	</div>
+</div>
+<div class="detailbox">
+	<h3>基本信息</h3>
+	<div class="box">
+		<ul class="detaillist mt10 clearfix">
+			<li><span class="gray">车型：</span><{if $cars.modelname<>''}><{$cars.modelname}><{else}>无<{/if}></li>	
+			<li><span class="gray">行驶里程：</span><{if $cars.p_kilometre<>''}><{$cars.p_kilometre}>万公里<{else}>无<{/if}></li>
+			<li><span class="gray">颜色：</span><{if $cars.p_color<>''}><{$cars.p_color}><{else}>无<{/if}></li>
+			<li><span class="gray" style="word-spacing:10px;">变速箱：</span><{if $cars.p_transmission<>''}><{$cars.p_transmission}><{else}>无<{/if}></li>
+			<li><span class="gray">首次上牌：</span><{if $cars.p_year<>''}><{$cars.p_year}>年<{$cars.p_month}>月<{else}>无<{/if}></li>
+			<li><span class="gray">归属地：</span><{if $cars.city<>''}><{$cars.city}><{else}>无<{/if}></li>
+		</ul>
+	</div>
+</div>
+<div class="detailbox mt15">
+	<h3>车辆概述</h3>
+	<div class="box">
+		<{$cars.p_details}>
+	</div>
+</div>
+
+<{if $cars.uid==0}>
+<div class="detailbox mt15">
+	<h3>联系方式</h3>
+	<div class="box">
+		<{if $cars.p_username<>''}><p><span>联系人：<{$setting.contactman}></span></p><{/if}>
+		<{if $cars.p_tel<>''}><p class="mt5">手机：<{$setting.tel}></p><{/if}>
+	</div>
+</div>
+<{elseif $cars.uid==-1}>
+<div class="detailbox mt15">
+	<h3>联系方式</h3>
+	<div class="box">
+		<p><span>联系人：<{$setting.contactman}></span></p>
+		<p class="mt5">手机：<{$setting.tel}></p>
+	</div>
+</div>
+<{else}>
+	<{if $shop.isdealer==1}>
+	<div class="detailbox mt15">
+		<h3>联系方式</h3>
+		<div class="box">
+			<{if $shop.nicname<>''}><p class="mt5">联系人：<{$shop.nicname}></p><{/if}>
+			<{if $shop.mobilephone<>''}><p class="mt5">手机：<{$shop.mobilephone}></p><{/if}>
+		</div>
+	</div>
+	<{else}>
+	<div class="detailbox mt15">
+		<h3>店铺信息</h3>
+		<div class="box">
+			<{if $shop.nicname<>''}><p><span>联系人：<{$shop.nicname}></span></p><{/if}>
+			<{if $shop.mobilephone<>''}><p class="mt5">手机：<{$shop.mobilephone}></p><{/if}>
+			<{if $shop.tel<>''}><p class="mt5">固话：<{$shop.tel}></p><{/if}>
+			<{if $shop.address<>''}>地址：<{$shop.address}></p><{/if}>
+			<p class="mt5 tc"><a href="car.php?m=shop&id=<{$shop.id}>" class="entermenu">进入商家店铺</a></p>
+		</div>
+	</div>
+	<{/if}>
+<{/if}>
+
+<div class="detailbox mt15">
+	<h3>同车型推荐</h3>
+	<{foreach from=$samecar item=samecarlist}>
+	<div class="carlist clearfix mt10">
+		<div class="carlist_left">
+			<a href="car.php?m=cars&id=<{$samecarlist.p_id}>"><{if $samecarlist.p_mainpic<>''}><img src="<{$samecarlist.p_mainpic}>"/><{else}>暂无图片<{/if}></a>
+		</div>
+		<div class="carlist_right">
+			<p class="f18 fb"><a href="car.php?m=cars&id=<{$samecarlist.p_id}>"><{$samecarlist.p_allname}></a></p>
+			<p>上牌日期：<{$samecarlist.p_year}>年<{$samecarlist.p_month}>月</p>
+			<p><span class="orange01 f14 fr pr10 fb"><{$samecarlist.p_price}></span><{$samecarlist.listtime}></p>
+		</div>
+	</div>
+	<{/foreach}>
+</div>
+<div class="detailbox mt15">
+	<h3>同价位推荐</h3>
+	<{foreach from=$samepricecars item=samepricecarlist}>
+	<div class="carlist clearfix mt10">
+		<div class="carlist_left">
+			<a href="car.php?m=cars&id=<{$samepricecarlist.p_id}>"><{if $samepricecarlist.p_mainpic<>''}><img src="<{$samepricecarlist.p_mainpic}>"/><{else}>暂无图片<{/if}></a>
+		</div>
+		<div class="carlist_right">
+			<p class="f18 fb"><a href="car.php?m=cars&id=<{$samepricecarlist.p_id}>"><{$samepricecarlist.p_allname}></a></p>
+			<p>上牌日期：<{$samepricecarlist.p_year}>年<{$samepricecarlist.p_month}>月</p>
+			<p><span class="orange01 fr pr10 fb"><{$samepricecarlist.p_price}></span><{$samepricecarlist.listtime}></p>
+		</div>
+	</div>
+	<{/foreach}>
+</div>
+<div id="foottel">
+	<{if $cars.uid==0}>
+		<div class="tel">
+			<p>联系人：<span class="orange01"><{$cars.p_username}></span></p>
+			<p>电话：<span class="orange01"><{$cars.p_tel}></span></p>
+		</div>
+		<div class="clickfoottel">
+			<a href="tel:<{$cars.p_tel}>">电话咨询</a>
+		</div>
+	<{elseif $cars.uid==-1}>
+	<div class="detailbox mt15">
+		<div class="tel">
+			<p>联系人：<span class="orange01"><{$setting.contactman}></span></p>
+			<p>电话：<span class="orange01"><{$setting.tel}></span></p>
+		</div>
+		<div class="clickfoottel">
+			<a href="tel:<{$setting.tel}>">电话咨询</a>
+		</div>
+	</div>
+	<{else}>
+		<div class="tel">
+			<p>联系人：<span class="orange01"><{$shop.nicname}></span></p>
+			<p>电话：<a href="tel://<{$shop.mobilephone}>"><span class="orange01"><{$shop.mobilephone}></span></a></p>
+		</div>
+	<{/if}>
+</div>
+<!--主体-->
+<!--底部-->
+<{include file="m/foot.html"}>
+<!--底部结束-->
+</body>
+</html>

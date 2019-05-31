@@ -1,0 +1,170 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title><{$cars.p_allname}>_泉州汽车网|泉州二手车|泉州车市|泉州汽车报价|泉州汽车团购服务_泉州汽车网_QZQCW.COM</title>
+<meta name="keywords" content="泉州汽车网,泉州二手车,泉州车市,泉州汽车报价,泉州汽车团购服务,泉州二手汽车,泉州二手车网,泉州二手车市场,泉州旧车,泉州卖车,泉州买车,泉州购车,泉州二手车价格,泉州二手车参考价,泉州经销商,泉州二手车报价,泉州二手货车,泉州二手面包车,泉州二手出租车,泉州二手车求购,泉州二手车置换,泉州二手车评估,泉州二手车保险,泉州二手车检测,泉州二手车资讯,泉州二手车新闻,泉州二手车杂志,泉州二手车网，泉州汽车网,泉州二手车,泉州二手车网,大泉州二手车,泉州二手估价,泉州二手买卖,二手车报价,二手车交易市场,大泉州汽车网" />
+<meta name="description" content="泉州汽车网,泉州二手车,泉州车市,泉州汽车报价,泉州汽车团购服务,泉州二手汽车,泉州二手车网,泉州二手车市场,泉州旧车,泉州卖车,泉州买车,泉州购车,泉州二手车价格,泉州二手车参考价,泉州经销商,泉州二手车报价,泉州二手货车,泉州二手面包车,泉州二手出租车,泉州二手车求购,泉州二手车置换,泉州二手车评估,泉州二手车保险,泉州二手车检测,泉州二手车资讯,泉州二手车新闻,泉州二手车杂志,泉州二手车网，泉州汽车网,泉州二手车,泉州二手车网,大泉州二手车,泉州二手估价,泉州二手买卖,二手车报价,二手车交易市场,大泉州汽车网" />
+		<link href="http://car.qzqcw.com/css/css/car1.css" rel="stylesheet" type="text/css"/>
+		<script type="text/javascript" src="http://car.qzqcw.com/templates/default/<{$setting.templates}>/js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="http://car.qzqcw.com/templates/default/<{$setting.templates}>/js/jquery.SuperSlide.2.1.js"></script>
+				<script type="text/javascript" src="/static/js/jquery.js"></script>
+		<script language="JavaScript">
+			$(function() {
+				//品牌选择
+				$("#brand").change(function(){
+					$.get("/?mod=ajax&ajax=1", { 
+						pid :  $("#brand").val() 
+					}, function (data, textStatus){
+						   $("#subbrand").html(data); // 把返回的数据添加到页面上
+						}
+					);
+				});
+				$("div.car_tab ul li a").mouseover(function() {
+					$(this).addClass("here").parent().siblings().children().removeClass("here");
+					var index = $div_li.index(this);
+					$("div.cartab_box > div").eq(index).show().siblings().hide();
+				});
+				$("#hits").load("/?m=ajax&ajax=1&rentcarshit=1&id=<{$cars.p_id}>");
+			})
+		</script>
+		</head>
+	<body>
+<!--内容--> 
+<{include file="default/`$setting.templates`/head.html"}>
+<div class="nav">您当前的位置：<a href="http://www.qzqcw.com/" target="_blank">泉州汽车网</a> <span>></span> <a href="http://car.qzqcw.com/">泉州汽车选购</a> <span>></span> 租车服务</div>
+<div class="main mt10">
+	<div class="carbox clearfix">
+		<div class="carbox_left">
+			<div class="carpicbox">
+				<{if $cars.p_mainpic<>""}>
+				<img src="<{$weburl}><{$cars.p_mainpic}>" id="BigImg"/>
+				<{else}>
+				<img src="<{$weburl}>/static/img/bigcar.jpg"/>
+				<{/if}>
+			</div>
+			<{if $pic_list neq ""}>
+			<div class="ladyScroll">
+				<a class="prev" href="javascript:void(0)"></a>
+				<div class="scrollWrap">
+					<div class="dlList">
+						<{foreach from=$pic_list item=piclist}>
+						<dl>
+							<dt><img src="<{$weburl}><{$piclist.smallpic}>" onmousemove="javascript:document.getElementById('BigImg').src='<{$weburl}><{$piclist.pic}>'"></dt>
+						</dl>
+						<{/foreach}>
+					</div>
+				</div>
+				<a class="next" href="javascript:void(0)"></a>
+			</div>
+			<script type="text/javascript">
+				jQuery(".ladyScroll").slide({ mainCell:".dlList", effect:"leftLoop",vis:5, autoPlay:true});
+			</script>
+			<{/if}>
+		</div>
+		<div class="carbox_right">
+			<div class="carname"><{$cars.p_title}></div>
+			<div class="rentcarname">车型：<{$cars.p_allname}></div>
+			<p class="gray01 mt20"><span class="fr">点击：<span class="orange01" id="hits"></span></span>发布日期：<{$cars.listtime}></p>
+			<div class="detail01 mt10">
+				<ul class="clearfix">
+					<li class="li01 mb10">价格：<span class="price"><{$cars.dayprice}></span> 元/天 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="price"><{$cars.monthprice}></span> 元/月</li>
+				</ul>
+				<div class="rentcarname"><h3>免费咨询电话（8:30-17:00 周六日休息）</h3></div>
+				<div class="contactbox">
+					<div class="telbox">
+						<i></i>
+
+							<{if $cars.uid==0}>
+								<p class="tel"><span class="fb"><{$setting.tel}></span></p>
+								<p class="tel">联系人：<{$setting.contactman}></p>
+							<{else}>
+								<p class="tel"><span class="fb"><{$shop.mobilephone}></span> <{if $shop.isdealer==2}>（商家车源）<{/if}></p>
+								<p class="tel"><{$shop.nicname}></p>
+							<{/if}>
+					</div>
+
+				</div>
+				<div class="ensure"><!--保障服务-->
+                <label>保障服务</label>
+                <i class="i-yb"></i>车况良好&nbsp;&nbsp;&nbsp;<i class="i-ckb"></i>车辆崭新&nbsp;&nbsp;&nbsp;<i class="i-dk"></i>保险齐全
+			</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div class="main mt20 clearfix">
+	<div class="main_left">
+		<div class="cardetailbox">
+			<ul class="title_tab">
+				<li class="here"><a href="#B">租车描述</a></li>
+				<li><a href="#D">大图展示</a></li>
+			</ul>
+			<div class="box">
+				<h3 id="B"><span class="title">租车描述</span></h3>
+				<div class="p20 cardetail">
+					<{$cars.p_details}>
+				</div>
+				<{if $pic_list neq ""}>
+				<h3 id="D"><span class="title">大图展示</span></h3>
+				<div class="p20">
+					<{foreach from=$pic_list item=piclist}>
+					<p class="tc mt10"><img src="<{$weburl}><{$piclist.pic}>"></p>
+					<{/foreach}>
+				</div>
+				<{/if}>
+			</div>
+		</div>
+	</div>
+	<div class="main_right">
+		<{if $shop.isdealer==2 and $setting.version<>1}>
+		<div class="shopbox mb10">
+			<h3><{$shop.company}></h3>
+			<div class="box">
+				<{if $shop.logo<>''}><div class="logo"><img src="<{$shop.logo}>"></div><{/if}>
+				<ul class="shopcontact">
+					<li><strong>电话：</strong><{$shop.mobilephone}></li>
+					<li><strong>地址：</strong>-<{$shop.address}></li>
+				</ul>
+				<div class="cyssbut">
+					<span class="button_gray w200-h35"><a target="_blank" href="/?m=shop&id=<{$shop.id}>">进入商家店铺</a></span> 
+				</div>
+			</div>
+		</div>
+		<{/if}>
+		<div class="commonbox01">
+			<h3><span class="title">同车系其他车源</span></h3>
+			<div class="box">
+				<ul class="carlist clearfix">
+					<{foreach from=$samecar key=skey item=recomcarlist}>
+					<li>
+						<a href="<{$recomcarlist.p_url}>" target="_blank"><{if $recomcarlist.p_mainpic<>""}><img src="<{$recomcarlist.p_mainpic}>"/><{else}><img src="<{$weburl}>/static/img/car.jpg"/><{/if}></a>
+						<p class="mt10"><a href="<{$recomcarlist.p_url}>" target="_blank"><{$recomcarlist.p_shortname}></a></p>
+						<p class="gray01"><span class="orange01 fb fr"><{$recomcarlist.p_price}></span><{$recomcarlist.p_year}>年<{$recomcarlist.p_month}>月上牌</p>
+					</li>
+					<{/foreach}>
+				</ul>
+			</div>
+		</div>
+		<div class="commonbox01 mt10">
+			<h3><span class="title">同价位其他车源</span></h3>
+			<div class="box">
+				<ul class="carlist clearfix">
+					<{foreach from=$samepricecars key=skey item=recomcarlist}>
+					<li>
+						<a href="<{$recomcarlist.p_url}>" target="_blank"><{if $recomcarlist.p_mainpic<>""}><img src="<{$recomcarlist.p_mainpic}>"/><{else}><img src="<{$weburl}>/static/img/car.jpg"/><{/if}></a>
+						<p class="mt10"><a href="<{$recomcarlist.p_url}>" target="_blank"><{$recomcarlist.p_shortname}></a></p>
+						<p class="gray01"><span class="orange01 fb fr"><{$recomcarlist.p_price}></span><{$recomcarlist.p_year}>年<{$recomcarlist.p_month}>月上牌</p>
+					</li>
+					<{/foreach}>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<{include file="default/`$setting.templates`/foot.html" }>
+</body>
+</html>
+

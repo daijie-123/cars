@@ -1,0 +1,189 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="static/css/admin/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="static/js/jquery.js"></script>
+<link rel="stylesheet" href="admin/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="admin/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="admin/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript" src="static/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="<{$weburl}>/static/js/laydate/laydate.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    //品牌选择
+	$("#brand").change(function(){
+		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", { 
+			brandid :  $("#brand").val() 
+		}, function (data, textStatus){
+               $("#subbrand").html(data); // 把返回的数据添加到页面上
+			}
+		);
+	});
+	//品牌选择
+	$("#subbrand").change(function(){
+		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", { 
+			subbrandid :  $("#subbrand").val() 
+		}, function (data, textStatus){
+               $("#subsubbrand").html(data); // 把返回的数据添加到页面上
+			}
+		);
+	});
+	<{if $setting.version==3}>
+	   //城市选择
+	$("#province").change(function(){
+		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", { 
+			cityid :  $("#province").val() 
+		}, function (data, textStatus){
+               $("#city").html(data); // 把返回的数据添加到页面上
+			}
+		);
+	});
+	<{/if}>
+
+	//图片删除
+	$("#piclist li div span").live('click', function(){
+		$.get("<{$adminpage}>?m=cars&ajax=1&p_id=<{$cars.p_id}>",{
+			p_pic :  $(this).next().val()
+		}, function (data, textStatus){
+			$("li").remove("#"+data);
+		});
+	});
+
+	//设为封面
+	$("#piclist li p span").live('click', function(){
+		$(this).parent().parent().children('.img').addClass("selected");
+		$(this).parent().parent().siblings().children('.img').removeClass("selected");
+		$("#mainpic").empty();
+		$("#mainpic").append('<input type="hidden" name="p_mainpic" value="'+$(this).next().val()+'">');
+	});
+
+	//表单验证
+	$(".carform").Validform({
+		tiptype:3
+	});
+});
+KindEditor.ready(function(K) {
+	var editor = K.editor({
+		uploadJson : 'index.php?m=upload_car',
+		allowFileManager : false
+	});
+	K('#J_selectImage').click(function() {
+		editor.loadPlugin('multiimage', function() {
+			editor.plugin.multiImageDialog({
+			clickFn : function(urlList) {
+					var div = K('#piclist');
+					K.each(urlList, function(i, data) {
+						var arr_picid = data.url.split("/");
+						var arr_length = arr_picid.length;
+						var arr_picids = arr_picid[arr_length-1].split(".");
+						div.append('<li id="'+arr_picids[0]+'"><img src="' + data.url + '" class="vt img"><div><span class="del"></span><input type="hidden" name="p_pics[]" value="'+ data.url +'"></div><p><span>设为封面</span><input type="hidden" name="url" value="'+ data.url +'"></p></li>');
+					});
+					editor.hideDialog();
+				}
+			});
+		});
+	});
+});
+</script>
+</head>
+<body>
+<div class="colorarea01">
+	<div class="search clearfix">
+		<div class="searchL">
+			<ul class="menulist">
+				<li><a href="<{$adminpage}>?m=rentcars&a=list" class="list">返回车源列表</a></li>
+			</ul>
+		</div>
+	</div>
+	<form name="form1" class="carform" enctype="multipart/form-data" method="post" action="<{$adminpage}>?m=rentcars" onsubmit="return chksubmit();">
+		<table cellspacing="0" cellpadding="0" width="100%"  class="maintable">
+			<tr>
+				<th>浏览次数：</th>
+				<td><input type="text" name="p_hits" value="<{$rentcars.p_hits}>" size="6"></td>
+			</tr>
+			<tr>
+				<th>推荐位：</th>
+				<td><input type="checkbox" name="isrecom" value="1" <{if $rentcars.isrecom==1}>checked<{/if}>> 推荐 &nbsp;&nbsp;<input type="checkbox" name="issprecom" value="1" <{if $rentcars.issprecom==1}>checked<{/if}>> 特荐 &nbsp;&nbsp; <input type="checkbox" name="ishot" value="1" <{if $rentcars.ishot==1}>checked<{/if}>> 热门 </td>
+			</tr>
+			<{if $setting.version==3}>
+			<tr>
+            <th>所在城市：</th>
+				<td colspan="3">
+					<select name="aid" id="province">
+						<{$selectprovince}>
+					</select>
+					<select name="cid" id="city">
+						<{$selectcity}>
+					</select>
+				</td>
+                </tr><{/if}>
+			<tr>
+				<th>标题：</th>
+				<td><input type="text" name="p_title" value="<{$rentcars.p_title}>" size="80"></td>
+			</tr>
+			<tr>
+				<th>品牌型号：</th>
+				<td colspan="3">
+					<select name="p_brand" id="brand" datatype="n" nullmsg="请选择品牌！">
+						<{$select_brand}>
+					</select>
+					<select class="subbrand" id="subbrand" name="p_subbrand" datatype="n" nullmsg="请选择车系！">
+						<option  value="">请选择车系</option>
+						<{$select_subbrand}>                    
+					</select> &nbsp;<select class="subbrand" id="subsubbrand" name="p_subsubbrand" datatype="n" nullmsg="请选择款式！">
+					<option  value="">请选择款式</option>
+						<{$select_subsubbrand}>	
+					</select>
+					<input type="text" name="p_name" value="<{$rentcars.p_name}>" size="10"></td>
+			</tr>
+			<tr>
+				<th>车型选择：</th>
+				<td><select name="p_model">
+						<{$select_rentmodel}>
+					</select></td>
+			</tr>
+			<tr>
+				<th>日租金：</th>
+				<td><input type="text" name="dayprice"  size="8" value="<{$rentcars.dayprice}>" datatype="s" nullmsg="请填写日租金！">
+				<span class="gray">元/天</span></td>
+			</tr>
+			<tr>
+				<th>月租金：</th>
+				<td><input type="text" name="monthprice"  size="8" value="<{$rentcars.monthprice}>" datatype="s" nullmsg="请填写月租金！">
+				<span class="gray">元/月</span></td>
+			</tr>
+			<tr>
+				<th>图片：</th>
+				<td colspan="3">
+					<ul id="piclist" class="clearfix">
+						<{foreach from=$pic_list key=key item=pic_list}>
+							<li id="<{$pic_list.picid}>"><img src="<{$pic_list.pic}>" class="img"/><div><span class="del"></span><input type="hidden" name="p_pics[]" value="<{$pic_list.pic}>"></div><p><span>设为封面</span><input type="hidden" name="url" value="<{$pic_list.pic}>"></p></li></li>
+					<{/foreach}>
+					</ul>
+					<input type="button" id="J_selectImage" value="批量上传图片" class="uploadbut"/>
+					<div id="mainpic">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>补充描述：</th>
+				<td colspan="5"><textarea  name="p_details" rows="2" cols="90" class="textarea01"><{$rentcars.p_details}></textarea></td>
+			</tr>
+			
+			<tr>
+				<th></th>
+				<td colspan="5"><div class="buttons">
+						<input type="submit" value="<{$ac_arr[$ac]}>" class="submit">
+						<input type="hidden" name="a" value="<{$ac}>">
+						<input type="hidden" name="id" value="<{$rentcars.p_id}>">
+				</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+</body>
+</html>

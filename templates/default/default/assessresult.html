@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>免费评估_泉州汽车网|泉州二手车|泉州车市|泉州汽车报价|泉州汽车团购服务_泉州汽车网_QZQCW.COM</title>
+<meta name="keywords" content="泉州汽车网,泉州二手车,泉州车市,泉州汽车报价,泉州汽车团购服务,泉州二手汽车,泉州二手车网,泉州二手车市场,泉州旧车,泉州卖车,泉州买车,泉州购车,泉州二手车价格,泉州二手车参考价,泉州经销商,泉州二手车报价,泉州二手货车,泉州二手面包车,泉州二手出租车,泉州二手车求购,泉州二手车置换,泉州二手车评估,泉州二手车保险,泉州二手车检测,泉州二手车资讯,泉州二手车新闻,泉州二手车杂志,泉州二手车网，泉州汽车网,泉州二手车,泉州二手车网,大泉州二手车,泉州二手估价,泉州二手买卖,二手车报价,二手车交易市场,大泉州汽车网" />
+<meta name="description" content="泉州汽车网,泉州二手车,泉州车市,泉州汽车报价,泉州汽车团购服务,泉州二手汽车,泉州二手车网,泉州二手车市场,泉州旧车,泉州卖车,泉州买车,泉州购车,泉州二手车价格,泉州二手车参考价,泉州经销商,泉州二手车报价,泉州二手货车,泉州二手面包车,泉州二手出租车,泉州二手车求购,泉州二手车置换,泉州二手车评估,泉州二手车保险,泉州二手车检测,泉州二手车资讯,泉州二手车新闻,泉州二手车杂志,泉州二手车网，泉州汽车网,泉州二手车,泉州二手车网,大泉州二手车,泉州二手估价,泉州二手买卖,二手车报价,二手车交易市场,大泉州汽车网" />
+<link href="http://car.qzqcw.com/css/css/assess.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+</head>
+<body>
+<!--内容--> 
+<{include file="default/`$setting.templates`/head.html"}>
+<div class="main mt15">
+	<div class="lay1" id="evalute_result">
+        <div class="car_info">
+            <div class="left">
+				<span title="<{$post.p_allname}>"><{$post.p_allname}></span>
+			</div>
+            <div class="right">
+                <span class="time">上牌年份<strong><{$post.p_year}>年<{$post.p_month}>月</strong></span>
+				<span class="mileage">行驶里程<strong><{$post.p_kilometre}>万公里</strong></span>
+            </div>
+        </div>
+        <div class="eva_info">
+            <div class="logo">
+                <div class="logo_switch">
+                     <div class="hasdata"></div>
+                 </div>  
+            </div>
+            <div class="detail_info">
+                <p class="p1">通过专业估价算法分析，得出以下结果：</p>
+                <p class="p2">预计成交价<span><{$lastprice}></span>万元</p>
+                <div class="note_box">
+                    <p>以上报价是基于该车在<strong class="color-red">正常保养情况</strong>下行驶<strong class="color-red"><{$post.p_kilometre}>万公里</strong>后的车况进行评估，该车况可能与您的实际情况有所偏差，您可在此基础上进行微调。</p>
+                </div>
+            </div>
+            <div class="choose">
+			  <div class="item">
+				<a class="btn" href="/?m=assesscar">再次免费评估</a>
+			  </div>  
+			</div>
+        </div>
+    </div>
+</div>
+<!--版权--> 
+<{include file="default/`$setting.templates`/foot.html"}>
+</body>
+</html>

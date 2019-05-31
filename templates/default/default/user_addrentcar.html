@@ -1,0 +1,157 @@
+<script type="text/javascript">
+$(function(){
+	//品牌选择
+	$("#brand").change(function(){
+		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", { 
+			brandid :  $("#brand").val() 
+		}, function (data, textStatus){
+               $("#subbrand").html(data); // 把返回的数据添加到页面上
+			}
+		);
+	});
+	//品牌选择
+	$("#subbrand").change(function(){
+		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", { 
+			subbrandid :  $("#subbrand").val() 
+		}, function (data, textStatus){
+               $("#subsubbrand").html(data); // 把返回的数据添加到页面上
+			}
+		);
+	});
+	<{if $setting.version==3}>
+	//城市选择
+	$("#province").change(function(){
+		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", { 
+			cityid :  $("#province").val() 
+		}, function (data, textStatus){
+			$("#city").html(data); // 把返回的数据添加到页面上
+					}
+		);
+	});
+	<{/if}>
+	//图片删除
+	$("#piclist li div span").live('click', function(){
+		$.get("index.php?m=user&ajax=1&rentid=<{$cars.p_id}>",{
+			p_pic :  $(this).next().val()
+		}, function (data, textStatus){
+			$("li").remove("#"+data);
+		});
+	});
+
+	//设为封面
+	$("#piclist li p span").live('click', function(){
+		$(this).parent().parent().children('.img').addClass("selected");
+		$(this).parent().parent().siblings().children('.img').removeClass("selected");
+		$("#mainpic").empty();
+		$("#mainpic").append('<input type="hidden" name="p_mainpic" value="'+$(this).next().val()+'">');
+	});
+	KindEditor.ready(function(K) {
+	var editor = K.editor({
+		uploadJson : 'index.php?m=upload_car',
+		allowFileManager : false,
+		imageUploadLimit : 10
+	});
+	K('#J_selectImage').click(function() {
+		var inputArr = $("#piclist").children("li");
+			var length = inputArr.length;
+			if(length>=10){
+				alert("您最多只能上传10张图片！");
+				exit;
+			}
+		editor.loadPlugin('multiimage', function() {
+			editor.plugin.multiImageDialog({
+				clickFn : function(urlList) {
+					var div = K('#piclist');
+					K.each(urlList, function(i, data) {
+						var arr_picid = data.url.split("/");
+						var arr_length = arr_picid.length;
+						var arr_picids = arr_picid[arr_length-1].split(".");
+						div.append('<li id="'+arr_picids[0]+'"><img src="' + data.url + '" class="vt img"><div><span class="del"></span><input type="hidden" name="p_pics[]" value="'+ data.url +'"></div><p><span>设为封面</span><input type="hidden" name="url" value="'+ data.url +'"></p></li>');
+					});
+					editor.hideDialog();
+				}
+			});
+		});
+	});
+});
+});
+</script>
+<form name="form1" class="carform" enctype="multipart/form-data" method="post" action="index.php?m=user">
+    <table cellspacing="0" cellpadding="0" width="100%"  class="maintable">
+		<{if $setting.version==3}>
+			<tr>
+				<th>所在城市：</th>
+				<td colspan="3">
+					<select name="aid" id="province">
+						<{$selectprovince}>
+					</select>
+					<select name="cid" id="city">
+						<{$selectcity}>
+					</select>
+				</td>
+			</tr><{/if}>
+			<tr>
+				<th> 标题：</th>
+				<td><input type="text" name="p_title"  size="60" value="<{$cars.p_title}>" datatype="*1-50" nullmsg="请填写标题！">
+				</td>
+			</tr>
+			<tr>
+				<th> 品牌型号：</th>
+				<td colspan="3">
+					<select name="p_brand" id="brand" datatype="n" nullmsg="请选择品牌！">
+						<{$select_brand}>
+					</select>
+					<select class="subbrand" id="subbrand" name="p_subbrand" datatype="n" nullmsg="请选择车系！">
+						<option  value="">请选择车系</option>
+						<{$select_subbrand}>                    
+					</select> &nbsp;<select class="subbrand" id="subsubbrand" name="p_subsubbrand" datatype="n" nullmsg="请选择款式！">
+						<option  value="">请选择款式</option>
+						<{$select_subsubbrand}>	
+					</select>
+			</tr>
+			<tr>
+				<th> 车型选择：</th>
+				<td><select name="p_model" datatype="n" nullmsg="请选择车型！">
+						<{$select_rentmodel}>
+					</select></td>
+			</tr>
+			<tr>
+				<th> 日租金：</th>
+				<td><input type="text" name="dayprice"  size="5" value="<{$cars.dayprice}>" datatype="s" nullmsg="请填写日租金！">
+					<span class="gray">元/天</span></td>
+			</tr>
+			<tr>
+				<th> 月租金：</th>
+				<td><input type="text" name="monthprice"  size="5" value="<{$cars.monthprice}>" datatype="s" nullmsg="请填写月租金！">
+					<span class="gray">元/月</span></td>
+			</tr>
+			<tr>
+				<th>图片：</th>
+				<td colspan="3">
+					<ul id="piclist" class="clearfix">
+						<{foreach from=$pic_list key=key item=pic_list}>
+							<li id="<{$pic_list.picid}>"><img src="<{$pic_list.pic}>" class="img"/><div><span class="del"></span><input type="hidden" name="p_pics[]" value="<{$pic_list.pic}>"></div><p><span>设为封面</span><input type="hidden" name="url" value="<{$pic_list.pic}>"></p></li></li>
+						<{/foreach}>
+					</ul>
+					<input type="button" id="J_selectImage" value="批量上传图片" class="uploadbut"/>
+					<div id="mainpic">
+						
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>补充描述：</th>
+				<td colspan="5"><textarea  name="p_details" rows="2" cols="90" class="textarea01"><{$cars.p_details}></textarea></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td colspan="5">
+					<div class="buttons">
+						<input type="submit" value="提 交" class="submit">
+						<input type="hidden" name="a" value="<{$ac}>">
+						<input type="hidden" name="id" value="<{$cars.p_id}>">
+					</div>
+				</td>
+			</tr>
+		</table>
+</form>

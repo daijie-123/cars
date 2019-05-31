@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><{$page.p_title}> - <{$setting.title}></title>
+<meta content="<{$setting.keywords}>"  name="keywords"/>
+<meta content="<{$setting.description}>" name="description"/>
+<link href="http://car.xqzqc.com/css/css/page.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<link rel="stylesheet" href="http://car.xqzqc.com/admin/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="http://car.xqzqc.com/admin/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="http://car.xqzqc.com/admin/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript" src="http://car.xqzqc.com/static/js/Validform_v5.3.2_min.js"></script>
+</head>
+<body>
+<!--内容--> 
+<{include file="default/`$setting.templates`/head.html"}>
+<div class="nav">您当前的位置：<a href="http://www.naqcw.com/">南安汽车网</a> <span>></span> <a href="/">南安选车中心</a> <span>></span> 地区城市 <span>></span> 城市选择</div>
+<div class="main mt10 clearfix">
+	<div class="citylist">
+		<div class="searchcity">
+			<div class="clearfix">
+				<span class="fb f14">热门城市</span>
+				<span><a href="/index.php?m=city&cid=0" class="orange01 fb">总站</a></span>
+				<{foreach from=$recomcity item=recomcitylist}>
+				<span><a href="/index.php?m=city&cid=<{$recomcitylist.id}>" class="fb"><{$recomcitylist.name}></a></span>
+				<{/foreach}>
+			</div>
+			<div class="clearfix mt15">
+				<form method="get" action="/index.php?m=city">
+				<span class="fb f14">选择分站</span>
+				<span>
+					<select name="aid" id="province" datatype="n" nullmsg="请选择省份！" class="select01">
+						<{$selectprovince}>
+					</select>
+				</span>
+				<span>
+					<select name="cid" id="city" datatype="n" nullmsg="请选择城市！" class="select01">
+						<{$selectcity}>
+					</select>
+				</span>
+				<span>
+					<input type="hidden" name="m" value="city">
+					<input type="submit" value="确定" class="citybut">
+				</span>
+				</form>
+			</div>
+		</div>
+	<{foreach from=$arealist item=area}>
+		<h3><span class="title"><{$area.name}></span></h3>
+		<ul class="citylist clearfix">
+		<{foreach from=$area.citylist item=city}>
+			<li><a href="/index.php?m=city&cid=<{$city.id}>"><{$city.name}></a></li>
+			<{/foreach}>
+		</ul>
+		<{/foreach}>
+	</div>
+</div>
+<!--版权--> 
+<{include file="default/`$setting.templates`/foot.html"}>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>二手车/新车_<{$shop.company}>_泉州汽车网|泉州二手车|泉州车市|泉州汽车报价|泉州汽车团购服务_泉州汽车网_NaQcw.com</title>
+<meta name="keywords" content="<{$shop.company}>,泉州汽车网,泉州二手车,泉州车市,泉州汽车报价,泉州汽车团购服务,泉州二手汽车,泉州二手车网,泉州二手车市场,泉州旧车,泉州卖车,泉州买车,泉州购车,泉州二手车价格,泉州二手车参考价,泉州经销商,泉州二手车报价,泉州二手货车,泉州二手面包车,泉州二手出租车,泉州二手车求购,泉州二手车置换,泉州二手车评估,泉州二手车保险,泉州二手车检测,泉州二手车资讯,泉州二手车新闻,泉州二手车杂志,泉州二手车网，泉州汽车网,泉州二手车,泉州二手车网,大泉州二手车,泉州二手估价,泉州二手买卖,二手车报价,二手车交易市场,大泉州汽车网" />
+<meta name="description" content="<{$shop.company}>,泉州汽车网,泉州二手车,泉州车市,泉州汽车报价,泉州汽车团购服务,泉州二手汽车,泉州二手车网,泉州二手车市场,泉州旧车,泉州卖车,泉州买车,泉州购车,泉州二手车价格,泉州二手车参考价,泉州经销商,泉州二手车报价,泉州二手货车,泉州二手面包车,泉州二手出租车,泉州二手车求购,泉州二手车置换,泉州二手车评估,泉州二手车保险,泉州二手车检测,泉州二手车资讯,泉州二手车新闻,泉州二手车杂志,泉州二手车网，泉州汽车网,泉州二手车,泉州二手车网,大泉州二手车,泉州二手估价,泉州二手买卖,二手车报价,二手车交易市场,大泉州汽车网" />
+		<script type="text/javascript" src="/static/js/jquery.js"></script>
+		<link href="/css/css/shop.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<script language="JavaScript">
+		$(function(){
+			$("#login").load("/?m=ajax&ajax=1&login=1");
+			//品牌选择
+			$("#brand").change(function(){
+				$.get("/?m=ajax&ajax=1", { 
+					bid :  $("#brand").val() 
+				}, function (data, textStatus){
+						   $("#subbrand").html(data); // 把返回的数据添加到页面上
+					}
+				);
+			});
+		})
+		</script>
+		<!--头部 -->
+		<{include file="default/`$setting.templates`/shop_head.html"}>
+		<!--内容-->
+		<div class="main mt10 clearfix">
+			<div class="shop_left">
+				<{include file="default/`$setting.templates`/shop_left.html"}>
+			</div>
+			<div class="shop_right">
+				<div class="search_box">
+					<div class="condition">
+						<span class="fr pr10"><a href="/?m=shop&a=cars&id=<{$shop.id}>&clear=1" class="unl blue">清空条件</a></span>
+						<span class="fl">个性选择：</span>
+						<ul class="condition_list fl">
+							<{if $smarty.cookies.skeywords<>''}><li><a href="/?m=shop&a=cars&id=<{$shop.id}>&k=" class="condition"><{$smarty.cookies.skeywords}></a></li><{/if}>
+							<{if $smarty.cookies.sbrand<> 0}><li><a href="/?m=shop&a=cars&id=<{$shop.id}>&c=b_0" class="condition"><{$cache.brandlist[$smarty.cookies.sbrand]}></a></li><{/if}>
+							<{if $smarty.cookies.ssubbrand<> 0}><li><a href="/?m=shop&a=cars&id=<{$shop.id}>&sb=0" class="condition"><{$cache.subbrandlist[$smarty.cookies.ssubbrand]}></a></li><{/if}>
+							<{if $smarty.cookies.smodel<> 0}><li><a href="/?m=shop&a=cars&id=<{$shop.id}>&c=m_0" class="condition"><{$cache.modellist[$smarty.cookies.smodel]}></a></li><{/if}>
+							<{if $smarty.cookies.sprice<>0}><li><a href="/?m=shop&a=cars&id=<{$shop.id}>&c=p_0" class="condition"><{$arr_price[$smarty.cookies.sprice]}></a></li><{/if}>
+							<{if $smarty.cookies.sage<> 0}><li><a href="/?m=shop&a=cars&id=<{$shop.id}>&c=a_0" class="condition"><{$arr_age[$smarty.cookies.sage]}></a></li><{/if}>
+							<{if $smarty.cookies.sgas<> 0}><li><a href="/?m=shop&a=cars&id=<{$shop.id}>&c=g_0" class="condition"><{$arr_gas[$smarty.cookies.sgas]}></a></li><{/if}>
+						</ul>
+					</div>
+					<ul class="search_list">
+						<form method="get" action="/">
+						<li>品 牌： <a href="/?m=shop&a=cars&id=<{$shop.id}>&c=b_0" <{if $smarty.cookies.brand==0}>class="here"<{/if}>>全部</a>
+						<select id="brand" name="c">
+							<{$selectbrandsearch}>
+						</select>
+						<select id="subbrand" name="sb">
+							<option value="">请选择车系</option>
+						</select>
+						<input type="hidden" name="m" value="shop">
+						<input type="hidden" name="a" value="cars">
+						<input type="hidden" name="id" value="<{$shop.id}>">
+						<input type="submit" value="搜索" class="cbutton">
+						</li>
+						</form>
+						<li>车 型： <a href="/?m=shop&a=cars&id=<{$shop.id}>&c=m_0" <{if $smarty.cookies.smodel==0}>class="here"<{/if}>>全部</a><{foreach from=$cache.modellist key=skey item=modellist}><a href="/?m=shop&a=cars&id=<{$shop.id}>&c=m_<{$skey}>" <{if $smarty.cookies.smodel==$skey}>class="here"<{/if}>><{$modellist}></a><{/foreach}></li>
+						<li>价 格： <a href="/?m=shop&a=cars&id=<{$shop.id}>&c=p_0"  <{if $smarty.cookies.sprice==0}>class="here"<{/if}>>全部</a><{foreach from=$arr_price key=skey item=pricelist}><a href="/?m=shop&a=cars&id=<{$shop.id}>&c=p_<{$skey}>" <{if $smarty.cookies.sprice==$skey}>class="here"<{/if}>><{$pricelist}></a><{/foreach}></li>
+						<li>车 龄： <a href="/?m=shop&a=cars&id=<{$shop.id}>&c=a_0"  <{if $smarty.cookies.sage==0}>class="here"<{/if}>>全部</a><{foreach from=$arr_age key=skey item=agellist}><a href="/?m=shop&a=cars&id=<{$shop.id}>&c=a_<{$skey}>" <{if $smarty.cookies.sage==$skey}>class="here"<{/if}>><{$agellist}></a><{/foreach}></li>
+					</ul>
+				</div>
+				<div class="shopbox mt10">
+					<h3>在售车源</h3>
+					<div class="box"> 
+						<ul class="bigcarlist clearfix">
+							<{foreach from=$carslist key=skey item=cars_list}>
+							<li <{if ($skey+1)%4<>0}>class="bbg"<{/if}>>
+								<a href="/<{$cars_list.p_url}>" target="_blank"><{if $cars_list.p_mainpic<>""}><img src="<{$cars_list.p_mainpic}>"/><{else}><img src="<{$weburl}>/static/img/car.jpg"/><{/if}></a>
+								<p class="carname mt5"><a href="/<{$cars_list.p_url}>" target="_blank"><{$cars_list.p_allname}></a></p>
+								<p class="price"><{$cars_list.p_price}></p>
+								<p class="gray01 mt5"><{$cars_list.p_year}>年<{$cars_list.p_month}>月上牌&nbsp;&nbsp;<{$cars_list.p_kilometre}>万公里</p>
+							</li>
+							<{/foreach}>
+						</ul>
+					</div>
+					<div class="page_list"><{$button_basic}></div>
+				</div>
+			</div>
+		</div>
+		<!--版权-->
+		<{include file="default/`$setting.templates`/foot.html"}>
+	</body>
+</html>

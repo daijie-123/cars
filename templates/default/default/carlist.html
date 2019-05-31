@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>泉州买车|泉州二手车|泉州新车|泉州汽车网|泉州二手车市场|泉州二手车网|泉州二手估价|泉州二手车交易市场_泉州汽车网_QZQCW.COM</title>
+<meta name="keywords" content="泉州买车,泉州二手车,泉州新车,泉州汽车网,泉州二手车市场,泉州二手车网,泉州二手估价,泉州二手车交易市场" />
+<meta name="description" content="提供泉州买车、泉州二手车、泉州新车、泉州汽车网、泉州二手车市场、泉州二手车网、泉州二手估价、泉州二手车交易市场" />
+<link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.qzqcw.com/" >
+<meta name="mobile-agent" content="format=html5;url=http://m.qzqcw.com/" />
+<meta name="mobile-agent" content="format=xhtml;url=http://m.qzqcw.com/" />
+<link rel="miphtml" href="http://m.qzqcw.com/">
+<script type="text/javascript">try {var urlhash = window.location.hash;if (!urlhash.match("fromapp")){if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iPad)/i))){window.location="http://m.qzqcw.com/";}}}catch(err){}</script>
+<link href="/css/css/car.css" rel="stylesheet" type="text/css"/>
+		<script type="text/javascript" src="/static/js/jquery.js"></script>
+		<script language="JavaScript">
+			$(function() {
+				//品牌选择
+				$("#brand").change(function(){
+					$.get("/?m=ajax&ajax=1", { 
+						bid :  $("#brand").val() 
+					}, function (data, textStatus){
+						   $("#subbrand").html(data); // 把返回的数据添加到页面上
+						}
+					);
+				});
+
+				$("div.car_tab ul li a").mouseover(function() {
+					$(this).addClass("here").parent().siblings().children().removeClass("here");
+					var index = $div_li.index(this);
+					$("div.cartab_box > div").eq(index).show().siblings().hide();
+				});
+			})
+		</script>
+		</head>
+	<body>
+<!--内容--> 
+<{include file="default/`$setting.templates`/head.html"}>
+<div class="nav">您当前的位置：<a href="http://www.qzqcw.com/" target="_blank">泉州汽车网</a> <span>></span> <a href="/">选车中心</a> <span>></span> 我要买车</div>
+<div class="main clearfix mt10">
+		<div class="search_box mb15">
+			<div class="condition">
+				<span class="fl gray pl20">已选条件：</span>
+				<ul class="condition_list fl">
+					<{if $smarty.cookies.keywords<>''}><li><a href="/?m=search&k=" class="condition"><{$smarty.cookies.keywords}></a></li><{/if}>
+					<{if $smarty.cookies.gas<> 0}><li><a href="/?m=search&c=g_0" class="condition"><{$arr_gas[$smarty.cookies.gas]}></a></li><{/if}>
+					<{if $smarty.cookies.brand<> 0}><li><a href="/?m=search&c=b_0" class="condition"><{$cache.brandlist[$smarty.cookies.brand]}></a></li><{/if}>
+					<{if $smarty.cookies.subbrand<> 0}><li><a href="/?m=search&sb=0" class="condition"><{$smarty.cookies.subbrandname}></a></li><{/if}>
+					<{if $smarty.cookies.model<> 0}><li><a href="/?m=search&c=m_0" class="condition"><{$cache.modellist[$smarty.cookies.model]}></a></li><{/if}>
+					<{if $smarty.cookies.price<>0}><li><a href="/?m=search&c=p_0" class="condition"><{$arr_price[$smarty.cookies.price]}></a></li><{/if}>
+					<{if $smarty.cookies.age<> 0}><li><a href="/?m=search&c=a_0" class="condition"><{$arr_age[$smarty.cookies.age]}></a></li><{/if}>
+				</ul>
+				<span class="del"><a href="/?m=search&clear=1"><i class="i-del"></i>清空全部条件</a></span>
+			</div>
+			<ul class="search_list">
+							<li>新&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;车 <a href="/?m=search&c=g_0"  <{if $smarty.cookies.gas==0}>class="here"<{/if}>>全部</a><{foreach from=$arr_gas key=skey item=gasllist}><a href="/?m=search&c=g_<{$skey}>" <{if $smarty.cookies.gas==$skey}>class="here"<{/if}>><{$gasllist}></a><{/foreach}></li>
+				<form method="get" action="/">
+				<li>品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;牌 <a href="/?m=search&c=b_0" <{if $smarty.cookies.brand==0}>class="here"<{/if}>>全部</a><{foreach from=$arr_brand key=skey item=brandlist}><a href="/?m=search&c=b_<{$skey}>" <{if $smarty.cookies.brand==$skey}>class="here"<{/if}>><{$brandlist}></a><{/foreach}>
+				<select id="brand" name="c">
+					<{$selectbrandsearch}>
+				</select>
+				<select id="subbrand" name="sb">
+					<option value="">请选择车系</option>
+				</select>
+				<input type="hidden" name="m" value="search">
+				<input type="submit" value="搜索" class="cbutton">
+				</li>
+				</form>
+				<li>车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型 <a href="/?m=search&c=m_0" <{if $smarty.cookies.model==0}>class="here"<{/if}>>全部</a><{foreach from=$cache.modellist key=skey item=modellist}><a href="/?m=search&c=m_<{$skey}>" <{if $smarty.cookies.model==$skey}>class="here"<{/if}>><{$modellist}></a><{/foreach}></li>
+				<li>价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格 <a href="/?m=search&c=p_0"  <{if $smarty.cookies.price==0}>class="here"<{/if}>>全部</a><{foreach from=$arr_price key=skey item=pricelist}><a href="/?m=search&c=p_<{$skey}>" <{if $smarty.cookies.price==$skey}>class="here"<{/if}>><{$pricelist}></a><{/foreach}></li>
+				<li>车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄 <a href="/?m=search&c=a_0"  <{if $smarty.cookies.age==0}>class="here"<{/if}>>全部</a><{foreach from=$arr_age key=skey item=agellist}><a href="/?m=search&c=a_<{$skey}>" <{if $smarty.cookies.age==$skey}>class="here"<{/if}>><{$agellist}></a><{/foreach}></li>
+			</ul>
+		</div>
+</div>
+<div class="main clearfix">
+	<div class="main_left">
+		<div class="search_big_box">
+			<div class="orderlist">
+				<ul class="fl">
+					<li><a href="/?m=search&order=<{if $smarty.cookies.order==1}>2<{elseif $smarty.cookies.order==2}>1<{else}>2<{/if}>" <{if $smarty.cookies.order==1}>class="or01"<{elseif $smarty.cookies.order==2}>class="or03"<{else}>class="or02"<{/if}>>时间</a></li>
+					<li><a href="/?m=search&order=<{if $smarty.cookies.order==3}>4<{elseif $smarty.cookies.order==4}>3<{else}>3<{/if}>" <{if $smarty.cookies.order==3}>class="or01"<{elseif $smarty.cookies.order==4}>class="or03"<{else}>class="or02"<{/if}>>价格</a></li>
+					<li><a href="/?m=search&order=<{if $smarty.cookies.order==5}>6<{elseif $smarty.cookies.order==6}>5<{else}>5<{/if}>" <{if $smarty.cookies.order==5}>class="or01"<{elseif $smarty.cookies.order==6}>class="or03"<{else}>class="or02"<{/if}>>里程</a></li>
+					<li><a href="/?m=search&order=<{if $smarty.cookies.order==7}>8<{elseif $smarty.cookies.order==8}>7<{else}>7<{/if}>"  <{if $smarty.cookies.order==7}>class="or01"<{elseif $smarty.cookies.order==8}>class="or03"<{else}>class="or02"<{/if}>>车龄</a></li>
+				</ul>
+				<div class="showtype">
+					<{if $smarty.cookies.showtype=="list"}>
+					<span class="type01"><a href="/?m=search&showtype=list">列表</a></span>
+					<{else}>
+					<span class="type02"><a href="/?m=search&showtype=list">列表</a></span>
+					<{/if}>
+					<{if $smarty.cookies.showtype=="pic"}>
+					<span class="type03"><a href="/?m=search&showtype=pic">大图</a></span>
+					<{else}>
+					<span class="type04"><a href="/?m=search&showtype=pic">大图</a></span>
+					<{/if}>
+				</div>
+				<div class="page_num">
+					<span>每页显示：</span>
+					<span class="num"><a href="/?m=search&pagenum=30" <{if $smarty.cookies.pagenum==30}>class="fb orange01"<{/if}>>30</a></span>
+					<span class="num"><a href="/?m=search&pagenum=60" <{if $smarty.cookies.pagenum==60}>class="fb orange01"<{/if}>>60</a></span>
+					<span class="num"><a href="/?m=search&pagenum=90" <{if $smarty.cookies.pagenum==90}>class="fb orange01"<{/if}>>90</a></span>
+				</div>
+			</div>
+			<div class="box">
+				<{if $smarty.cookies.showtype=="pic"}>
+				<ul class="bigcarlist clearfix">
+					<{foreach from=$carslist key=skey item=cars_list}>
+					<li <{if ($skey+1)%4<>0}>class="bbg"<{/if}>>
+						<{if $cars_list.issell==1}>
+						<div class="psoldout"><a href="/<{$cars_list.p_url}>" target="_blank" title="<{$cars_list.p_shortname}>"><{if $cars_list.p_mainpic<>""}><img src="<{$weburl}><{$cars_list.p_mainpic}>" alt="<{$cars_list.p_shortname}>"/><{else}><img src="<{$weburl}>/static/img/car.jpg"/><{/if}></a>
+						<p class="carname"><a href="/<{$cars_list.p_url}>" target="_blank"><{$cars_list.p_shortname}></a></p>
+						<p class="red"><span class="price">已售罄</span><span class="fr pt5 mt15"><{if $cars_list.isdealer==2}><span class="check01" title="商家车源"></span><{/if}> <{if $cars_list.isdealer==1}><span class="check02" title="个人车源"></span><{/if}> <{if $cars_list.uid==-1}><span class="check05" title="本站发布"></span><{/if}><{if $cars_list.isnew_old==1}><span class="check04" title="新车旧卖"></span><{/if}><{if $cars_list.isshow==1}><span class="check03" title="审核通过"></span><{else}><span title="待审核">待审核</span><{/if}></span></p>
+						<p class="gray01 mt5"><span class="fr">里程：<{$cars_list.p_kilometre}>万公里</span>上牌:<{$cars_list.p_year}>年<{$cars_list.p_month}>月</p>
+						</div>
+						<{else}>
+						<a href="/<{$cars_list.p_url}>" target="_blank" title="<{$cars_list.p_shortname}>"><{if $cars_list.p_mainpic<>""}><img src="<{$weburl}><{$cars_list.p_mainpic}>" alt="<{$cars_list.p_shortname}>"/><{else}><img src="<{$weburl}>/static/img/car.jpg"/><{/if}></a>
+						<p class="carname"><a href="/<{$cars_list.p_url}>" target="_blank"><{$cars_list.p_shortname}></a></p>
+						<p class="red"><span class="price"><{$cars_list.p_price}></span> <{if $cars_list.p_price<>"面议"}>万<{/if}><span class="fr pt5 mt15"><{if $cars_list.isdealer==2}><span class="check01" title="商家车源"></span><{/if}> <{if $cars_list.isdealer==1}><span class="check02" title="个人车源"></span><{/if}> <{if $cars_list.uid==-1}><span class="check05" title="本站发布"></span><{/if}><{if $cars_list.isnew_old==1}><span class="check04" title="新车旧卖"></span><{/if}><{if $cars_list.isshow==1}><span class="check03" title="审核通过"></span><{else}><span title="待审核">待审核</span><{/if}></span></p>
+						<p class="gray01 mt5"><span class="fr">里程：<{$cars_list.p_kilometre}>万公里</span>上牌:<{$cars_list.p_year}>年<{$cars_list.p_month}>月</p>
+						<{/if}>
+					</li>
+					<{/foreach}>
+				</ul>
+				<{else}>
+				<{foreach from=$carslist key=skey item=cars_list}>
+					<{if $cars_list.issell==1}>
+					<div class="listcar clearfix soldout">
+						<div class="img">
+							<a href="/<{$cars_list.p_url}>" target="_blank" title="<{$cars_list.p_allname}>"><{if $cars_list.p_mainpic<>""}><img src="<{$weburl}><{$cars_list.p_mainpic}>" alt="<{$cars_list.p_allname}>"/><{else}><img src="<{$weburl}>/static/img/car.jpg"/><{/if}></a>
+						</div>
+						<div class="word">
+							<p class="clearfix"><span class="carname fl"><a href="/<{$cars_list.p_url}>" target="_blank"><{$cars_list.p_allname}></a></span>&nbsp;    <span class="fl pt5"><{if $cars_list.isdealer==2}><span class="check01" title="商家车源"></span><{/if}> <{if $cars_list.isdealer==1}><span class="check02" title="个人车源"></span><{/if}> <{if $cars_list.uid==-1}><span class="check05" title="本站发布"></span><{/if}><{if $cars_list.isnew_old==1}><span class="check04" title="新车旧卖"></span><{/if}><{if $cars_list.isshow==1}><span class="check03" title="审核通过"></span><{else}><span title="待审核">待审核</span><{/if}></span></p>
+							<p class="gray">
+								<span class="orange01"><{$cars_list.p_year}>年<{$cars_list.p_month}>月</span> 上牌 &nbsp;&nbsp;/&nbsp;&nbsp;  
+								<span class="orange01"><{$cars_list.p_kilometre}></span> 万公里 <{if $cars_list.p_emission<>''}>&nbsp;&nbsp;/ &nbsp;&nbsp;
+								<{$cars_list.p_emission}> <{/if}>&nbsp;&nbsp;/&nbsp;&nbsp;
+								<{if $cars_list.province<>''}><{$cars_list.province}><{/if}> <{if $cars_list.city<>''}><{$cars_list.city}><{/if}>
+								信息编号：<{$cars_list.p_no}>
+							</p>
+							<p class="gray f14">车主说明：<{$cars_list.p_details}></p>
+							<p class="gray f12"><{$cars_list.listtime}> 更新</p>
+						</div>
+						<div class="price">
+							<span class="fb f30">已售罄</span>
+						</div>
+					</div>
+					<{else}>
+					<div class="listcar clearfix">
+						<div class="img">
+							<a href="/<{$cars_list.p_url}>" target="_blank" title="<{$cars_list.p_allname}>"><{if $cars_list.p_mainpic<>""}><img src="<{$cars_list.p_mainpic}>" alt="<{$cars_list.p_allname}>"/><{else}><img src="/static/img/car.jpg"/><{/if}></a>
+						</div>
+						<div class="word">
+							<p class="clearfix"><span class="carname fl"><a href="/<{$cars_list.p_url}>" target="_blank"><{$cars_list.p_allname}></a></span>&nbsp;    <span class="fl pt5"><{if $cars_list.isdealer==2}><span class="check01" title="商家车源"></span><{/if}> <{if $cars_list.isdealer==1}><span class="check02" title="个人车源"></span><{/if}> <{if $cars_list.uid==-1}><span class="check05" title="本站发布"></span><{/if}><{if $cars_list.isnew_old==1}><span class="check04" title="新车旧卖"></span><{/if}><{if $cars_list.isshow==1}><span class="check03" title="审核通过"></span><{else}><span title="待审核">待审核</span><{/if}></span></p>
+							<p class="gray">
+								<span class="orange01"><{$cars_list.p_year}>年<{$cars_list.p_month}>月</span> 上牌 &nbsp;&nbsp;/&nbsp;&nbsp;  
+								<span class="orange01"><{$cars_list.p_kilometre}></span> 万公里 <{if $cars_list.p_emission<>''}>&nbsp;&nbsp;/ &nbsp;&nbsp;
+								<{$cars_list.p_emission}> <{/if}>&nbsp;&nbsp;/&nbsp;&nbsp;
+								<{if $cars_list.province<>''}><{$cars_list.province}><{/if}> <{if $cars_list.city<>''}><{$cars_list.city}><{/if}>
+								信息编号：<{$cars_list.p_no}>  颜色:<{$cars_list.p_color}>  
+							</p>
+							<p class="gray f14">车主说明：<{$cars_list.p_details}></p>
+							<p class="gray f12"><{$cars_list.listtime}> 更新</p>
+						</div>
+						<div class="price">
+							<span class="fb f30"><{$cars_list.p_price}></span> <{if $cars_list.p_price<>"面议"}>万<{/if}>
+						</div>
+					</div>
+					<{/if}>
+				<{/foreach}>
+				<{/if}>
+				<div class="page_list"><{$button_basic}></div>
+			</div>
+		</div>
+	</div>
+	<div class="main_right">
+		<{include file="default/`$setting.templates`/right.html"}>
+	</div>
+</div>
+<{include file="default/`$setting.templates`/foot.html" }>
+<script type="text/javascript">$(".listcar").click(function(){window.open($(this).find("a").attr("href"),"_blank")})</script>
+</body>
+</html>

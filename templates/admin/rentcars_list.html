@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title></title>
+
+<link href="static/css/admin/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="static/js/common.js"></script>
+<script type="text/javascript" src="static/js/uploadify/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="<{$weburl}>/templates/default/<{$setting.templates}>/js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="<{$weburl}>/templates/default/<{$setting.templates}>/js/jcarousellite_1.0.1.min.js"></script>
+		<script type="text/javascript" src="<{$weburl}>/templates/default/<{$setting.templates}>/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript">
+function selectsubmit()
+{
+ document.form1.submit();
+
+
+}
+$(document).ready(function() {
+    //品牌选择
+	$("#brand").change(function(){
+		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", { 
+			brandid :  $("#brand").val() 
+		}, function (data, textStatus){
+               $("#subbrand").html(data); // 把返回的数据添加到页面上
+			}
+		);
+	});
+		//品牌选择
+	$("#subbrand").change(function(){
+		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", { 
+			subbrandid :  $("#subbrand").val() 
+		}, function (data, textStatus){
+               $("#subsubbrand").html(data); // 把返回的数据添加到页面上
+			}
+		);
+	});
+	  //城市选择
+	$("#province").change(function(){
+		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", { 
+			cityid :  $("#province").val() 
+		}, function (data, textStatus){
+               $("#city").html(data); // 把返回的数据添加到页面上
+			}
+		);
+	});
+
+	$("input[name*='p_price']").blur(function(){
+
+		var obj=$(this).next();//回调函数前先写入变量;
+
+		$.get("<{$weburl}>/<{$adminpage}>?m=rentcars&ajax=1", { 
+
+			p_id :  $(this).attr('valueid'),
+
+			price : $(this).val()
+
+		}, function (data){
+
+              obj.html("<img src='static/img/admin/onSuccess.gif' align='absmiddle'/>");
+
+		   }
+
+		);
+
+	});
+	
+});
+
+
+
+</script>
+
+</head>
+
+<body>
+
+<div class="colorarea01">
+	<div class="search clearfix">
+		<div class="searchL">
+			<ul class="menulist">
+				<li><a href="<{$adminpage}>?m=rentcars&a=add" class="add">添加车源</a></li>
+			</ul>
+		</div>
+       <div class="searchR">统计: 总数: <span class="orange01"><{$pagecount}></span> 条,商家: <{if  $dealercount==''}><span class="orange01">0</span> 条<{else}><span class="orange01"><{$dealercount}></span> 条<{/if}>,
+        个人: <{if $personcount==''}><span class="orange01">0</span> 条<{else}><span class="orange01"><{$personcount}></span> 条<{/if}>,
+        游客: <{if $visitor==''}><span class="orange01">0</span> 条<{else}><span class="orange01"><{$visitor}></span> 条<{/if}>,
+        待审核: <{if $unaudited==''}><span class="orange01">0</span> 条<{else}><span class="orange01"><{$unaudited}></span> 条<{/if}>,
+</div>
+	</div>
+<div class="main clearfix mt10">
+	<div class="main_left">
+		<div class="search_box">
+			<div class="condition">
+				<span class="fr pr10"><a href="<{$adminpage}>?m=rentcars&a=list&clear=1" class="unl blue">清空条件</a></span>
+				<span class="fl">您已选择：</span>
+                	<ul class="condition_list fl">
+					<{if $smarty.cookies.usertype<> 0}><li><a href="<{$adminpage}>?m=rentcars&a=list&c=u_0" class="condition"><{$arr_usertype[$smarty.cookies.usertype]}></a></li><{/if}>
+					<{if $smarty.cookies.recom<> 0}><li><a href="<{$adminpage}>?m=rentcars&a=list&c=t_0" class="condition"><{$arr_recom[$smarty.cookies.recom]}></a></li><{/if}>
+					<{if $smarty.cookies.area<>''}><li><a href="<{$adminpage}>?m=rentcars&a=list&c=c_0" class="condition"><{$cache.citylist[$smarty.cookies.area]}></a></li><{/if}>
+					<{if $smarty.cookies.keywords<>''}><li><a href="<{$adminpage}>?m=rentcars&a=list&keywords=" class="condition"><{$smarty.cookies.keywords}></a></li><{/if}>
+					<{if $smarty.cookies.brand<> 0}><li><a href="<{$adminpage}>?m=rentcars&a=list&c=b_0" class="condition"><{$cache.brandlist[$smarty.cookies.brand]}></a></li><{/if}>
+					<{if $smarty.cookies.subbrand<> 0}><li><a href="<{$adminpage}>?m=rentcars&a=list&sb=0" class="condition"><{$subrandname}></a></li><{/if}>
+                    <{if $smarty.cookies.subsubbrand<> 0}><li><a href="<{$adminpage}>?m=rentcars&a=list&sbsb=0" class="condition"><{$subsubrandname}></a></li><{/if}>
+					<{if $smarty.cookies.model<> 0}><li><a href="<{$adminpage}>?m=rentcars&a=list&c=m_0" class="condition"><{$cache.rentmodellist[$smarty.cookies.model]}></a></li><{/if}>
+					<{if $smarty.cookies.price<>0}><li><a href="<{$adminpage}>?m=rentcars&a=list&c=p_0" class="condition"><{$arr_price[$smarty.cookies.price]}></a></li><{/if}>
+                    <{if $smarty.cookies.province<> 0}><li><a href="<{$adminpage}>?m=rentcars&a=list&c=c_0" class="condition">
+                    <{$cache.provincelist[$smarty.cookies.province]}></a></li><{/if}>
+                    <{if $smarty.cookies.city<> 0}><li><a href="<{$adminpage}>?m=rentcars&a=list&cy=0" class="condition">     
+                    <{$cache.citylist[$smarty.cookies.city]}></a></li><{/if}>
+				</ul>
+			</div>
+			<ul class="search_list">
+				<li>
+					会员类型： <a href="<{$adminpage}>?m=rentcars&a=list&c=u_0"  <{if $smarty.cookies.usertype==0}>class="here"<{/if}>>全部</a><{foreach from=$arr_usertype key=skey item=usertypellist}><a href="<{$adminpage}>?m=rentcars&a=list&c=u_<{$skey}>" <{if $smarty.cookies.usertype==$skey}>class="here"<{/if}>><{$usertypellist}></a><{/foreach}> &nbsp;&nbsp;
+					推荐位： <a href="<{$adminpage}>?m=rentcars&a=list&c=t_0"  <{if $smarty.cookies.recom==0}>class="here"<{/if}>>全部</a><{foreach from=$arr_recom key=skey item=recomllist}><a href="<{$adminpage}>?m=rentcars&a=list&c=t_<{$skey}>" <{if $smarty.cookies.recom==$skey}>class="here"<{/if}>><{$recomllist}></a><{/foreach}>
+				</li>
+				<form method="get"   action="<{$adminpage}>?m=rentcars">
+				<li>省 市： <a href="<{$adminpage}>?m=rentcars&a=list&c=c_0" <{if $smarty.cookies.province==0}>class="here"<{/if}>>全部</a>
+				<select id="province" name="c">
+					<{$selectprovincesearch}>
+				</select>
+				<select id="city" name="cy">
+					<option value="">请选择城市</option>
+				</select>
+				<input type="hidden" name="m" value="rentcars">
+                <input type="hidden" name="a" value="list">
+				<input type="submit" name="filtersubmit" value="查询" class="combutton02 w50">
+				</li>
+				</form>
+				<form method="get" action="<{$adminpage}>?m=rentcars">
+				<li>品 牌： <a href="<{$adminpage}>?m=rentcars&a=list&c=b_0" <{if $smarty.cookies.brand==0}>class="here"<{/if}>>全部</a>
+				<select name="b" id="brand" datatype="n" nullmsg="请选择品牌！">
+									<{$selectbrand}>
+								</select>
+								<select class="subbrand" id="subbrand" name="sb" datatype="n" nullmsg="请选择车系！">
+									<option value="" selected>请选择车系</option>                       
+								</select> &nbsp;<select class="subbrand" id="subsubbrand" name="sbsb" datatype="n" nullmsg="请选择款式！" style="width:100px;">
+								<option value="" selected>请选择款式</option>
+						
+					</select>
+				<input type="hidden" name="m" value="rentcars">
+                <input type="hidden" name="a" value="list">
+                <span>
+				<input type="text" name="keywords" id="searchkey" value="" size="16" class="inp01">
+				</span>
+				<input type="submit" name="filtersubmit" value="查询" class="combutton02 w50">
+				</li>
+				</form>
+				<li>车 型： <a href="<{$adminpage}>?m=rentcars&a=list&c=m_0" <{if $smarty.cookies.model==0}>class="here"<{/if}>>全部</a><{foreach from=$cache.rentmodellist key=skey item=modellist}><a href="<{$adminpage}>?m=rentcars&a=list&c=m_<{$skey}>" <{if $smarty.cookies.model==$skey}>class="here"<{/if}>><{$modellist}></a><{/foreach}></li>
+                <li>价 格： <a href="<{$adminpage}>?m=rentcars&a=list&c=p_0"  <{if $smarty.cookies.price==0}>class="here"<{/if}>>全部</a><{foreach from=$arr_price key=skey item=pricelist}><a href="<{$adminpage}>?m=rentcars&a=list&c=p_<{$skey}>" <{if $smarty.cookies.price==$skey}>class="here"<{/if}>><{$pricelist}></a><{/foreach}></li>		
+			</ul>
+		</div>
+        <br />
+	<form action="<{$adminpage}>?m=rentcars" method="POST" name="form" onSubmit="return listsubmitconfirm(this.form)">
+
+	<table cellspacing="0" cellpadding="0" width="100%"  class="listtable">
+
+	<tr><th width="30">选择</th><th>ID</th><th align="left">品牌</th><th>车型</th><th>日租金</th><th>月租金</th><th>发布时间</th><th>会员</th><{if $setting.version==3}><th>省份</th><th>城市</th><{/if}><th>显示</th><th width="190">操作</th></tr>
+
+	<{foreach from=$rentcarslist item=rentcars}>
+
+	<tr bgcolor="#ffffff" onmouseover="style.backgroundColor='#E2E9EA'"  onmouseout="style.backgroundColor='#ffffff'">
+
+	<td align="center"><input type="checkbox" name="bulkid[]" value="<{$rentcars.p_id}>"></td>
+
+	<td align="center"><{$rentcars.p_id}></td>
+
+	<td align="left"><a href="<{$rentcars.p_url}>" target="_blank"><{if $rentcars.p_allname!=""}><{$rentcars.p_allname}><{else}><{$rentcars.p_name}><{/if}></a> <{if $rentcars.p_pics!=""}><span class="red">图</span><{/if}> 
+
+	<{if $rentcars.isrecom==1}><span class="red">推荐</span><{/if}> <{if $rentcars.issprecom==1}><span class="red">特荐</span><{/if}> <{if $rentcars.ishot==1}><span class="red">热门</span><{/if}>
+
+	<{if $rentcars.is_sell==1}><span class="red">已卖</span><{/if}></td>
+
+	<td align="center"><{$rentcars.p_modelname}></td>
+
+	<td align="center" class="red"><{$rentcars.dayprice}>元</span></td>
+
+	<td align="center" class="red"><{$rentcars.monthprice}>元</td>
+
+	<td align="center"><{$rentcars.listtime}></td>
+
+     <td align="center"><{$rentcars.username}></td>
+    <{if $setting.version==3}>
+<td align="center"><{$rentcars.province}></td>
+<td align="center"><{$rentcars.city}></td>
+<{/if}>
+
+	<td align="center"><{if $rentcars.isshow==1}>是<{else}><span class="red">否</span><{/if}></td>
+
+	<td align="center" class="rightmenu"><a href="<{$adminpage}>?m=rentcars&a=html&id=<{$rentcars.p_id}>">生成静态</a> | <a href="<{$adminpage}>?m=rentcars&a=show&id=<{$rentcars.p_id}>&p_state=<{if $rentcars.isshow==1}>0<{else}>1<{/if}>">显示</a> | <a href="<{$adminpage}>?m=rentcars&a=edit&id=<{$rentcars.p_id}>">编辑</a> | <a href="<{$adminpage}>?m=rentcars&a=refresh&id=<{$rentcars.p_id}>">刷新</a> | <a href="javascript:if(confirm('确实要删除吗?'))location='<{$adminpage}>?m=rentcars&a=del&id=<{$rentcars.p_id}>'">删除</a></td>
+
+	</tr>
+
+	<{/foreach}>
+
+	<tr>
+
+		<td colspan="12" class="buttontd">
+
+			<a href="javascript:javascript:selectAll();" title="请选择后操作">全选</a>
+
+			<a href="javascript:submitForm('<{$adminpage}>?m=rentcars&a=bulkhtml','生成静态');" title="请选择后操作">生成静态</a>
+
+			<a href="javascript:submitForm('<{$adminpage}>?m=rentcars&a=bulkrefresh','刷新');" title="请选择后操作">刷新</a>
+
+			<a href="javascript:submitForm('<{$adminpage}>?m=rentcars&a=bulkdel','删除');" title="请选择后操作">删除</a>
+
+		</td>
+
+	</tr>
+
+	</table>
+
+	</form>
+
+	<div class="listpage"><{$button_basic}><{$button_select}></div>
+
+</div>
+
+</body>
+
+</html>

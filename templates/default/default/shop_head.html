@@ -1,0 +1,27 @@
+<script language="JavaScript">
+$(function(){
+	$("#login").load("/?m=ajax&ajax=1&login=1");
+})
+</script>
+<!--头部 -->
+<div class="head">
+<div class="head_m">
+<div class=head_l><a href=http://www.qzqcw.com/>泉州汽车网-泉州最大汽车门户网(WWW.QZQCW.COM)</a></div>
+<div class=head_r><span id="login"></span></div>
+</div></div>
+<div class="shop_head">
+	<p class="shop_name"><{$shop.company}></p>
+	<p class="shop_tel">联系人：<{$shop.nicname}>&nbsp;&nbsp;&nbsp; 电话：<{$shop.mobilephone}></p>
+</div>
+<!--导航-->
+<div class="shopnav_list">
+	<ul class="clearfix">
+		<li><a href="<{$weburl}>/index.php?m=shop&id=<{$shopid}>" <{if $smstate==1}>class="here"<{/if}>>首页</a></li>
+		<li><a href="<{$weburl}>/index.php?m=shop&a=cars&id=<{$shopid}>" <{if $smstate==2}>class="here"<{/if}>>车辆信息</a></li>
+		<li><a href="<{$weburl}>/index.php?m=shop&a=about&id=<{$shopid}>" <{if $smstate==3}>class="here"<{/if}>>公司介绍</a></li>
+		<li><a href="<{$weburl}>/index.php?m=shop&a=news&id=<{$shopid}>" <{if $smstate==4}>class="here"<{/if}>>优惠促销</a></li>
+		<li><a href="<{$weburl}>/index.php?m=shop&a=ask&id=<{$shopid}>" <{if $smstate==5}>class="here"<{/if}>>购车问答</a></li>
+		<li><a href="<{$weburl}>/index.php?m=shop&a=rentcars&id=<{$shopid}>" <{if $smstate==6}>class="here"<{/if}>>租车服务</a></li>
+	</ul>
+</div>
+<!--导航-->

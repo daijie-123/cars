@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>会员注册_泉州汽车网|泉州二手车|泉州车市|泉州汽车报价|泉州汽车团购服务_泉州汽车网_QZQCW.COM</title>
+<meta name="keywords" content="泉州汽车网,泉州二手车,泉州车市,泉州汽车报价,泉州汽车团购服务,泉州二手汽车,泉州二手车网,泉州二手车市场,泉州旧车,泉州卖车,泉州买车,泉州购车,泉州二手车价格,泉州二手车参考价,泉州经销商,泉州二手车报价,泉州二手货车,泉州二手面包车,泉州二手出租车,泉州二手车求购,泉州二手车置换,泉州二手车评估,泉州二手车保险,泉州二手车检测,泉州二手车资讯,泉州二手车新闻,泉州二手车杂志,泉州二手车网，泉州汽车网,泉州二手车,泉州二手车网,大泉州二手车,泉州二手估价,泉州二手买卖,二手车报价,二手车交易市场,大泉州汽车网" />
+<meta name="description" content="泉州汽车网,泉州二手车,泉州车市,泉州汽车报价,泉州汽车团购服务,泉州二手汽车,泉州二手车网,泉州二手车市场,泉州旧车,泉州卖车,泉州买车,泉州购车,泉州二手车价格,泉州二手车参考价,泉州经销商,泉州二手车报价,泉州二手货车,泉州二手面包车,泉州二手出租车,泉州二手车求购,泉州二手车置换,泉州二手车评估,泉州二手车保险,泉州二手车检测,泉州二手车资讯,泉州二手车新闻,泉州二手车杂志,泉州二手车网，泉州汽车网,泉州二手车,泉州二手车网,大泉州二手车,泉州二手估价,泉州二手买卖,二手车报价,二手车交易市场,大泉州汽车网" />
+		<link href="/css/css/user.css" rel="stylesheet" type="text/css"/>
+		<script type="text/javascript" src="/static/js/jquery.js"></script>
+		<script type="text/javascript" src="/static/js/Validform_v5.3.2_min.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			//城市选择
+			<{if $setting.version==3}>	
+			$("#province").bind("change", function(){
+				$.get("/?m=ajax&ajax=1", { 
+					cityid :  $("#province").val() 
+				}, function (data, textStatus){
+					$("#city").html(data); // 把返回的数据添加到页面上
+				}) ;
+			})   ;
+			$("#province2").bind("change", function(){
+				$.get("/?m=ajax&ajax=1", { 
+					cityid :  $("#province2").val() 
+				}, function (data, textStatus){
+					$("#city2").html(data); // 把返回的数据添加到页面上
+				}) ;
+			})   ;
+			<{/if}>
+			//表单验证
+			$(".resform").Validform({
+				tiptype:3
+			});
+			$div_li = $("ul.reg_tab li");
+			$div_li.click(function() {
+				$(this).addClass("here").siblings().removeClass("here");
+				var index = $div_li.index(this);
+				$("div.regbox > div").eq(index).show().siblings().hide();
+			});
+		});
+		</script>
+	</head>
+	<body>
+		<!--内容-->
+		<{include file="default/`$setting.templates`/head.html"}>
+		<div class="login_main mt10 clearfix">
+			<div class="login_left">
+				<div class="title">注册</div>
+				<ul class="clearfix reg_tab">
+					<li class="here">个人注册</li>
+					<li>商家注册</li>
+				</ul>
+				<div class="regbox mt20">
+					<div>
+					<form name="loginform" class="resform" id="loginform" method="post" action="/?m=register" >
+					<table class="logintable">
+						<tr>
+							<th>用户名：</th>
+							<td><input type="text"  name="username" class="inp01" ajaxurl="/?m=register&ajax=1" datatype="s6-18" errormsg="用户名至少6个字符,最多18个字符！"/></td>
+						</tr>
+						<tr>
+							<th>密码：</th>
+							<td><input type="password"  name="password" class="inp01"/></td>
+						</tr>
+						<{if $setting.version==3}>
+						<tr>
+						<th> 所在城市：</th>
+						<td colspan="3">
+							<select name="aid" id="province" datatype="n" nullmsg="请选择省份！">
+								<{$selectprovince}>
+							</select>
+							<select name="cid" id="city" datatype="n" nullmsg="请选择城市！">
+								<{$selectcity}>
+							</select>
+						</td>
+						</tr>
+						<{/if}>
+						<tr>
+							<th>邮箱：</th>
+							<td><input type="text" name="email" class="inp01" datatype="e" ajaxurl="/?m=register&ajax=1" nullmsg="请输入邮箱地址！" errormsg="请输入正确的邮箱地址！"/></td>
+						</tr>
+						<tr>
+							<th>联系人：</th>
+							<td><input type="text" name="nicname" class="inp01"  datatype="s" nullmsg="请填写联系人！"/></td>
+						</tr>
+						<tr>
+							<th>手机号：</th>
+							<td><input type="text" name="mobilephone" class="inp01" datatype="n" ajaxurl="/?m=register&ajax=1" sucmsg="手机号验证通过！" nullmsg="请输入手机号！" errormsg="请输入正确的手机号！"/></td>
+						</tr>
+						<tr>
+							<th></th>
+							<td><input type="submit" class="login_but" value="注册">  <input type="hidden" name="action" value="register"><input type="hidden" name="isdealer" value="1"></td>
+						</tr>
+					</table>
+					</form>
+					</div>
+					<div class="hide">
+						<form name="loginform" class="resform" id="loginform" method="post" action="/?m=register" >
+						<table class="logintable">
+						<tr>
+							<th>用户名：</th>
+							<td><input type="text"  name="username" class="inp01" ajaxurl="/?m=register&ajax=1" datatype="s6-18" errormsg="用户名至少6个字符,最多18个字符！"/></td>
+						</tr>
+						<tr>
+							<th>密码：</th>
+							<td><input type="password"  name="password" class="inp01"/></td>
+						</tr>
+						<{if $setting.version==3}>
+						<tr>
+						<th> 所在城市：</th>
+						<td colspan="3">
+							<select name="aid" id="province2" datatype="n" nullmsg="请选择省份！">
+								<{$selectprovince}>
+							</select>
+							<select name="cid" id="city2" datatype="n" nullmsg="请选择城市！">
+								<option>请选择城市</option>
+							</select>
+						</td>
+						</tr>
+						<{/if}>
+						<tr>
+							<th>邮箱：</th>
+							<td><input type="text" name="email" class="inp01" datatype="e" ajaxurl="/?m=register&ajax=1" nullmsg="请输入邮箱地址！" errormsg="请输入正确的邮箱地址！"/></td>
+						</tr>
+						<tr>
+							<th>联系人：</th>
+							<td><input type="text" name="nicname" class="inp01"  datatype="s" nullmsg="请填写联系人！"/></td>
+						</tr>
+						<tr>
+							<th>手机号：</th>
+							<td><input type="text" name="mobilephone" class="inp01" datatype="n" ajaxurl="/?m=register&ajax=1" sucmsg="手机号验证通过！" nullmsg="请输入手机号！" errormsg="请输入正确的手机号！"/></td>
+						</tr>
+						<tr>
+							 <th width="20%" align="right">公司类型：</th>
+							 <td>
+								<select name="shoptype" id="shoptype" datatype="n" nullmsg="请选择公司类型！">
+									<{$select_dealer_category}>
+								</select>
+							 </td>
+						</tr>
+                        <tr>
+							<th>公司名称：</th>
+							<td><input type="text" name="company" class="inp01"  datatype="s" nullmsg="请填写公司名称！"/></td>
+						</tr>
+						<tr>
+							<th></th>
+							<td><input type="submit" class="login_but" value="注册">  <input type="hidden" name="action" value="register"><input type="hidden" name="isdealer" value="2"></td>
+						</tr>
+					</table>
+					</form>
+					</div>
+				</div>
+			</div>
+			<div class="login_right">
+				<p class="f14 mt20">已是泉州汽车网会员？</p>
+				<p class="mt20"><a href="/?m=login" class="register_but">我要登录</a></p>
+			</div>
+		</div>
+		<!--版权-->
+		<{include file="default/`$setting.templates`/foot.html"}>
+	</body>
+</html>
