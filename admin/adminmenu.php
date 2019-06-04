@@ -1,10 +1,8 @@
 <div class="sidebar">
 	<h3><span class="title">二手车管理</span></h3>
 	<ul class="hide">
-		<li><a href="<?php echo WEB_PATH?>?m=brand&a=add" target="report_iframe">品牌添加</a></li>
+		<!-- <li><a href="<?php echo WEB_PATH?>?m=brand&a=add" target="report_iframe">品牌添加</a></li> -->
 		<li><a href="<?php echo WEB_PATH?>?m=brand&a=list" target="report_iframe">品牌管理</a></li>
-	
-	
 		<li><a href="<?php echo WEB_PATH?>?m=carmodel&a=list" target="report_iframe">车型管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=model&a=list" target="report_iframe">级别管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=cars&a=list&clear=1" target="report_iframe">车源列表</a></li>
@@ -55,7 +53,6 @@
 		<li><a href="<?php echo WEB_PATH?>?m=channel&a=list" target="report_iframe">栏目管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=page&a=list" target="report_iframe">单页管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=feedback&a=list&typeid=1" target="report_iframe">留言管理</a></li>
-		
 		<li><a href="<?php echo WEB_PATH?>?m=ad&a=list" target="report_iframe">广告管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=keywords&a=list" target="report_iframe">关键词管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=1" target="report_iframe">首页轮播广告</a></li>
@@ -77,6 +74,7 @@
 		<li><a href="<?php echo WEB_PATH?>?m=settings&a=web" target="report_iframe">系统基本设置</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=settings&a=car" target="report_iframe">车源相关设置</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=settings&a=contact" target="report_iframe">联系方式设置</a></li>
+		<li><a href="<?php echo WEB_PATH?>?m=admingroup&a=list" target="report_iframe">管理员用户组</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=admin&a=list" target="report_iframe">管理员选项</a></li>
 	</ul>
 </div>

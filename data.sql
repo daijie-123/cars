@@ -32117,10 +32117,10 @@ CREATE TABLE IF NOT EXISTS `simcms_member` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `aid` int(11) DEFAULT '0',
   `cid` int(11) DEFAULT '0',
-  `username` varchar(20) DEFAULT NULL,
-  `nicname` varchar(20) DEFAULT NULL,
+  `username` varchar(100) DEFAULT NULL,
+  `nicname` varchar(100) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
-  `email` varchar(30) DEFAULT NULL,
+  `email` varchar(60) DEFAULT NULL,
   `regtime` int(11) DEFAULT '0',
   `regip` varchar(20) DEFAULT NULL,
   `last_login_time` int(11) DEFAULT '0',
@@ -34650,6 +34650,9 @@ CREATE TABLE IF NOT EXISTS `simcms_subscribe` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
+ALTER TABLE `simcms_member`
+  ADD COLUMN `open_id` VARCHAR(60) NULL AFTER `isdealer`,
+  DROP INDEX `email`;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

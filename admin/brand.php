@@ -1,13 +1,4 @@
 <?php
-/*
- 本软件版权归作者所有,在投入使用之前注意获取许可
- 作者：北京市普艾斯科技有限公司
- 项目：simcms_锐车1.0
- 电话：010-58480317
- Q  Q: 228971357
- 网址：http://www.simcms.net
- simcms.net保留全部权力，受相关法律和国际公约保护，请勿非法修改、转载、散播，或用于其他赢利行为，并请勿删除版权声明。
-*/
 if (!defined('APP_IN')) exit('Access Denied');
 
 //当前模块
@@ -81,13 +72,13 @@ elseif ($ac == 'bulkdel')
 elseif ($ac == 'sign') {
 	$signid  = intval($_GET['signid']);
 	$rs = $db -> row_update('brand', array('sign' => $signid ), "b_id=" . intval($_GET['id']));
-} 
+}
 //批量排序
 elseif ($ac == 'bulksort')
 {
     if (empty($_POST['bulkid'])) showmsg('没有选中任何项',-1);
     foreach ($_POST['bulkid'] as $k => $v)
-    {	
+    {
         $rs = $db->row_update('brand',array('orderid'=>$_POST['orderid'][$v]),"b_id=".intval($v));
     }
 }
@@ -149,4 +140,3 @@ else
 }
 
 showmsg($ac_arr[$ac].($rs ? '成功' : '失败'),ADMIN_PAGE."?m=$m&a=list&page=".$page_g);
-?>

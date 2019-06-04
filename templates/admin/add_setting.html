@@ -38,28 +38,28 @@
 			});
 		});
 	});
-			function register(limittype)	{	
-	     if(limittype==1)		{		
-	        document.getElementById("count").disabled=false;		
-			}	
-		else{		
+			function register(limittype)	{
+	     if(limittype==1)		{
+	        document.getElementById("count").disabled=false;
+			}
+		else{
 		    document.getElementById("count").disabled=true;
 		}
 			}
-			
-			function register1(limittype)	{	
-	     if(limittype==1)		{		
-	        document.getElementById("count1").disabled=false;		
-			}	
-		else{		
+
+			function register1(limittype)	{
+	     if(limittype==1)		{
+	        document.getElementById("count1").disabled=false;
+			}
+		else{
 		    document.getElementById("count1").disabled=true;
 		}
 			}
-			function register2(limittype)	{	
-	     if(limittype==1)		{		
-	        document.getElementById("count2").disabled=false;		
-			}	
-		else{		
+			function register2(limittype)	{
+	     if(limittype==1)		{
+	        document.getElementById("count2").disabled=false;
+			}
+		else{
 		    document.getElementById("count2").disabled=true;
 		}
 			}
@@ -75,6 +75,7 @@
 				<li><a href="<{$adminpage}>?m=settings&a=web" class="list">系统基本设置</a></li>
 				<li><a href="<{$adminpage}>?m=settings&a=contact" class="list">联系方式设置</a></li>
 				<li><a href="<{$adminpage}>?m=settings&a=car" class="list">车源相关设置</a></li>
+				<li><a href="<{$adminpage}>?m=settings&a=miniprogram" class="list">小程序相关设置</a></li>
 			</ul>
 		</div>
 	</div>
@@ -114,7 +115,7 @@
 			<th>开启水印：</th>
 		<td><input type="radio" name="water" onclick="register2(1);"  value="1" <{if $setting.water==1}>checked<{/if}>> 是&nbsp;&nbsp;水印位置：<select id="count2" name="position"  <{if $setting.water==0}>disabled="disabled"<{/if}> ><option value="1" <{if $setting.position==1}>selected="selected"<{/if}>>左上</option><option value="2" <{if $setting.position==2}>selected="selected"<{/if}>>左下
 		</option><option value="3" <{if $setting.position==3}>selected="selected"<{/if}>>右上</option><option value="4" <{if $setting.position==4}>selected="selected"<{/if}>>右下</option><option value="5" <{if $setting.position==5}>selected="selected"<{/if}>>下中</option></select> <input type="radio" name="water" onclick="register2(2);" value="0" <{if $setting.water==0}>checked<{/if}>> 否</td>
-       
+
 		</tr>
 		<tr>
 			<th>上传水印图片：</th>
@@ -146,7 +147,7 @@
             <input type="radio" name="islimit" onclick="register(1);" value="1" <{if $setting.islimit==1}>checked<{/if}>> 是
             <input type="text" id="count" name="limitcount"  size="5" value="<{$setting.limitcount}>"  <{if $setting.islimit==0}>disabled="disabled"<{/if}>>条
             <input type="radio" name="islimit" onclick="register(2);" value="0" <{if $setting.islimit==0}>checked<{/if}>> 否
-            </td>   
+            </td>
 		</tr>
 		<{/if}>
 		<{/if}>
@@ -209,6 +210,16 @@
 			</td>
 			<td>
 			</td>
+		</tr>
+		<{/if}>
+		<{if $ac=="miniprogram"}>
+		<tr>
+			<th>app_id：</th>
+			<td><input name="miniprogram_app_id" type="text" size="60"  value="<{$setting.miniprogram_app_id}>" /></td>
+		</tr>
+		<tr>
+			<th>app_secret：</th>
+			<td><input name="miniprogram_app_secret" type="text" size="60"  value="<{$setting.miniprogram_app_secret}>" /></td>
 		</tr>
 		<{/if}>
 		<tr>

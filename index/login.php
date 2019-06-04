@@ -3,7 +3,7 @@ if(!defined('APP_IN')) exit('Access Denied');
 
 //验证用户名
 if (!empty($_POST['param']) and $_POST['name']=="username")
-{	
+{
 	$data = $db->row_count('member',"username='".$_POST['param']."'");
     if($data==0){
 		echo '{"info":"用户名不存在！","status":"n"}';
@@ -25,7 +25,7 @@ if (submitcheck('username'))
     //不可为空
     $arr_not_empty = array('username'=>'请输入您的账号','password'=>'请输入您的密码');
     can_not_be_empty($arr_not_empty,$_POST);
-    
+
 	//if (trim($_POST['authcode']) != $_SESSION['authcode']) showmsg('验证码不正确',-1);
     $rs_user = $db->row_select_one('member',"username='".trim($_POST['username'])."' AND password='".md5(trim($_POST['password']))."'");
     if (!$rs_user) showmsg('用户不存在或密码错误',-1);
@@ -37,4 +37,3 @@ if (submitcheck('username'))
 }
 
 $tpl -> display('default/'.$settings['templates'].'/login.html');
-?>

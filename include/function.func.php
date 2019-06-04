@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  本软件版权归作者所有,在投入使用之前注意获取许可
  作者：北京市普艾斯科技有限公司
@@ -13,31 +13,31 @@ function _addslashes($value) {
 	if (is_array($value)) {
 		foreach ($value as $key => $val) {
 			$value[$key] = _addslashes($val);
-		} 
+		}
 		return $value;
-	} 
+	}
 	return addslashes($value);
-} 
+}
 // 去掉addslashes加的\
 function _stripslashes($value) {
 	if (is_array($value)) {
 		foreach ($value as $k => $v) {
 			$value[$k] = _stripslashes($v);
-		} 
+		}
 		return $value;
-	} 
+	}
 	return stripslashes($value);
-} 
+}
 // 过滤函数
 function _filter($value) {
 	if (is_array($value)) {
 		foreach ($value as $key => $val) {
 			$value[$key] = _filter($val);
-		} 
+		}
 		return $value;
-	} 
+	}
 	return str_replace(array('..\\', '../', './', '.\\'), '', trim($value));
-} 
+}
 
 function RpLine($str) {
 	$str = str_replace("\r", "\\r", $str);
@@ -49,14 +49,14 @@ function tpl($tpl_name = '', $index_file = FILE) {
 	global $mod;
 	if (empty($tpl_name)) $tpl_name = $mod;
 	return TPL_DIR . $index_file . '/' . $tpl_name . TPL_SUFFIX;
-} 
+}
 // 检查是否为合法post提交
 function submitcheck($var) {
 	if (empty($_POST[$var]) || $_SERVER['REQUEST_METHOD'] != 'POST') return false;
 	if ((!empty($_SERVER['HTTP_REFERER']) || preg_replace("/https?:\/\/([^\:\/]+).*/i", "\\1", $_SERVER['HTTP_REFERER']) == preg_replace("/([^\:]+).*/", "\\1", $_SERVER['HTTP_HOST'])))
 		return true;
 	else alert('错误的请求', -1);
-} 
+}
 
 function showmsg($msg, $url = -1, $is_frame = 0, $time = 2) {
 	$addslashes = $is_frame ? '\\' : '';
@@ -70,13 +70,13 @@ function showmsg($msg, $url = -1, $is_frame = 0, $time = 2) {
 	} else {
 		$url = str_replace(array("\n", "\r"), '', $url);
 		$func = "{$parent}window.location.href=\'$url\';";
-	} 
+	}
 	if (empty($msg)) {
 		$func = str_replace('\\', '', $func);
 		echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
         <script language='javascript'>$func</script>";
 		exit;
-	} 
+	}
 	$str = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">
     <meta http-equiv=\"cache-control\" content=\"no-cache\">
     <title>提示信息</title>
@@ -114,7 +114,7 @@ function showmsg($msg, $url = -1, $is_frame = 0, $time = 2) {
         <script language='javascript'>parent.document.write('$str');</script>";
 	} else echo $str;
 	exit;
-} 
+}
 
 function showmsg2($msg, $url = -1, $is_frame = 0, $time = 2) {
 	$addslashes = $is_frame ? '\\' : '';
@@ -128,13 +128,13 @@ function showmsg2($msg, $url = -1, $is_frame = 0, $time = 2) {
 	} else {
 		$url = str_replace(array("\n", "\r"), '', $url);
 		$func = "{$parent}window.location.href=\'$url\';";
-	} 
+	}
 	if (empty($msg)) {
 		$func = str_replace('\\', '', $func);
 		echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
         <script language='javascript'>$func</script>";
 		exit;
-	} 
+	}
 	$str = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">
     <meta http-equiv=\"cache-control\" content=\"no-cache\">
     <title>提示信息</title>
@@ -172,7 +172,7 @@ function showmsg2($msg, $url = -1, $is_frame = 0, $time = 2) {
         <script language='javascript'>parent.document.write('$str');</script>";
 	} else echo $str;
 	exit;
-} 
+}
 
 function htmlshowmsg($msg) {
 	$str = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">
@@ -206,13 +206,13 @@ function htmlshowmsg($msg) {
     </body>";
 	$str = str_replace(array("\r", "\n"), '', $str);
 	echo $str;
-} 
+}
 function mshowmsg($msg) {
 	global $tpl;
 	$tpl -> assign('msg', $msg);
 	$tpl -> display('m/notice.html');
 	exit;
-} 
+}
 // 使用JS弹出消息框
 function alert1($msg, $url = '', $window = 'window', $display = 1) {
 	$str = "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
@@ -225,7 +225,7 @@ function alert1($msg, $url = '', $window = 'window', $display = 1) {
 	$str .= '</script>';
 	if (!$display) return $str;
 	exit($str);
-} 
+}
 // 消息提示框
 function redirect($msg, $url = '', $window = 'window', $display = 1) {
 	$str = "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
@@ -238,7 +238,7 @@ function redirect($msg, $url = '', $window = 'window', $display = 1) {
 	$str .= '</script>';
 	if (!$display) return $str;
 	exit($str);
-} 
+}
 // 字符串截取
 function _substr($str, $start = 0, $length, $charset = "utf-8", $suffix = '') {
 	$string = substr($str, $start, $length);
@@ -249,33 +249,33 @@ function _substr($str, $start = 0, $length, $charset = "utf-8", $suffix = '') {
 	preg_match_all($re[$charset], $string, $match);
 	$slice = join('', array_slice($match[0], 0, $length));
 	return strlen($str) > strlen($slice) ? $slice . $suffix : $slice;
-} 
+}
 // 获取post过来的值
 function post() {
 	$args = func_get_args();
 	$value = array();
 	while (list(, $key) = each ($args)) {
 		if (isset($_POST[$key])) $value[$key] = $_POST[$key];
-	} 
+	}
 	if (count($args) === 1) return empty($value) ? '' : array_shift($value);
 	return $value;
-} 
+}
 // 获取get过来的值
 function get() {
 	$args = func_get_args();
 	$value = array();
 	while (list(, $key) = each ($args)) {
 		if (isset($_GET[$key])) $value[$key] = $_GET[$key];
-	} 
+	}
 	if (count($args) === 1) return empty($value) ? '' : array_shift($value);
 	return $value;
-} 
+}
 // 不能为空
 function can_not_be_empty($arr_not_empty, $arr_value) {
 	foreach ($arr_not_empty as $k => $v) {
 		if (empty($arr_value[$k])) showmsg($v, -1);
-	} 
-} 
+	}
+}
 // 获取客户端IP
 function get_client_ip() {
 	if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
@@ -289,18 +289,18 @@ function get_client_ip() {
 	else $ip = "unknown";
 	if (!preg_match("/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/", $ip)) return 'unknown';
 	return($ip);
-} 
+}
 // 返回ID字符串
 function return_str_id($id) {
 	$str_id = '';
 	if (is_array($id)) {
 		foreach ($id as $v) {
 			$str_id .= intval($v) . ',';
-		} 
+		}
 		$str_id = substr($str_id, 0, -1);
 	} else $str_id = $id;
 	return $str_id;
-} 
+}
 // 创建多级目录
 function createFolder($dir){
     return is_dir($dir) or (createFolder(dirname($dir)) and mkdir($dir,0777));
@@ -317,13 +317,13 @@ function _rmdir($path) {
 			if (substr($path, -1) != '/') $path .= '/';
 			while (($file = readdir($op)) !== false) {
 				if (!in_array($file, array('.', '..'))) _rmdir($path . $file);
-			} 
+			}
 			closedir($op);
 			rmdir($path);
-		} 
+		}
 	} else return false;
 	return true;
-} 
+}
 // 构造select
 function select_make($id, $arr, $default_str = '', $default_val = '') {
 	$option = $default_str ? "<option value='$default_val'>$default_str</option>\r\n" : '';
@@ -331,9 +331,9 @@ function select_make($id, $arr, $default_str = '', $default_val = '') {
 		$selected = '';
 		if ($k == $id) $selected = 'selected';
 		$option .= "<option value='{$k}' $selected>{$v}</option>\r\n";
-	} 
+	}
 	return $option;
-} 
+}
 // 占用空间大小格式化
 function byte_format($size, $unit = 'B', $dec = 2) {
 	$arr_unit = array("B", "KB", "MB", "GB", "TB", "PB");
@@ -346,13 +346,13 @@ function byte_format($size, $unit = 'B', $dec = 2) {
 	} while ($size < 1) {
 		$size *= 1024;
 		$pos--;
-	} 
+	}
 	return round($size, $dec) . ' ' . $arr_unit[$pos];
-} 
+}
 // 是否邮件地址
 function is_email($email) {
 	return preg_match('/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/', $email);
-} 
+}
 
 // 获取字符串首字母
 function getinitial($s0)
@@ -404,34 +404,34 @@ function getpagelist($action, $pagecount, $page, $result_num, $page_size) {
 				$pagecountlist .= "<span class=\"xspace-current\">" . $i . "</span>";
 			else
 				$pagecountlist .= "<a href=" . $action . "_" . sprintf("%02d", $i) . ".html>" . $i . "</a>";
-		} 
+		}
 	} else {
 		$pagecountlist .= "<span class=\"xspace-current\">1</span>";
-	} 
+	}
 	$pagelist .= "Page：";
 	if ($page > 1) {
 		$pagelist .= "<a href=" . $action . "_" . sprintf("%02d", ($page-1)) . ".html class='prepage'></a>";
-	} 
+	}
 
 	$pagelist .= $pagecountlist . "";
 
 	if ($page < $pagecount) {
 		$pagelist .= "<a href=" . $action . "_" . sprintf("%02d", ($page + 1)) . ".html class='nextpage'></a>";
-	} 
+	}
 	$pagelist .= "</div>";
 	return $pagelist;
-} 
+}
 // PHP COOKIE设置函数立即生效，支持数组
 function setMyCookie($var, $value = '', $time = 0, $path = '', $domain = '') {
 	$_COOKIE[$var] = $value;
 	if (is_array($value)) {
 		foreach($value as $k => $v) {
 			setcookie($var . '[' . $k . ']', $v, $time, $path, $domain);
-		} 
+		}
 	} else {
 		setcookie($var, $value, $time, $path, $domain);
-	} 
-} 
+	}
+}
 
 // 获取访客ip
 function getFirstIpFromList($ip) {
@@ -440,8 +440,8 @@ function getFirstIpFromList($ip) {
 		return (substr($ip, 0, $p));
 	} else {
 		return ($ip);
-	} 
-} 
+	}
+}
 function getIp() {
 	if (isset($_SERVER['HTTP_CLIENT_IP']) && ($ip = getFirstIpFromList($_SERVER['HTTP_CLIENT_IP'])) && strpos($ip, "unknown") === false && getHost($ip) != $ip) {
 		return $ip;
@@ -453,19 +453,19 @@ function getIp() {
 		return getFirstIpFromList($_SERVER['HTTP_X_FORWARDED_FOR']);
 	} else {
 		return getFirstIpFromList($_SERVER['REMOTE_ADDR']);
-	} 
-} 
+	}
+}
 function get_cityname($ip) {
 	$arr_ip = convertIp($ip);
 	$cityname = $arr_ip['city'];
 	if($cityname=="unkown") $cityname="";
 	return $cityname;
-} 
+}
 
 function convertIp($ip, $url = 'data/ipdata.dat') {
 	if (!preg_match("/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/", $ip)) {
 		return '';
-	} 
+	}
 
 	if ($fd = @fopen($url, 'rb')) {
 		$ip = explode('.', $ip);
@@ -490,27 +490,27 @@ function convertIp($ip, $url = 'data/ipdata.dat') {
 			if (strlen($ipData1) < 4) {
 				fclose($fd);
 				return 'System Error';
-			} 
+			}
 			$ip1num = implode('', unpack('L', $ipData1));
 			if ($ip1num < 0) $ip1num += pow(2, 32);
 
 			if ($ip1num > $ipNum) {
 				$EndNum = $Middle;
 				continue;
-			} 
+			}
 
 			$DataSeek = fread($fd, 3);
 			if (strlen($DataSeek) < 3) {
 				fclose($fd);
 				return 'System Error';
-			} 
+			}
 			$DataSeek = implode('', unpack('L', $DataSeek . chr(0)));
 			fseek($fd, $DataSeek);
 			$ipData2 = fread($fd, 4);
 			if (strlen($ipData2) < 4) {
 				fclose($fd);
 				return 'System Error';
-			} 
+			}
 			$ip2num = implode('', unpack('L', $ipData2));
 			if ($ip2num < 0) $ip2num += pow(2, 32);
 
@@ -518,10 +518,10 @@ function convertIp($ip, $url = 'data/ipdata.dat') {
 				if ($Middle == $BeginNum) {
 					fclose($fd);
 					return 'Unknown';
-				} 
+				}
 				$BeginNum = $Middle;
-			} 
-		} 
+			}
+		}
 
 		$ipFlag = fread($fd, 1);
 		if ($ipFlag == chr(1)) {
@@ -529,25 +529,25 @@ function convertIp($ip, $url = 'data/ipdata.dat') {
 			if (strlen($ipSeek) < 3) {
 				fclose($fd);
 				return 'System Error';
-			} 
+			}
 			$ipSeek = implode('', unpack('L', $ipSeek . chr(0)));
 			fseek($fd, $ipSeek);
 			$ipFlag = fread($fd, 1);
-		} 
+		}
 
 		if ($ipFlag == chr(2)) {
 			$AddrSeek = fread($fd, 3);
 			if (strlen($AddrSeek) < 3) {
 				fclose($fd);
 				return 'System Error';
-			} 
+			}
 			$ipFlag = fread($fd, 1);
 			if ($ipFlag == chr(2)) {
 				$AddrSeek2 = fread($fd, 3);
 				if (strlen($AddrSeek2) < 3) {
 					fclose($fd);
 					return 'System Error';
-				} 
+				}
 				$AddrSeek2 = implode('', unpack('L', $AddrSeek2 . chr(0)));
 				fseek($fd, $AddrSeek2);
 			} else {
@@ -571,26 +571,26 @@ function convertIp($ip, $url = 'data/ipdata.dat') {
 				if (strlen($AddrSeek2) < 3) {
 					fclose($fd);
 					return 'System Error';
-				} 
+				}
 				$AddrSeek2 = implode('', unpack('L', $AddrSeek2 . chr(0)));
 				fseek($fd, $AddrSeek2);
 			} else {
 				fseek($fd, -1, SEEK_CUR);
 			} while (($char = fread($fd, 1)) != chr(0))
 			$ipAddr2 .= $char;
-		} 
+		}
 		fclose($fd);
 
 		if (preg_match('/http/i', $ipAddr2)) {
 			$ipAddr2 = '';
-		} 
+		}
 		$ipaddr = "$ipAddr1,$ipAddr2";
 		$ipaddr = preg_replace('/CZ88\.NET/is', '', $ipaddr);
 		$ipaddr = preg_replace('/^\s*/is', '', $ipaddr);
 		$ipaddr = preg_replace('/\s*$/is', '', $ipaddr);
 		if (preg_match('/http/i', $ipaddr) || $ipaddr == '') {
 			$ipaddr = '';
-		} 
+		}
 		if (count(explode(',', $ipaddr)) > 0)
 			$ipaddrArr = explode(',', $ipaddr);
 
@@ -607,11 +607,11 @@ function convertIp($ip, $url = 'data/ipdata.dat') {
 		} else {
 			if (!($ip_fdata = @fopen($datadir . '0.txt', 'r'))) {
 				return 'Invalid IP data file';
-			} 
-		} 
+			}
+		}
 		for($i = 0; $i <= 3; $i++) {
 			$ip_detail[$i] = sprintf('%03d', $ip_detail[$i]);
-		} 
+		}
 		$ip = join('.', $ip_detail);
 		do {
 			$ip_data = fgets($ip_fdata, 200);
@@ -619,12 +619,12 @@ function convertIp($ip, $url = 'data/ipdata.dat') {
 			if ($ip >= $ip_data_detail[0] && $ip <= $ip_data_detail[1]) {
 				fclose($ip_fdata);
 				return $ip_data_detail[2] . $ip_data_detail[3];
-			} 
+			}
 		} while (!feof($ip_fdata));
 		fclose($ip_fdata);
 		return '';
-	} 
-} 
+	}
+}
 
 //判断是否为真实图片
 function isImage($filename){
@@ -637,4 +637,117 @@ function isImage($filename){
         return false;
     }
 }
-?>
+
+function splash($data = '', $code = 0, $msg = '')
+{
+    $code_msg = [
+        0 => [
+            'desc' => '成功',
+        ],
+        1 => [
+            'desc' => '未知错误',
+        ],
+        2 => [
+            'desc' => '服务暂不可用',
+        ],
+        3 => [
+            'desc' => '未知的方法',
+        ],
+        4 => [
+            'desc' => '接口调用次数已达到设定的上限',
+        ],
+        5 => [
+            'desc' => '请求来自未经授权的IP地址',
+        ],
+        6 => [
+            'desc' => '无权限访问该用户数据',
+        ],
+        7 => [
+            'desc' => '来自该refer的请求无访问权限',
+        ],
+        100 => [
+            'desc' => '请求参数无效',
+        ],
+        104 => [
+            'desc' => '无效签名',
+        ],
+        110 => [
+            'desc' => '无效的access token',
+        ],
+        801 => [
+            'desc' => '无效的操作方法',
+        ],
+    ];
+
+    echo json_encode([
+        'code' => $code,
+        'msg' => $code_msg[$code]['desc'] ?: $msg,
+        'data' => $data,
+    ]);
+
+    exit;
+}
+
+function api_session_start()
+{
+    ini_set('session.gc_maxlifetime', 7 * 24 * 60 * 60 ); // 设置为和“session.cookie_lifetime”一样的时间；(个人理解：设定session有效期)
+    // ini_set("session.cookie_lifetime","60"); //这个代表SessionID在客户端Cookie储存的时间，默认是0，代表浏览器一关闭
+    session_name(API_SESSION_NAME);
+    session_start();
+}
+
+function clear_all_fzz_cache(){
+    $fzz = new fzz_cache;
+    $fzz->clear_all();
+    if( !($fzz->_isset( "common_cache" )) ){
+		$fzz->set("common_cache", display_common_cache(), CACHETIME);
+	}
+}
+
+function http_client($url, $params, $method = 'GET', $header = array(), $multi = false){
+    $opts = array(
+        CURLOPT_TIMEOUT        => 30,
+        CURLOPT_RETURNTRANSFER => 1,
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_SSL_VERIFYHOST => false,
+        CURLOPT_HTTPHEADER     => $header
+    );
+
+    /* 根据请求类型设置特定参数 */
+    switch(strtoupper($method)){
+        case 'GET':
+            $opts[CURLOPT_URL] = $url . '?' . http_build_query($params);
+            break;
+        case 'POST':
+            //判断是否传输文件
+            $params = $multi ? $params : http_build_query($params);
+            $opts[CURLOPT_URL] = $url;
+            $opts[CURLOPT_POST] = 1;
+            $opts[CURLOPT_POSTFIELDS] = $params;
+            break;
+        default:
+            throw new Exception('不支持的请求方式！');
+    }
+
+    /* 初始化并执行curl请求 */
+    $ch = curl_init();
+    curl_setopt_array($ch, $opts);
+    $data  = curl_exec($ch);
+    $error = curl_error($ch);
+    curl_close($ch);
+    if($error) throw new Exception('请求发生错误：' . $error);
+    return  $data;
+}
+
+// 检查是否为post提交
+function postCheck() {
+	if ($_SERVER['REQUEST_METHOD'] != 'POST') return false;
+	// if ((!empty($_SERVER['HTTP_REFERER']) || preg_replace("/https?:\/\/([^\:\/]+).*/i", "\\1", $_SERVER['HTTP_REFERER']) == preg_replace("/([^\:]+).*/", "\\1", $_SERVER['HTTP_HOST'])))
+    return true;
+}
+// 检查是否为get提交
+function getCheck() {
+	if ($_SERVER['REQUEST_METHOD'] != 'GET') return false;
+	// if ((!empty($_SERVER['HTTP_REFERER']) || preg_replace("/https?:\/\/([^\:\/]+).*/i", "\\1", $_SERVER['HTTP_REFERER']) == preg_replace("/([^\:]+).*/", "\\1", $_SERVER['HTTP_HOST'])))
+    return true;
+}
