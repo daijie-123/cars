@@ -1,7 +1,8 @@
 <?php
 session_start();
 define('APP_IN', true);
-error_reporting(0);
+// error_reporting(0);
+error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
 @set_magic_quotes_runtime(0);
 
 if (isset($_REQUEST['GLOBALS']))
@@ -18,23 +19,21 @@ define('FILE', basename($_SERVER['PHP_SELF'], '.php'));
 $PHP_SELF = explode("/", $_SERVER['PHP_SELF']);
 unset($PHP_SELF[count($PHP_SELF)-1]);
 define('WEB_PATH', implode("/", $PHP_SELF));
-define('CACHE_DIR',WEB_ROOT.'cache/');  //缓存目录
+define('CACHE_DIR', WEB_ROOT . 'cache/');  //缓存目录
+define('INC_DIR', WEB_ROOT . 'include/'); //包含目录
+define('TPL_DIR', 'templates/'); //模板目录
+define('HTML_DIR', ''); //静态文件目录
 
-// //网站域名
-// define('WEB_DOMAIN', "http://car.test.com");
-
-// 网站访问路径，相对于域名
-// 包含配置文件
-include (WEB_ROOT . 'config.php');
-
-// 时区设置
-date_default_timezone_set('ETC/GMT'.TIMEZONE);
 // 包含模版配置文件
 include (INC_DIR . 'tql.inc.php');
 include (INC_DIR . 'function.func.php');
 include (INC_DIR.'common.func.php');
 include (INC_DIR . 'simplehtmldom/simple_html_dom.php');
-
+// 包含配置文件
+include (WEB_ROOT . 'config.php');
+// 时区设置
+date_default_timezone_set('ETC/GMT' . TIMEZONE);
+define('WEB_DOMAIN', (is_https() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST']);
 // 数据库连接
 include (INC_DIR . 'Mysql.class.php');
 $db = new Mysql($db_config);

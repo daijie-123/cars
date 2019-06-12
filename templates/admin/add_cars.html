@@ -14,8 +14,8 @@
 $(document).ready(function() {
     //品牌选择
 	$("#brand").change(function(){
-		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", { 
-			brandid :  $("#brand").val() 
+		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", {
+			brandid :  $("#brand").val()
 		}, function (data, textStatus){
                $("#subbrand").html(data); // 把返回的数据添加到页面上
 			}
@@ -23,8 +23,8 @@ $(document).ready(function() {
 	});
 	//品牌选择
 	$("#subbrand").change(function(){
-		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", { 
-			subbrandid :  $("#subbrand").val() 
+		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", {
+			subbrandid :  $("#subbrand").val()
 		}, function (data, textStatus){
                $("#subsubbrand").html(data); // 把返回的数据添加到页面上
 			}
@@ -33,8 +33,8 @@ $(document).ready(function() {
 	<{if $setting.version==3}>
 	   //城市选择
 	$("#province").change(function(){
-		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", { 
-			cityid :  $("#province").val() 
+		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", {
+			cityid :  $("#province").val()
 		}, function (data, textStatus){
                $("#city").html(data); // 把返回的数据添加到页面上
 			}
@@ -125,17 +125,17 @@ KindEditor.ready(function(K) {
 					</select>
 					<select class="subbrand" id="subbrand" name="p_subbrand" datatype="n" nullmsg="请选择车系！">
 						<option  value="">请选择车系</option>
-						<{$select_subbrand}>                    
+						<{$select_subbrand}>
 					</select> &nbsp;<select class="subbrand" id="subsubbrand" name="p_subsubbrand" datatype="n" nullmsg="请选择款式！">
 					<option  value="">请选择款式</option>
-						<{$select_subsubbrand}>	
+						<{$select_subsubbrand}>
 					</select>
 
 					<input type="text" name="p_name" value="<{$cars.p_name}>" size="10"></td>
 
 			</tr>
 			<tr>
-				<th>车型选择：</th>
+				<th>级别选择：</th>
 				<td><select name="p_model">
 						<{$select_model}>
 					</select></td>
@@ -163,7 +163,7 @@ KindEditor.ready(function(K) {
 				<td width="180"><select name="p_color">
 						<{$select_color}>
 					</select></td>
-				<th width="50">新车：</th>
+				<th width="50">排量：</th>
 				<td><select name="p_gas">
 						<{$select_gas}>
 					</select></td>
@@ -211,13 +211,13 @@ KindEditor.ready(function(K) {
 				<td>
 				<{if $paralist.type_name=='input'}>
 					<input name="para<{$paralist.id}>" type="text" size="20" value="<{$paralist.c_value}>"/>
-				<{elseif $paralist.type_name=='textarea' }>	
+				<{elseif $paralist.type_name=='textarea' }>
 					<textarea name="para<{$paralist.id}>" ><{$paralist.c_value}></textarea>
-				<{elseif $paralist.type_name=='select' }>	
+				<{elseif $paralist.type_name=='select' }>
 					<select name="para<{$paralist.id}>"><{$paralist.select}></select>
-				<{elseif $paralist.type_name=='time' }>	
+				<{elseif $paralist.type_name=='time' }>
 					<input name="para<{$paralist.id}>" type="text" size="20" class="laydate-icon"  value="<{$paralist.c_value}>" onclick="laydate()"/>
-				<{elseif $paralist.type_name=='checkbox' }>	
+				<{elseif $paralist.type_name=='checkbox' }>
 					<{$checkbox_str}>
 				<{/if}>
 				</td>
@@ -233,7 +233,7 @@ KindEditor.ready(function(K) {
 					</ul>
 					<input type="button" id="J_selectImage" value="批量上传图片" class="uploadbut"/>
 					<div id="mainpic">
-						
+
 					</div>
 				</td>
 			</tr>
@@ -242,7 +242,7 @@ KindEditor.ready(function(K) {
 				<td colspan="5"><textarea  name="p_details" rows="2" cols="90" class="textarea01"><{$cars.p_details}></textarea></td>
 			</tr>
 			<tr>
-				<th>车主电话：</th>
+				<th>车主姓名：</th>
 				<td colspan="5"><input type="text" name="p_username" value="<{$cars.p_username}>"></td>
 			</tr>
 			<tr>

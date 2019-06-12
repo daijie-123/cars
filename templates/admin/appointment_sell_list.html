@@ -1,0 +1,108 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title></title>
+    <link href="static/css/admin/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="static/js/common.js"></script>
+    <script type="text/javascript" src="static/js/jquery.js"></script>
+</head>
+
+<body>
+    <div class="colorarea01">
+        <div class="search clearfix">
+            <div class="searchL">
+                <ul class="menulist">
+                    <li><a href="#" class="add">预约卖车列表</a></li>
+                </ul>
+            </div>
+            <div class="searchR">
+                <form action="<{$adminpage}>?m=appointment_sell" method="get" name="form2">
+                    <input type="hidden" name="m" value="appointment_sell">
+                    <input type="hidden" name="a" value="list">
+                    <span>
+                        <input type="text" name="keywords" id="searchkey" value="" size="16" class="inp01"
+                            placeholder="手机号或车牌号码">
+                    </span>
+                    <span>
+                        <input type="submit" name="filtersubmit" value="查询" class="combutton02 w50">
+                    </span>
+                </form>
+            </div>
+        </div>
+        <form action="<{$adminpage}>?m=appointment_sell" method="POST" name="form"
+            onSubmit="return listsubmitconfirm(this.form)">
+            <table cellspacing="0" cellpadding="0" width="100%" class="listtable">
+                <tr>
+                    <th width="30">选择</th>
+                    <th>ID</th>
+                    <th>车行</th>
+                    <th align="left">品牌 - 车型</th>
+                    <th>车牌号</th>
+                    <th>上牌日期</th>
+                    <th>行驶里程</th>
+                    <th>联系人</th>
+                    <th>电话</th>
+                    <th>车况自评</th>
+                    <th>创建时间</th>
+                    <th width="60">操作</th>
+                </tr>
+                <{foreach from=$carslist item=cars}>
+                    <tr bgcolor="#ffffff" onmouseover="style.backgroundColor='#E2E9EA'"
+                        onmouseout="style.backgroundColor='#ffffff'">
+                        <td align="center"><input type="checkbox" name="bulkid[]" value="<{$cars.id}>"></td>
+                        <td align="center">
+                            <{$cars.id}>
+                        </td>
+                        <td align="left">
+                            <{$cars.company}>
+                        </td>
+                        <td align="left">
+                            <{$cars.allname}>
+                        </td>
+                        <td align="center">
+                            <{$cars.car_license}>
+                        </td>
+                        <td align="center">
+                            <{$cars.add_license_time}>
+                        </td>
+                        <td align="center">
+                            <{$cars.kilometre}>万公里
+                        </td>
+                        <td align="center">
+                            <{$cars.contact_name}>
+                        </td>
+                        <td align="center">
+                            <{$cars.contact_tel}>
+                        </td>
+                        <td align="center">
+                            <{$cars.self_assessment}>
+                        </td>
+                        <td align="center">
+                            <{$cars.create_time}>
+                        </td>
+                        <td align="center" class="rightmenu"><a
+                                href="<{$adminpage}>?m=appointment_sell&a=assess&id=<{$cars.id}>&page=<{$page}>">处理</a>
+                            | <a
+                                href="javascript:if(confirm('ID:<{$cars.id}>&nbsp;确实要删除吗?'))location='<{$adminpage}>?m=appointment_sell&a=del&id=<{$cars.id}>&page=<{$page}>'">删除</a>
+                        </td>
+                    </tr>
+                    <{/foreach}> <tr>
+                        <td colspan="12" class="buttontd">
+                            <a href="javascript:javascript:selectAll();" title="请选择后操作">全选</a>
+                            <a href="javascript:submitForm('<{$adminpage}>?m=appointment_sell&a=bulkdel&page=<{$page}>','删除');"
+                                title="请选择后操作">删除</a>
+                        </td>
+                        </tr>
+            </table>
+        </form>
+        <div class="listpage">
+            <{$button_basic}>
+                <{$button_select}>
+        </div>
+    </div>
+</body>
+
+</html>

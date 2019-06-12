@@ -681,7 +681,7 @@ function splash($data = '', $code = 0, $msg = '')
 
     echo json_encode([
         'code' => $code,
-        'msg' => $code_msg[$code]['desc'] ?: $msg,
+        'msg' => $msg ?: $code_msg[$code]['desc'],
         'data' => $data,
     ]);
 
@@ -692,6 +692,7 @@ function api_session_start()
 {
     ini_set('session.gc_maxlifetime', 7 * 24 * 60 * 60 ); // 设置为和“session.cookie_lifetime”一样的时间；(个人理解：设定session有效期)
     // ini_set("session.cookie_lifetime","60"); //这个代表SessionID在客户端Cookie储存的时间，默认是0，代表浏览器一关闭
+    $_COOKIE[API_SESSION_NAME] = $_SERVER['HTTP_' . strtoupper(API_SESSION_NAME)];
     session_name(API_SESSION_NAME);
     session_start();
 }
@@ -726,7 +727,7 @@ function http_client($url, $params, $method = 'GET', $header = array(), $multi =
             $opts[CURLOPT_POSTFIELDS] = $params;
             break;
         default:
-            throw new Exception('不支持的请求方式！');
+            splash('', 1, '不支持的请求方式！');
     }
 
     /* 初始化并执行curl请求 */
@@ -735,7 +736,7 @@ function http_client($url, $params, $method = 'GET', $header = array(), $multi =
     $data  = curl_exec($ch);
     $error = curl_error($ch);
     curl_close($ch);
-    if($error) throw new Exception('请求发生错误：' . $error);
+    if($error) splash('', 1, '请求发生错误：' . $error);
     return  $data;
 }
 
@@ -750,4 +751,44 @@ function getCheck() {
 	if ($_SERVER['REQUEST_METHOD'] != 'GET') return false;
 	// if ((!empty($_SERVER['HTTP_REFERER']) || preg_replace("/https?:\/\/([^\:\/]+).*/i", "\\1", $_SERVER['HTTP_REFERER']) == preg_replace("/([^\:]+).*/", "\\1", $_SERVER['HTTP_HOST'])))
     return true;
+}
+
+// 不能为空
+function api_can_not_be_empty($arr_not_empty, $arr_value) {
+	foreach ($arr_not_empty as $k => $v) {
+		if (!isset($arr_value[$k]) || ($arr_value[$k] == '')) splash('', 100, $v);
+	}
+}
+
+function jj($a) {
+    header('Content-Type: text/html;charset=utf-8');
+    if(is_array($a)){
+        echo json_encode($a);
+    }elseif(is_null($a)){
+        echo date('Y-m-d H:i:s');
+    }else{
+        echo $a;
+    }
+	exit;
+}
+
+function request_method_check($ac, $ac_get_arr = [], $ac_post_arr = []){
+    // 当前操作
+    if(empty($ac)) splash('', 801);
+    if(postCheck() && !isset($ac_post_arr[$ac])){
+        splash('', 801);
+    }else if(getCheck() && !isset($ac_get_arr[$ac])){
+        splash('', 801);
+    }
+}
+
+function is_https() {
+    if ( !empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') {
+        return true;
+    } elseif ( isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ) {
+        return true;
+    } elseif ( !empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) !== 'off') {
+        return true;
+    }
+    return false;
 }

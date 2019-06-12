@@ -8,7 +8,8 @@
 		<li><a href="<?php echo WEB_PATH?>?m=cars&a=list&clear=1" target="report_iframe">车源列表</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=assesscars&a=list" target="report_iframe">车源评估</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=buycars&a=list" target="report_iframe">求购信息</a></li>
-		<li><a href="<?php echo WEB_PATH?>?m=subscribe&a=list" target="report_iframe">预约管理</a></li>
+		<li><a href="<?php echo WEB_PATH?>?m=subscribe&a=list" target="report_iframe">预约看车</a></li>
+		<li><a href="<?php echo WEB_PATH?>?m=appointment_sell&a=list" target="report_iframe">预约卖车</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=inquiry&a=list" target="report_iframe">询价管理</a></li>
 	</ul>
 </div>
@@ -57,7 +58,8 @@
 		<li><a href="<?php echo WEB_PATH?>?m=keywords&a=list" target="report_iframe">关键词管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=1" target="report_iframe">首页轮播广告</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=2" target="report_iframe">手机轮播广告</a></li>
-		<li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=3" target="report_iframe">周末集市轮播广告</a></li>
+        <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=3" target="report_iframe">周末集市轮播广告</a></li>
+        <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=4" target="report_iframe">小程序首页轮播图</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=flink&a=list" target="report_iframe">友情链接</a></li>
 	</ul>
 </div>

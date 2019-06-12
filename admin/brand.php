@@ -22,18 +22,17 @@ $tpl->assign( 'page_g', $page_g );
 //列表
 if ($ac == 'list')
 {
-    $where = 'b_parent = -1 and mark="A" ';
-    //搜索条件
-	$pagesize = 0;
-    if ($sel_key != 'All' and $sel_key)
-    {
-		$pagesize = 100;
-        $where = " b_parent=-1 AND mark = '".$sel_key."'";
+    if ($sel_key == 'All'){
+		$pagesize = 10;
+        $where = " b_parent = -1 ";
+    }else{
+        $pagesize = 100;
+        $where = " b_parent = -1 and mark='{$sel_key}' ";
     }
     include(INC_DIR.'Page.class.php');
     $Page = new Page($db->tb_prefix.'brand',$where,'*',$pagesize,'mark');
     $list = $Page->get_data();
-	$page = $Page -> page;
+	$page = $Page->page;
     foreach($list as $key => $value){
         $subbrandlist = $db->row_select('brand','b_parent = '.$value['b_id']);
 		foreach($subbrandlist as $subkey => $subvalue){
@@ -51,7 +50,7 @@ if ($ac == 'list')
     $tpl->assign( 'button_select', $button_select );
     $tpl->assign( 'brandlist', $list );
 	$tpl->assign( 'brandlist', $list );
-	$tpl -> assign('page', $page);
+	$tpl->assign( 'page', $page);
     $tpl->display( 'admin/brand_list.html' );
     exit;
 }

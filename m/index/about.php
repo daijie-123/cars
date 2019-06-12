@@ -9,7 +9,7 @@ if($id==0){
 	/*幻灯片*/
 	$tpl -> assign('film_list', get_filmstrip(2));
 
-	include(dirname(dirname(dirname(__FILE__))).'/'.INC_DIR . 'Page.class.php');
+	include(INC_DIR . 'Page.class.php');
 	$Page = new Page($db -> tb_prefix . 'news', 'catid=64', 'n_id,n_title,n_pic', '30','n_addtime desc');
 	$list = $Page -> get_data();
 	$button_basic = $Page -> button_basic_num();

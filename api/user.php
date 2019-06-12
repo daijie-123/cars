@@ -5,18 +5,6 @@ include ('page.php');
 // include(INC_DIR . 'html.func.php');
 if (!is_user_login()) splash('', 110);
 
-// 验证手机号
-if (!empty($_POST['param']) and $_POST['name'] == "mobilephone") {
-	$data = $db -> row_count('member', "mobilephone='" . $_POST['param'] . "' and id!={$_SESSION['USER_ID']}");
-	if ($data == 0) {
-		echo '{"info":"手机号验证成功！","status":"y"}';
-	} else {
-		echo '{"info":"手机号已存在！","status":"n"}';
-	}
-	exit;
-}
-
-
 $array_brand_with_index = arr_brand_with_index();
 $array_brand = arr_brand(-1);
 $array_model = arr_model();
@@ -50,13 +38,7 @@ $ac_post_arr = ['updateMobilePhone' => '修改手机号'];
 $ac_get_arr = [];
 // 当前操作
 $ac = $_REQUEST['a'];
-if(empty($ac)) splash('', 801);
-if(postCheck() && !isset($ac_post_arr[$ac])){
-    splash('', 801);
-}else if(getCheck() && !isset($ac_get_arr[$ac])){
-    splash('', 801);
-}
-
+request_method_check($ac, $ac_get_arr, $ac_post_arr);
 // 修改密码处理ajax后台处理
 if (!empty($_GET['ajax']) && isset($_GET['oldpassword'])) {
 	if ($userinfo['password'] == md5($_GET['oldpassword'])) {

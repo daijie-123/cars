@@ -18,14 +18,14 @@ if (!empty($_GET['ajax']) && isset($_GET['bid'])) {
 	if($list) {
 		foreach($list as $key => $value) {
 			$brandlist .= "<option value=" . $value['b_id'] . ">" . $value['b_name'] . "</option>";
-		} 
-	} 
+		}
+	}
 	echo $brandlist;
 	exit;
-} 
+}
 
 //当前模块
-$m_name = '品牌管理';
+$m_name = '车型管理';
 //允许操作
 $ac_arr = array('list'=>'品牌列表','add'=>'添加车型','edit'=>'编辑车型','del'=>'删除品牌','bulkdel'=>'批量删除','bulksort'=>'更新排序','sign'=>'标记品牌','editcarstyle'=>'编辑款式');
 $match_arr = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','All');
@@ -84,7 +84,7 @@ if ($ac == 'list')
 					$list[$key]['brand01']=$data04['b_name'];
 				}
 			}
-			
+
 		}
 		$tpl->assign( 'types', 2 );
 		$button_basic = $Page->button_basic();
@@ -96,7 +96,7 @@ if ($ac == 'list')
 		$tpl -> assign('select_brand', $select_brand);
 		$tpl -> assign('select_subbrand', $select_subbrand);
 	}
-	
+
     $tpl->assign( 'sel_key',	$sel_key );
     $tpl->assign( 'match_arr',	$match_arr );
     $tpl->assign( 'brandlist', $list );
@@ -130,7 +130,7 @@ elseif ($ac == 'add' || $ac == 'edit')
 {
     //添加或修改
     if (submitcheck('a'))
-    {	
+    {
       //  $arr_not_empty = array('b_name4'=>'款式名称不可为空');
         //can_not_be_empty($arr_not_empty,$_POST);
         if ($ac == 'add')
@@ -166,7 +166,7 @@ elseif ($ac == 'add' || $ac == 'edit')
 			}
         }
         else
-		{ 	
+		{
 			if($_POST['isaddmodel']==1){
 			//四级品牌
 			$post=post('b_name','b_parent','mark','classid');
@@ -196,7 +196,7 @@ elseif ($ac == 'add' || $ac == 'edit')
 		}
     }
     //转向添加或修改页面
-    else 
+    else
     {
 		    if (empty($_GET['b_id'])) {
 		    $data = array('b_id'=>'','b_parent'=>'','b_name'=>'','mark'=>'');
@@ -219,29 +219,29 @@ elseif ($ac == 'add' || $ac == 'edit')
 		    $tpl -> assign('select_subbrand', $select_subbrand);
 		    $tpl -> assign('select_fourbrand', $select_fourbrand);
             $tpl->display( 'admin/add_carmodel.html' );
-            exit;	
+            exit;
     }
 }
 //修改款式
 elseif ($ac == 'editcarstyle')
 {
     if (submitcheck('a'))
-    {	
+    {
         $arr_not_empty = array('b_name4'=>'款式名称不可为空');
         can_not_be_empty($arr_not_empty,$_POST);
 		//四级品牌
 		$post=post('b_name');
 		$post['b_name']=$_POST['b_name4'];
-		$rs = $db->row_update('brand',$post,'b_id='.$_POST['b_id']);	        
+		$rs = $db->row_update('brand',$post,'b_id='.$_POST['b_id']);
     }
     //转向修改页面
-    else 
+    else
     {
             $data4 = $db->row_select_one('brand',"b_id=".$_GET['b_id']);
 			$tpl->assign( 'subsubsublist', $data4 );
 		    $tpl->assign( 'ac', $ac );
             $tpl->display( 'admin/edit_carstyle.html' );
-            exit;	
+            exit;
     }
 }
 //默认操作

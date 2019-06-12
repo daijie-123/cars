@@ -83,7 +83,7 @@ if ($rs_user){
 $rs_user = $db->row_select_one('member', "id='{$_SESSION['USER_ID']}'");
 
 splash([
-    'token' => session_id(),
+    'apitoken' => session_id(),
     'user_id' => $_SESSION['USER_ID'],
     'user_data' => $rs_user,
 ]);

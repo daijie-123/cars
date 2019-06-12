@@ -18,7 +18,7 @@
 		</div>
 	</div>
 	<div>
-		<form action="<{$adminpage}>?m=brand" method="post" name="form">     
+		<form action="<{$adminpage}>?m=brand" method="post" name="form">
         <div class="main">
 			<{foreach from=$brandlist item=pbrands}>
 			<div class="letter">
@@ -67,7 +67,10 @@
 			<{/foreach}>
         </div>
 		</form>
-	</div>
+    </div>
+    <{if $sel_key=="All"}>
+    <div class="listpage"><{$button_basic}><{$button_select}></div>
+    <{/if}>
 </div>
 </body>
 </html>

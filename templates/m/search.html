@@ -53,7 +53,7 @@
 	<{foreach from=$carslist item=carslist}>
 	<div class="carlist clearfix mt10">
 		<div class="carlist_left">
-			<a href="<{$carslist.p_url}>"><{if $carslist.p_mainpic<>''}><img src="/<{$carslist.p_mainpic}>"/><{else}>暂无图片<{/if}></a>
+			<a href="<{$carslist.p_url}>"><{if $carslist.p_mainpic<>''}><img src="<{$carslist.p_mainpic}>"/><{else}>暂无图片<{/if}></a>
 		</div>
 		<div class="carlist_right">
 		<p class="f18 fb mt5"><a href="<{$carslist.p_url}>"><{$carslist.p_allname}></a></p>
@@ -64,7 +64,7 @@
 	<div class="pagelist"><{$button_basic}><{$button_select}></div>
 </div>
 <!--主体-->
-<!--底部--> 
+<!--底部-->
 <{include file="m/foot.html"}>
 <!--底部结束-->
 </body>

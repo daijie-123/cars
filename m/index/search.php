@@ -27,12 +27,12 @@ $tpl -> assign('arr_brand', $arr_b);
 // 车型
 if(!empty($_GET['model'])){
 	$where .= " and p_model = ".intval($_GET['model']);
-} 
+}
 
 //品牌
 if(!empty($_GET['brand'])){
 	$where .= " and p_brand = ".intval($_GET['brand']);
-} 
+}
 if(!empty($_GET['subbrand'])){
 	$where .= " and p_subbrand = ".intval($_GET['subbrand']);
 }
@@ -75,8 +75,8 @@ if (!empty($_GET['price'])) {
 			break;
 		default:
 			$where .= "";
-	} 
-} 
+	}
+}
 
 
 
@@ -93,8 +93,8 @@ if (!empty($_GET['gas'])) {
 			break;
 		default:
 			$where .= "";
-	} 
-} 
+	}
+}
 
 
 
@@ -115,7 +115,7 @@ if (!empty($_GET['years'])) {
 			break;
 		default:
 			$where .= " and p_year >= ".$compareyear;
-	} 
+	}
 }
 
 //行驶里程
@@ -139,20 +139,20 @@ if (!empty($_GET['kilometre'])) {
 		case 6:
 			$where .= " and p_kilometre > 10";
 			break;
-	} 
+	}
 }
 
 // 关键字
 if (isset($_GET['k']) and $_GET['k'] != "" and $_GET['k'] != "请输入要搜索的关键词,如:宝马") {
 	$where .= " AND (`p_allname` like '%" . $_GET['k'] . "%' or `p_keyword` like '%" . $_GET['k'] . "%')";
-} 
+}
 
 // 排序
 if (isset($_GET['order'])) {
 	setMyCookie("order", $_GET['order'], time() + COOKIETIME);
 } else {
 	setMyCookie("order", 1, time() + COOKIETIME);
-} 
+}
 $orderby = "";
 if (!empty($_COOKIE['order'])){
 	switch ($_COOKIE['order']){
@@ -182,10 +182,10 @@ if (!empty($_COOKIE['order'])){
 			break;
 		default:
 			$orderby = "listtime desc";
-	} 
-} 
- 
-include(dirname(dirname(dirname(__FILE__))).'/'.INC_DIR . 'Page.class.php');
+	}
+}
+
+include(INC_DIR . 'Page.class.php');
 $Page = new Page($db -> tb_prefix . 'cars', $where, '*', '24', $orderby);
 $listnum = $Page -> total_num;
 $list = $Page -> get_data();
@@ -193,14 +193,14 @@ foreach($list as $key => $value) {
 	if (!empty($value['p_mainpic'])) {
 		$pic = explode(".", $value['p_mainpic']);
 		$list[$key]['p_mainpic'] = WEB_DOMAIN."/".$pic[0] . "_small" . "." . $pic[1];
-	} 
+	}
 	$list[$key]['p_shortname'] = _substr($value['p_allname'], 0, 26);
 	$list[$key]['listtime'] = date('Y-m-d', $value['listtime']);
 	$list[$key]['p_details'] = _substr($value['p_details'], 0, 80);
 	$list[$key]['p_price'] = intval($value['p_price']) == 0 ? "面议" : "￥" . $value['p_price']."万";
 	if (!empty($value['p_model'])) $list[$key]['p_modelname'] = $commoncache['modellist'][$value['p_model']];
 	$list[$key]['p_url'] ="car.php?m=cars&id=".$value['p_id'];
-} 
+}
 $button_basic = $Page -> mobilephone_button_basic();
 $tpl -> assign('button_basic', $button_basic);
 $tpl -> assign('allnum', $listnum);

@@ -220,6 +220,19 @@ function arr_brandname($bid)
 	}
 	return $brandname;
 }
+//获取品牌名称
+function brand_full_name($bid)
+{
+	global $db;
+    $brand = $db -> row_select_one('brand', "b_id=".$bid, 'b_id,b_name,b_parent,classid');
+    $name = $brand['b_name'];
+	if($brand['classid'] != 1){
+        $name = brand_full_name($brand['b_parent']) . '-' . $name;
+	}
+
+	return $name;
+}
+
 
 // 推荐车源品牌数组
 function arr_brand_recom()

@@ -17,7 +17,7 @@ if (!empty($_GET['ajax']) && isset($_GET['login']))
 //品牌选择
 if (!empty($_GET['ajax']) && !empty($_GET['bid']))
 {	header('Content-Type:text/plain; charset=utf-8');
-	$arr_b = explode("_", trim($_GET['bid'])); 
+	$arr_b = explode("_", trim($_GET['bid']));
 	$brandlist = "<option value='' selected>请选择车系</option>";
 	$list = $db->row_select('brand',"b_parent='".$arr_b[1]."'");
 	if($list){
@@ -96,7 +96,7 @@ if (!empty($_GET['ajax']) && isset($_GET['cityid']))
 	$list = $db->row_select('area',"parentid='".$_GET['cityid']."'");
 	if($list){
 		foreach($list as $key => $value){
-			$provincelist .= "<option value=".$value['id'].">".$value['name']."</option>";		
+			$provincelist .= "<option value=".$value['id'].">".$value['name']."</option>";
 		}
 	}
 	echo $provincelist;
@@ -148,7 +148,7 @@ if(!empty($_GET['ajax']) && isset($_GET['cartype']) && $_GET['cartype']=="hot" )
 }
 
 
-		
+
 //最新车源排行
 if(!empty($_GET['ajax']) && isset($_GET['cartype']) && $_GET['cartype']=="indexnew" ){
 	header('Content-Type:text/plain; charset=utf-8');
@@ -164,7 +164,7 @@ if(!empty($_GET['ajax']) && isset($_GET['cartype']) && $_GET['cartype']=="indexn
         <p><span class='price'>".$value['p_price']."</span>万</p>
         <p class='gray01 mt5 f12'><span class='fr'>里程：".$value['p_kilometre']."万公里</span>上牌：".$value['p_year']."年".$value['p_month']."月</p>
         </li>";
-			
+
 
 	}
 	echo $str;
