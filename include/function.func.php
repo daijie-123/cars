@@ -792,3 +792,14 @@ function is_https() {
     }
     return false;
 }
+
+function upload_url_modify($path, $size = 'l')
+{
+    if($size == 'l'){
+        return WEB_DOMAIN . $path;
+    }elseif($size == 's'){
+        $pic = explode(".", $path);
+        return WEB_DOMAIN . $pic[0] . "_small" . "." . $pic[1];
+    }
+    return $path;
+}

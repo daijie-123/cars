@@ -20,10 +20,10 @@ $ac = isset($_REQUEST['a']) && isset($ac_arr[$_REQUEST['a']]) ? $_REQUEST['a'] :
 $tpl->assign( 'mod_name', $mod_name );
 $tpl->assign( 'ac_arr', $ac_arr );
 $tpl->assign( 'ac', $ac );
-		
+
 //验证用户名
 if (!empty($_POST['param']) and $_POST['name']=="username")
-{	
+{
 	$data = $db->row_count('member',"username='".$_POST['param']."' and id<>".intval($_GET['id']));
     if($data==0){
 		echo '{"info":"用户名验证成功！","status":"y"}';
@@ -36,7 +36,7 @@ if (!empty($_POST['param']) and $_POST['name']=="username")
 
 //验证邮箱地址
 if (!empty($_POST['param']) and $_POST['name']=="email")
-{	
+{
 	$data = $db->row_count('member',"email='".$_POST['param']."' and id<>".intval($_GET['id']));
     if($data==0){
 		echo '{"info":"邮箱验证成功！","status":"y"}';
@@ -49,7 +49,7 @@ if (!empty($_POST['param']) and $_POST['name']=="email")
 
 //验证手机号
 if (!empty($_POST['param']) and $_POST['name']=="mobilephone")
-{	
+{
 	$data = $db->row_count('member',"mobilephone='".$_POST['param']."' and id<>".intval($_GET['id']));
     if($data==0){
 		echo '{"info":"手机号验证成功！","status":"y"}';
@@ -70,7 +70,7 @@ $array_dealer_category = arr_dealer_category();
 
 //列表
 if ($ac == 'list')
-{	
+{
 	$where = '1=1';
     //搜索条件
     if (!empty($_GET['keywords']))
@@ -87,7 +87,7 @@ if ($ac == 'list')
 	}elseif($isdealer==1){
 		 $where .= " and isdealer=1";
 	}
-	
+
     include(INC_DIR.'Page.class.php');
     $Page = new Page($db->tb_prefix.'member',$where, '*', '50', 'id desc');
     $list = $Page->get_data();
@@ -140,7 +140,7 @@ elseif ($ac == 'add' || $ac == 'edit')
 				$post = post('username','mobilephone','email','nicname','isdealer');
 			}
 			else{
-				$post = post('username','mobilephone','email','nicname','company','address','tel','logo','shoptype','isdealer','isrecom','ishot','ischeck','checknotice','shopdetail');
+				$post = post('username','mobilephone','email','nicname','company','address','tel','logo','shoptype','isdealer','isrecom','ishot','ischeck','checknotice','shopdetail', 'lat_lng', 'shop_score');
 			}
 			if ($settings['version'] == 3) {
 				$post['aid'] = intval($_POST['aid']);
@@ -148,7 +148,7 @@ elseif ($ac == 'add' || $ac == 'edit')
 			} else {
 				$post['aid'] = 0;
 				$post['cid'] = 0;
-			} 
+			}
 			$post['isdealer'] = intval($post['isdealer']);
 			$post['shoptype'] = intval($post['shoptype']);
 			if(isset($_POST['isrecom'])){
@@ -176,7 +176,7 @@ elseif ($ac == 'add' || $ac == 'edit')
 				$post = post('username','mobilephone','email','nicname','isdealer');
 			}
 			else{
-				$post = post('username','mobilephone','email','nicname','company','address','tel','logo','shoptype','isdealer','isrecom','ishot','ischeck','checknotice','shopdetail');
+				$post = post('username','mobilephone','email','nicname','company','address','tel','logo','shoptype','isdealer','isrecom','ishot','ischeck','checknotice','shopdetail', 'lat_lng', 'shop_score');
 			}
 
 			if($settings['version'] == 3) {
@@ -185,7 +185,7 @@ elseif ($ac == 'add' || $ac == 'edit')
 			} else {
 				$post['aid'] = 0;
 				$post['cid'] = 0;
-			} 
+			}
 
 			$post['isdealer'] = intval($post['isdealer']);
 			if(isset($_POST['isrecom'])){
@@ -216,6 +216,16 @@ elseif ($ac == 'add' || $ac == 'edit')
     {
         if (empty($_GET['id'])) $data = array('username'=>'','password'=>'','email'=>'','mobilephone '=>'','aid'=>'','cid'=>'');
         else $data = $db->row_select_one('member',"id=".intval($_GET['id']));
+
+        if($data['lat_lng']){
+            $lat_lng = explode(',', $data['lat_lng']);
+            $data['lat'] = $lat_lng[0];
+            $data['lng'] = $lat_lng[1];
+        }else{
+            $data['lat'] = 0;
+            $data['lng'] = 0;
+        }
+
 		$select_province = select_make($data['aid'],$commoncache['provincelist'],"请选择省份");
 		$select_city = select_make($data['cid'],$commoncache['citylist'],"请选择城市");
 		$tpl->assign( 'selectprovince', $select_province );

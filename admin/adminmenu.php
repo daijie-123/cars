@@ -60,6 +60,7 @@
 		<li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=2" target="report_iframe">手机轮播广告</a></li>
         <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=3" target="report_iframe">周末集市轮播广告</a></li>
         <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=4" target="report_iframe">小程序首页轮播图</a></li>
+        <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=5" target="report_iframe">小程序新车页轮播图</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=flink&a=list" target="report_iframe">友情链接</a></li>
 	</ul>
 </div>

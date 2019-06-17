@@ -1,8 +1,5 @@
 <?php
-
 if (!defined('APP_IN')) exit('Access Denied');
-
-// 页码
 $page_size = isset($_REQUEST['page_size']) ? intval($_REQUEST['page_size']) : 20;
 
 // 总数
@@ -194,16 +191,15 @@ $total_num = $Page->total_num;
 $current_page = $Page->page;
 $total_page = $Page->total_page;
 foreach ($list as &$value) {
-    $new_arrival_time = TIMESTAMP - (24 * 60 * 60);
     // 是否新上
-    $value['new_arrival'] = ($value['p_addtime'] > $new_arrival_time) ? 1 : 0;
+    $value['new_arrival'] = ($value['p_addtime'] > (TIMESTAMP - (24 * 60 * 60))) ? 1 : 0;
     // $value['listtime'] = date('Y-m-d H:i:s', $value['listtime']);
     // $value['p_addtime'] = date('Y-m-d H:i:s', $value['p_addtime']);
-    $value['p_mainpic'] = WEB_DOMAIN . $value['p_mainpic'];
+    $value['p_mainpic'] = upload_url_modify($value['p_mainpic'], 's');
+
     $value['is_collect'] = 0;
     // if (!empty($value['p_model'])) $value['p_modelname'] = $commoncache['modellist'][$value['p_model']];
     // $value['p_url'] = HTML_DIR . "buycars/" . date('Y/m/d', $value['p_addtime']) . "/" . $value['p_id'] . ".html";
-
 }
 
 splash([

@@ -144,7 +144,7 @@ elseif ($ac == 'updateMobilePhone') {
 elseif (is_user_login() && $ac == 'logout') {
 	session_unset();
 	session_destroy();
-	showmsg($ac_arr[$ac] . ('成功'), "http://www.xqzqc.com/");
+	showmsg($ac_arr[$ac] . ('成功'), "/");
 }
 // 修改密码
 elseif ($ac == 'uppwd') {

@@ -9,7 +9,7 @@ $encrypted_data = $_POST['encryptedData'];
 $iv = $_POST['iv'];
 
 if (!$code || !$encrypted_data || !$iv) {
-    splash('', 100);
+    splash('', 100, '参数不合法');
 }
 
 $params = [
@@ -43,7 +43,7 @@ $decrypt_data = openssl_decrypt(
 $weixin_user_info = json_decode($decrypt_data, true);
 $weixin_user_info['sessionkey'] = $session_key;
 if (empty($weixin_user_info['openId'])) {
-    splash('', 100);
+    splash('', 100, '数据不合法');
 }
 
 $_SESSION['WEIXIN_USER_DATA'] = $weixin_user_info;

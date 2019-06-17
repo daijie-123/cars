@@ -14,17 +14,17 @@ $ac = $_REQUEST['a'];
 request_method_check($ac, $ac_get_arr, $ac_post_arr);
 
 if($ac == 'mark_brand_list'){
-    splash($commoncache['markbrandlist']);
+	$list = $db->row_select('brand', "b_parent=-1 and classid=1", 'b_id,mark,b_name,b_type', 0, 'mark asc');
+    splash($list);
 }else if($ac == 'sub_brand_list'){
     $arr_not_empty = [
         'brand_id' => '一级品牌不能为空',
     ];
     api_can_not_be_empty($arr_not_empty, $_GET);
-    $list = [];
 	$list = $db->row_select('brand', "b_parent='" . $_GET['brand_id'] . "'", 'b_id,b_name,b_parent');
 	if($list){
 		foreach($list as &$value){
-			$value['sub_list'] = $db->row_select('brand', "b_parent='" . $value['b_id'] . "'", 'b_id,b_name,b_parent');
+			$value['sub_list'] = $db->row_select('brand', "b_parent='" . $value['b_id'] . "'", 'b_id,b_name,b_parent,b_type');
 		}
     }
     splash($list);

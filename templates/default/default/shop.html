@@ -16,12 +16,12 @@
 			<div class="main_left">
 				<div class="shopbox">
 					<h3>在售车源</h3>
-					<div class="box"> 
+					<div class="box">
 						<ul class="bigcarlist clearfix">
 							<{foreach from=$carslist key=skey item=cars_list}>
 							<li <{if ($skey+1)%3<>0}>class="bbg"<{/if}>>
-								<a href="http://car.xqzqc.com/<{$cars_list.p_url}>" target="_blank"><img src="http://car.xqzqc.com/<{$cars_list.p_mainpic}>"/></a>
-								<p class="carname"><span class="orange01 fb fr"><{$cars_list.p_price}>万</span><a href="http://car.xqzqc.com/<{$cars_list.p_url}>" target="_blank"><{$cars_list.p_shortname}></a></p>
+								<a href="/<{$cars_list.p_url}>" target="_blank"><img src="/<{$cars_list.p_mainpic}>"/></a>
+								<p class="carname"><span class="orange01 fb fr"><{$cars_list.p_price}>万</span><a href="/<{$cars_list.p_url}>" target="_blank"><{$cars_list.p_shortname}></a></p>
 								<p><{$cars_list.p_gas}>L &nbsp;&nbsp;<{$cars_list.p_transmission}></p>
 								<p><{$cars_list.p_year}>年<{$cars_list.p_month}>月上牌&nbsp;&nbsp;<{$cars_list.p_color}></p>
 								<p><span class="gray01">发布时间：<{$cars_list.listtime}></span></p>

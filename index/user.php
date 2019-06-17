@@ -10,9 +10,9 @@ if (!empty($_POST['param']) and $_POST['name'] == "email") {
 		echo '{"info":"邮箱验证成功！","status":"y"}';
 	} else {
 		echo '{"info":"邮箱地址已存在！","status":"n"}';
-	} 
+	}
 	exit;
-} 
+}
 // 验证手机号
 if (!empty($_POST['param']) and $_POST['name'] == "mobilephone") {
 	$data = $db -> row_count('member', "mobilephone='" . $_POST['param'] . "' and id!={$_SESSION['USER_ID']}");
@@ -20,9 +20,9 @@ if (!empty($_POST['param']) and $_POST['name'] == "mobilephone") {
 		echo '{"info":"手机号验证成功！","status":"y"}';
 	} else {
 		echo '{"info":"手机号已存在！","status":"n"}';
-	} 
+	}
 	exit;
-} 
+}
 // 验证原始密码
 if (!empty($_POST['param']) and $_POST['name'] == "oldpassword") {
 	$data = $db -> row_select_one('member', "id={$_SESSION['USER_ID']}");
@@ -30,9 +30,9 @@ if (!empty($_POST['param']) and $_POST['name'] == "oldpassword") {
 		echo '{"info":"原始密码输入正确！","status":"y"}';
 	} else {
 		echo '{"info":"原始密码输入错误！","status":"n"}';
-	} 
+	}
 	exit;
-} 
+}
 
 $array_brand_with_index = arr_brand_with_index();
 $array_brand = arr_brand(-1);
@@ -82,9 +82,9 @@ if (!empty($_GET['ajax']) && isset($_GET['oldpassword'])) {
 		echo 1;
 	} else {
 		echo 0;
-	} 
+	}
 	exit;
-} 
+}
 // 车源品牌处理ajax后台处理
 if (!empty($_GET['ajax']) && isset($_GET['p_brandid'])) {
 	header('Content-Type:text/plain; charset=gbk');
@@ -92,10 +92,10 @@ if (!empty($_GET['ajax']) && isset($_GET['p_brandid'])) {
 	$str = '';
 	foreach ($arr as $k => $v) {
 		$str .= $k . '--' . $v . '||';
-	} 
+	}
 	echo substr($str, 0, -2);
 	exit;
-} 
+}
 // 删除图片ajax
 if (!empty($_GET['ajax']) && isset($_GET['p_id'])) {
 	$str = $_GET['p_pic'];
@@ -115,11 +115,11 @@ if (!empty($_GET['ajax']) && isset($_GET['p_id'])) {
 			unset($pic_list[$delstr]);
 			$post['p_pics'] = implode("|", array_flip($pic_list));
 			$rs = $db -> row_update('cars', $post, "p_id=" . intval($_GET['p_id']));
-		} 
-	} 
+		}
+	}
 	echo $picstr[0];
 	exit;
-} 
+}
 
 // 删除图片ajax
 if (!empty($_GET['ajax']) && isset($_GET['rentid'])) {
@@ -140,26 +140,26 @@ if (!empty($_GET['ajax']) && isset($_GET['rentid'])) {
 			unset($pic_list[$delstr]);
 			$post['p_pics'] = implode("|", array_flip($pic_list));
 			$rs = $db -> row_update('rentcars', $post, "p_id=" . intval($_GET['p_id']));
-		} 
-	} 
+		}
+	}
 	echo $picstr[0];
 	exit;
-} 
+}
 
 // 登陆欢迎页面
 if ($ac == 'index') {
 	$userinfo['last_login_time'] = date("Y-m-d H:i:s", $userinfo['last_login_time']);
-	$tpl -> assign('user', $userinfo); 
+	$tpl -> assign('user', $userinfo);
 
 	$tpl -> display('default/' . $settings['templates'] . '/user.html');
 	exit;
-} 
+}
 // 退出登录
 elseif (is_user_login() && $ac == 'logout') {
 	session_unset();
 	session_destroy();
-	showmsg($ac_arr[$ac] . ('成功'), "http://www.xqzqc.com/");
-} 
+	showmsg($ac_arr[$ac] . ('成功'), "/");
+}
 // 修改密码
 elseif ($ac == 'uppwd') {
 	if (submitcheck('a')) {
@@ -175,8 +175,8 @@ elseif ($ac == 'uppwd') {
 	} else {
 		$tpl -> display('default/' . $settings['templates'] . '/user.html');
 		exit;
-	} 
-} 
+	}
+}
 // 修改信息
 elseif ($ac == 'upinfo') {
 	if (submitcheck('a')) {
@@ -193,8 +193,8 @@ elseif ($ac == 'upinfo') {
 		$tpl -> assign('user', $userinfo);
 		$tpl -> display('default/' . $settings['templates'] . '/user.html');
 		exit;
-	} 
-} 
+	}
+}
 // 修改店铺资料
 elseif ($ac == 'editshop') {
 	if (submitcheck('a')) {
@@ -217,8 +217,8 @@ elseif ($ac == 'editshop') {
 		$tpl -> assign('user', $userinfo);
 		$tpl -> display('default/' . $settings['templates'] . '/user.html');
 		exit;
-	} 
-} 
+	}
+}
 // 修改头像
 elseif ($ac == 'addlogo') {
 	if (submitcheck('a')) {
@@ -227,8 +227,8 @@ elseif ($ac == 'addlogo') {
 	} else {
 		$tpl -> display('default/' . $settings['templates'] . '/user.html');
 		exit;
-	} 
-} 
+	}
+}
 // 车源列表
 elseif ($ac == 'carlist') {
 	$where = 'uid=' . $_SESSION['USER_ID'];
@@ -244,7 +244,7 @@ elseif ($ac == 'carlist') {
 		$list[$key]['p_addtime'] = date('Y-m-d H:i:s', $value['p_addtime']);
 		if (!empty($value['p_model'])) $list[$key]['p_modelname'] = $array_model[$value['p_model']];
 		$list[$key]['p_url'] = HTML_DIR . "buycars/" . date('Y/m/d', $value['p_addtime']) . "/" . $value['p_id'] . ".html";
-	} 
+	}
 	$button_basic = $Page -> button_basic();
 	$button_select = $Page -> button_select();
 	$pageid = $Page -> page;
@@ -254,7 +254,7 @@ elseif ($ac == 'carlist') {
 	$tpl -> assign('currpage', $pageid);
 	$tpl -> display('default/' . $settings['templates'] . '/user.html');
 	exit;
-} 
+}
 // 添加或修改车源
 elseif ($ac == 'addcar' || $ac == 'editcar') {
 	if ($userinfo['isdealer'] == 2 and $userinfo['ischeck']!=1) {
@@ -264,15 +264,15 @@ elseif ($ac == 'addcar' || $ac == 'editcar') {
 		$usercarcounts = $db -> row_count('cars', 'uid=' . $_SESSION['USER_ID']);
 		if ($usercarcounts >= $settings['limitcount']) {
 			showmsg('超出限制发布条数', "/?m=user&a=carlist");
-		} 
+		}
 	}
 
 	if (submitcheck('a')) {
 		foreach (array('p_details') as $v) {
 			if (!is_array($_POST[$v])) {
 				$_POST[$v] = htmlspecialchars($_POST[$v]);
-			} 
-		} 
+			}
+		}
 		$post = post('p_no', 'p_brand', 'p_subbrand','p_subsubbrand','p_model', 'p_allname', 'p_price','p_newprice','p_tax','p_save', 'p_color', 'p_country', 'p_transmission', 'p_year', 'p_month', 'p_details', 'p_model', 'p_hits', 'p_gas', 'p_kilometre', 'p_addtime', 'listtime', 'issell', 'isshow', 'isrecom', 'issprecom', 'ishot','aid', 'cid','p_emission');
 
 		if ($settings['version'] == 3) {
@@ -281,7 +281,7 @@ elseif ($ac == 'addcar' || $ac == 'editcar') {
 		} else {
 			$post['aid'] = 0;
 			$post['cid'] = 0;
-		} 
+		}
 		$post['p_brand'] = intval($post['p_brand']);
 		$post['p_subbrand'] = intval($post['p_subbrand']);
 		$post['p_subsubbrand'] = intval($post['p_subsubbrand']);
@@ -312,13 +312,13 @@ elseif ($ac == 'addcar' || $ac == 'editcar') {
 		if (empty($post['ishot'])) $post['ishot'] = 0;
 		if (empty($post['p_kilometre'])) {
 			$post['p_kilometre'] = 0;
-		} 
+		}
 
 		if ($userinfo['isdealer'] == 2 and $userinfo['ischeck'] == 1) {
 			$post['isshow'] = 1;
 		} else {
 			$post['isshow'] = 0;
-		} 
+		}
 
 		if (isset($_POST['p_pics'])) {
 			$post['p_pics'] = implode("|", $_POST['p_pics']);
@@ -326,10 +326,10 @@ elseif ($ac == 'addcar' || $ac == 'editcar') {
 				$post['p_mainpic'] = $_POST['p_mainpic'];
 			} else {
 				$post['p_mainpic'] = $_POST['p_pics'][0];
-			} 
+			}
 		} else {
 			$post['p_pics'] = "";
-		} 
+		}
 
 		$post['uid'] = $_SESSION['USER_ID'];
 		$paralist = $db -> row_select('selfdefine', "isshow=1",' id,type_name,type_value,c_name',0,'orderid');
@@ -342,7 +342,7 @@ elseif ($ac == 'addcar' || $ac == 'editcar') {
 
 			$rs = $db -> row_insert('cars', $post);
 			$insertid = $db -> insert_id();
-			
+
 			$post = array();
 			//添加自定义参数值
 			foreach($paralist as $key => $value){
@@ -354,7 +354,7 @@ elseif ($ac == 'addcar' || $ac == 'editcar') {
 					$post['c_value'] = $checkpara;
 				}
 				else
-				{	         
+				{
 					$post['c_value'] = $_POST[$c_value];
 				}
 				$r = $db -> row_insert('selfdefine_value', $post);
@@ -372,22 +372,22 @@ elseif ($ac == 'addcar' || $ac == 'editcar') {
 					$post['c_value'] = $checkpara;
 				}
 				else
-				{	         
+				{
 					$post['c_value'] = $_POST[$c_value];
 				}
 
 				$selfvalue= $db -> row_select_one('selfdefine_value', "p_id=" . intval($_POST['id']).' and c_id='.$paralist[$key]['id'],'c_id,p_id');
-				if(empty($selfvalue['c_id'])){		
+				if(empty($selfvalue['c_id'])){
 					$post['c_id']=$value['id'];
 					$r = $db -> row_insert('selfdefine_value', $post);
 				}else{
 					$rs = $db -> row_update('selfdefine_value', $post, "p_id=" . intval($_POST['id']).' and c_id='.$value['id']);
 				}
-			}			
+			}
 			html_cars(intval($_POST['id']));
-		} 
+		}
 		showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), "/?m=user&a=carlist");
-	} 
+	}
 	// 转向添加或修改页面
 	else {
 		$configure_list = array();
@@ -404,10 +404,10 @@ elseif ($ac == 'addcar' || $ac == 'editcar') {
 					$arr_length = count($arr_picid);
 					$arr_picids = explode(".", $arr_picid[$arr_length-1]);
 					$piclist[$key]['picid'] = $arr_picids[0];
-				} 
+				}
 				$tpl -> assign('pic_list', $piclist);
-			} 
-		} 
+			}
+		}
 		$array_city = arr_city($userinfo['aid']);
 		if ($ac == 'addcar') {
 			$select_province = select_make($userinfo['aid'], $commoncache['provincelist'], "请选择省份");
@@ -415,7 +415,7 @@ elseif ($ac == 'addcar' || $ac == 'editcar') {
 		} else {
 			$select_province = select_make($data['aid'], $commoncache['provincelist'], "请选择省份");
 			$select_city = select_make($data['cid'], $array_city, "请选择城市");
-		} 
+		}
 
 		$tpl -> assign('selectprovince', $select_province);
 		$tpl -> assign('selectcity', $select_city);
@@ -431,7 +431,7 @@ elseif ($ac == 'addcar' || $ac == 'editcar') {
 		$select_gas = select_make($data['p_gas'], $array_gas, '车辆属性');
 		$select_transmission = select_make($data['p_transmission'], $array_transmission, '请选择变速箱');
 		$select_country = select_make($data['p_country'], array('国产' => '国产', '进口' => '进口'), '请选择');
-		
+
 		//显示参数
 		$paralist = $db -> row_select('selfdefine', "isshow=1",' id,type_name,type_value,c_name',0,'orderid');
 		foreach($paralist as $key => $value){
@@ -453,7 +453,7 @@ elseif ($ac == 'addcar' || $ac == 'editcar') {
 							$check = "";
 						}
 						$checkbox_str.= "<input type='checkbox' name='para".$value['id']."[]' value='".$v."' ".$check."> ".$v."&nbsp;&nbsp;";
-					}		
+					}
 					$tpl->assign('checkbox_str',$checkbox_str);
 				}
 				else{
@@ -471,7 +471,7 @@ elseif ($ac == 'addcar' || $ac == 'editcar') {
 						$list[$check_para[$k]]=0;
 					}
 					$tpl->assign('list',$list);
-				}	
+				}
 			}
 		}
 	    $tpl->assign('paralist',$paralist);
@@ -491,8 +491,8 @@ elseif ($ac == 'addcar' || $ac == 'editcar') {
 		$tpl -> assign('page', $page_get);
 		$tpl -> display('default/' . $settings['templates'] . '/user.html');
 		exit;
-	} 
-} 
+	}
+}
 // 刷新车源
 elseif ($ac == 'refresh') {
 	$id = isset($_GET['id']) ? intval($_GET['id']) : showmsg('缺少ID', -1);
@@ -500,11 +500,11 @@ elseif ($ac == 'refresh') {
 	if ($data['uid'] != $_SESSION['USER_ID']) {
 		showmsg('非法操作', -1);
 		exit;
-	} 
+	}
 	$listtime = time();
 	$rs = $db -> row_update('cars', array('listtime' => $listtime), "p_id=" . $id);
 	showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), "/?m=user&a=carlist");
-} 
+}
 // 改变买卖状态
 elseif ($ac == 'sellcar') {
 	$id = isset($_GET['id']) ? intval($_GET['id']) : showmsg('缺少ID', -1);
@@ -512,12 +512,12 @@ elseif ($ac == 'sellcar') {
 	if ($data['uid'] != $_SESSION['USER_ID']) {
 		showmsg('非法操作', -1);
 		exit;
-	} 
+	}
 	$issell = intval($_GET['sell']);
 	$rs = $db -> row_update('cars', array('issell' => $issell), "p_id=" . $id);
 	html_cars($id);
 	showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), "/?m=user&a=carlist");
-} 
+}
 // 单条删除
 elseif ($ac == 'delcar') {
 	$p_id = isset($_GET['id']) ? intval($_GET['id']) : showmsg('缺少ID', -1);
@@ -525,7 +525,7 @@ elseif ($ac == 'delcar') {
 	if ($data['uid'] != $_SESSION['USER_ID']) {
 		showmsg('非法操作', -1);
 		exit;
-	} 
+	}
 	if (!empty($data['p_pics'])) {
 		$listpic = explode("|", $data['p_pics']);
 		foreach($pic_list as $key => $value) {
@@ -537,8 +537,8 @@ elseif ($ac == 'delcar') {
 			if(file_exists($smallpic)){
 				unlink($smallpic);
 			}
-		} 
-	} 
+		}
+	}
 	$rs = $db -> row_delete('cars', "p_id=$p_id");
 	showmsg($ac_arr[$ac].($rs ? '成功' : '失败'),"/?m=user&a=carlist");
 }
@@ -548,7 +548,7 @@ elseif ($ac == 'subscribelist') {
 	if(!empty($_GET['keywords'])) {
 		$keywords = $_GET['keywords'];
 		$where .= " and (name like '%{$keywords}%' or mobilephone like '%{$keywords}%')";
-	} 
+	}
 	include(INC_DIR . 'Page.class.php');
 	$Page = new Page($db -> tb_prefix . 'subscribe', $where, '*', '20', 'id desc');
 	$list = $Page -> get_data();
@@ -559,20 +559,20 @@ elseif ($ac == 'subscribelist') {
 		$car['p_url'] = HTML_DIR . "buycars/" . date('Y/m/d', $car['p_addtime']) . "/" . $car['p_id'] . ".html";
 		$list[$key]['p_allname'] = $car['p_allname'];
 		$list[$key]['p_url'] = $car['p_url'];
-	} 
+	}
 	$button_basic = $Page -> button_basic();
 	$button_select = $Page -> button_select();
 	$tpl -> assign('subscribelist', $list);
 	$tpl -> assign('button_basic', $button_basic);
 	$tpl -> display('default/' . $settings['templates'] . '/user.html');
 	exit;
-} 
+}
 // 单条删除
 elseif ($ac == 'delsubscribe') {
 	$id = isset($_GET['id']) ? intval($_GET['id']) : showmsg('缺少ID', -1);
 	$rs = $db -> row_delete('subscribe', "id=$id");
 	showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), "/?m=user&a=subscribelist");
-} 
+}
 // 询价列表
 elseif ($ac == 'inquirylist') {
 	$where = 'uid=' . $_SESSION['USER_ID'];
@@ -589,20 +589,20 @@ elseif ($ac == 'inquirylist') {
 		$car['p_url'] = HTML_DIR . "buycars/" . date('Y/m/d', $car['p_addtime']) . "/" . $car['p_id'] . ".html";
 		$list[$key]['p_allname'] = $car['p_allname'];
 		$list[$key]['p_url'] = $car['p_url'];
-	} 
+	}
 	$button_basic = $Page -> button_basic();
 	$button_select = $Page -> button_select();
 	$tpl -> assign('inquirylist', $list);
 	$tpl -> assign('button_basic', $button_basic);
 	$tpl -> display('default/' . $settings['templates'] . '/user.html');
 	exit;
-} 
+}
 // 单条删除
 elseif ($ac == 'delinquiry') {
 	$id = isset($_GET['id']) ? intval($_GET['id']) : showmsg('缺少ID', -1);
 	$rs = $db -> row_delete('inquiry', "id=$id");
 	showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), "/?m=user&a=inquirylist");
-} 
+}
 // 租车信息列表
 elseif ($ac == 'rentcarlist') {
 	$where = 'uid=' . $_SESSION['USER_ID'];
@@ -616,7 +616,7 @@ elseif ($ac == 'rentcarlist') {
 		$list[$key]['p_allname'] = _substr($value['p_allname'], 0, 16);
 		if (!empty($value['p_model'])) $list[$key]['p_modelname'] = $commoncache['rentmodellist'][$value['p_model']];
 		$list[$key]['p_url'] = HTML_DIR . "rentcars/" . date('Y/m/d', $value['p_addtime']) . "/" . $value['p_id'] . ".html";
-	} 
+	}
 	$button_basic = $Page -> button_basic();
 	$button_select = $Page -> button_select();
 	$pageid = $Page -> page;
@@ -626,7 +626,7 @@ elseif ($ac == 'rentcarlist') {
 	$tpl -> assign('currpage', $pageid);
 	$tpl -> display('default/' . $settings['templates'] . '/user.html');
 	exit;
-} 
+}
 // 添加或修改租车信息
 elseif ($ac == 'addrentcar' || $ac == 'editrentcar') {
 	if ($userinfo['isdealer'] == 2 and $userinfo['ischeck']!=1) {
@@ -636,14 +636,14 @@ elseif ($ac == 'addrentcar' || $ac == 'editrentcar') {
 		$usercarcounts = $db -> row_count('rentcars', 'uid=' . $_SESSION['USER_ID']);
 		if ($usercarcounts >= $settings['rentcount']) {
 			showmsg('超出限制发布条数', "/?m=user&a=rentcarlist");
-		} 
+		}
 	}
 	if (submitcheck('a')) {
 		foreach (array('p_details') as $v) {
 			if (!is_array($_POST[$v])) {
 				$_POST[$v] = htmlspecialchars($_POST[$v]);
-			} 
-		} 
+			}
+		}
 		$post = post('p_title', 'p_brand', 'p_subbrand','p_subsubbrand', 'p_model', 'p_allname', 'dayprice', 'monthprice', 'p_details', 'p_model', 'p_addtime', 'listtime', 'isshow', 'cid', 'aid');
 		if ($settings['version'] == 3) {
 			$post['aid'] = intval($_POST['aid']);
@@ -651,7 +651,7 @@ elseif ($ac == 'addrentcar' || $ac == 'editrentcar') {
 		} else {
 			$post['aid'] = 0;
 			$post['cid'] = 0;
-		} 
+		}
 
 		$post['p_brand'] = intval($post['p_brand']);
 		$post['p_subbrand'] = intval($post['p_subbrand']);
@@ -676,10 +676,10 @@ elseif ($ac == 'addrentcar' || $ac == 'editrentcar') {
 				$post['p_mainpic'] = $_POST['p_mainpic'];
 			} else {
 				$post['p_mainpic'] = $_POST['p_pics'][0];
-			} 
+			}
 		} else {
 			$post['p_pics'] = "";
-		} 
+		}
 
 		$post['uid'] = $_SESSION['USER_ID'];
 
@@ -687,7 +687,7 @@ elseif ($ac == 'addrentcar' || $ac == 'editrentcar') {
 			$post['isshow'] = 1;
 		} else {
 			$post['isshow'] = 0;
-		} 
+		}
 
 		if ($ac == 'addrentcar') {
 			$post['p_hits'] = 0;
@@ -701,9 +701,9 @@ elseif ($ac == 'addrentcar' || $ac == 'editrentcar') {
 		} else {
 			$rs = $db -> row_update('rentcars', $post, "p_id=" . intval($_POST['id']));
 			html_rentcars(intval($_POST['id']));
-		} 
+		}
 		showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), "/?m=user&a=rentcarlist");
-	} 
+	}
 	// 转向添加或修改页面
 	else {
 		$configure_list = array();
@@ -720,10 +720,10 @@ elseif ($ac == 'addrentcar' || $ac == 'editrentcar') {
 					$arr_length = count($arr_picid);
 					$arr_picids = explode(".", $arr_picid[$arr_length-1]);
 					$piclist[$key]['picid'] = $arr_picids[0];
-				} 
+				}
 				$tpl -> assign('pic_list', $piclist);
-			} 
-		} 
+			}
+		}
 
 		$array_city = arr_city($userinfo['aid']);
 		if ($ac == 'addrentcar') {
@@ -732,12 +732,12 @@ elseif ($ac == 'addrentcar' || $ac == 'editrentcar') {
 		} else {
 			$select_province = select_make($data['aid'], $commoncache['provincelist'], "请选择省份");
 			$select_city = select_make($data['cid'], $array_city, "请选择城市");
-		} 
+		}
 
 		$select_rentmodel = select_make($data['p_model'], $commoncache['rentmodellist'], '请选择车型');
 
 		$tpl -> assign('selectprovince', $select_province);
-		$tpl -> assign('selectcity', $select_city); 
+		$tpl -> assign('selectcity', $select_city);
 
 		// 品牌选择
 		$select_brand = select_make($data['p_brand'], $commoncache['markbrandlist'], '请选择品牌');
@@ -756,8 +756,8 @@ elseif ($ac == 'addrentcar' || $ac == 'editrentcar') {
 		$tpl -> assign('page', $page_get);
 		$tpl -> display('default/' . $settings['templates'] . '/user.html');
 		exit;
-	} 
-} 
+	}
+}
 // 刷新租车信息
 elseif ($ac == 'refreshrentcar') {
 	$id = isset($_GET['id']) ? intval($_GET['id']) : showmsg('缺少ID', -1);
@@ -765,11 +765,11 @@ elseif ($ac == 'refreshrentcar') {
 	if ($data['uid'] != $_SESSION['USER_ID']) {
 		showmsg('非法操作', -1);
 		exit;
-	} 
+	}
 	$listtime = time();
 	$rs = $db -> row_update('rentcars', array('listtime' => $listtime), "p_id=" . $id);
 	showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), "/?m=user&a=rentcarlist");
-} 
+}
 // 删除租车信息
 elseif ($ac == 'delrentcar') {
 	$p_id = isset($_GET['id']) ? intval($_GET['id']) : showmsg('缺少ID', -1);
@@ -777,7 +777,7 @@ elseif ($ac == 'delrentcar') {
 	if ($data['uid'] != $_SESSION['USER_ID']) {
 		showmsg('非法操作', -1);
 		exit;
-	} 
+	}
 	if (!empty($data['p_pics'])) {
 		$listpic = implode("|", $data['p_pics']);
 		foreach($pic_list as $key => $value) {
@@ -789,11 +789,11 @@ elseif ($ac == 'delrentcar') {
 			if(file_exists($smallpic)){
 				unlink($smallpic);
 			}
-		} 
-	} 
+		}
+	}
 	$rs = $db -> row_delete('rentcars', "p_id=$p_id");
 	showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), "/?m=user&a=rentcarlist");
-} 
+}
 // 问答列表
 elseif ($ac == 'asklist') {
 	$where = 'uid=' . $_SESSION['USER_ID'];
@@ -802,14 +802,14 @@ elseif ($ac == 'asklist') {
 	$list = $Page -> get_data();
 	foreach($list as $key => $value) {
 		$list[$key]['asktime'] = date('Y-m-d H:i:s', $value['asktime']);
-	} 
+	}
 	$button_basic = $Page -> button_basic();
 	$button_select = $Page -> button_select();
 	$tpl -> assign('asklist', $list);
 	$tpl -> assign('button_basic', $button_basic);
 	$tpl -> display('default/' . $settings['templates'] . '/user.html');
 	exit;
-} 
+}
 // 添加
 elseif ($ac == 'replyask') {
 	// 添加或修改
@@ -820,7 +820,7 @@ elseif ($ac == 'replyask') {
 		$post['replytime'] = time();
 		$rs = $db -> row_update('member_feedback', $post, "id=" . intval($_POST['id']));
 		showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), "/?m=user&a=asklist");
-	} 
+	}
 	// 转向添加或修改页面
 	else {
 		if (empty($_GET['id'])) $data = array('reply' => '', 'asktime' => '', 'ask' => '');
@@ -831,14 +831,14 @@ elseif ($ac == 'replyask') {
 		$tpl -> assign('ac', $ac);
 		$tpl -> display('default/' . $settings['templates'] . '/user.html');
 		exit;
-	} 
-} 
+	}
+}
 // 单条删除
 elseif ($ac == 'delask') {
 	$id = isset($_GET['id']) ? intval($_GET['id']) : showmsg('缺少ID', -1);
 	$rs = $db -> row_delete('member_feedback', "id=$id");
 	showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), "/?m=user&a=asklist");
-} 
+}
 // 促销信息列表
 elseif ($ac == 'newslist') {
 	$where = 'uid=' . $_SESSION['USER_ID'];
@@ -849,7 +849,7 @@ elseif ($ac == 'newslist') {
 		$list[$key]['n_date'] = date('Ym', $value['n_addtime']);
 		$list[$key]['addtime'] = date('Y-m-d H:i:s', $value['n_addtime']);
 		$list[$key]['n_typename'] = $value['n_type'] == 1?"<span class='red'>推荐</span>":"";
-	} 
+	}
 	$button_basic = $Page -> button_basic();
 	$button_select = $Page -> button_select();
 	$tpl -> assign('newslist', $list);
@@ -857,7 +857,7 @@ elseif ($ac == 'newslist') {
 	$tpl -> assign('button_select', $button_select);
 	$tpl -> display('default/' . $settings['templates'] . '/user.html');
 	exit;
-} 
+}
 // 添加
 elseif ($ac == 'addnews' || $ac == 'editnews') {
 	if ($userinfo['isdealer'] == 2 and $userinfo['ischeck']!=1) {
@@ -869,7 +869,7 @@ elseif ($ac == 'addnews' || $ac == 'editnews') {
 		can_not_be_empty($arr_not_empty, $_POST);
 		foreach (array('n_info') as $v) {
 			$_POST[$v] = htmlspecialchars($_POST[$v]);
-		} 
+		}
 		$post = post('n_title', 'n_info');
 
 		if ($ac == 'addnews') {
@@ -879,9 +879,9 @@ elseif ($ac == 'addnews' || $ac == 'editnews') {
 			$rs = $db -> row_insert('member_news', $post);
 		} else {
 			$rs = $db -> row_update('member_news', $post, "n_id=" . intval($_POST['id']));
-		} 
+		}
 		showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), "/?m=user&a=newslist");
-	} 
+	}
 	// 转向添加或修改页面
 	else {
 		if (empty($_GET['id'])) $data = array('n_id' => '', 'n_title' => '', 'n_info' => '', 'catid' => '');
@@ -890,14 +890,14 @@ elseif ($ac == 'addnews' || $ac == 'editnews') {
 		$tpl -> assign('ac', $ac);
 		$tpl -> display('default/' . $settings['templates'] . '/user.html');
 		exit;
-	} 
-} 
+	}
+}
 // 单条删除
 elseif ($ac == 'delnews') {
 	$id = isset($_GET['id']) ? intval($_GET['id']) : showmsg('缺少ID', -1);
 	$rs = $db -> row_delete('member_news', "n_id=$id");
 	showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), "/?m=user&a=newslist");
-} 
+}
 // 销售代表列表
 elseif ($ac == 'dealerlist') {
 	$where = 'uid=' . $_SESSION['USER_ID'];
@@ -911,7 +911,7 @@ elseif ($ac == 'dealerlist') {
 	$tpl -> assign('button_select', $button_select);
 	$tpl -> display('default/' . $settings['templates'] . '/user.html');
 	exit;
-} 
+}
 // 添加
 elseif ($ac == 'adddealer' || $ac == 'editdealer') {
 	if ($userinfo['isdealer'] == 2 and $userinfo['ischeck']!=1) {
@@ -928,9 +928,9 @@ elseif ($ac == 'adddealer' || $ac == 'editdealer') {
 			$rs = $db -> row_insert('member_dealer', $post);
 		} else {
 			$rs = $db -> row_update('member_dealer', $post, "id=" . intval($_POST['id']));
-		} 
+		}
 		showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), "/?m=user&a=dealerlist");
-	} 
+	}
 	// 转向添加或修改页面
 	else {
 		if (empty($_GET['id'])) $data = array('id' => '', 'name' => '', 'tel' => '', 'pic' => '');
@@ -939,8 +939,8 @@ elseif ($ac == 'adddealer' || $ac == 'editdealer') {
 		$tpl -> assign('ac', $ac);
 		$tpl -> display('default/' . $settings['templates'] . '/user.html');
 		exit;
-	} 
-} 
+	}
+}
 // 单条删除
 elseif ($ac == 'delnews') {
 	$id = isset($_GET['id']) ? intval($_GET['id']) : showmsg('缺少ID', -1);
@@ -948,5 +948,5 @@ elseif ($ac == 'delnews') {
 	showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), "/?m=user&a=dealerlist");
 } else {
 	showmsg('非法操作', -1);
-} 
+}
 ?>

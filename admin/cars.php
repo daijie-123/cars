@@ -550,8 +550,6 @@ elseif ($ac == 'refresh') {
 }
 // 添加
 elseif ($ac == 'add' || $ac == 'edit') {
-
-
     // 添加或修改
     if (submitcheck('a')) {
         $arr_not_empty = array('p_model' => '车型不可为空');

@@ -16,7 +16,7 @@ if (!empty($_POST['param']) and $_POST['name']=="username")
 
 //已登陆转向
 if (is_user_login()) {
-	redirect('',"http://car.xqzqc.com/?m=user");
+	redirect('',"/?m=user");
 }
 
 //登陆
@@ -33,7 +33,7 @@ if (submitcheck('username'))
     $db->row_update('member',array('last_login_time'=>TIMESTAMP,'last_login_ip'=>get_client_ip(),'login_count'=>$rs_user['login_count']+1),"id={$rs_user['id']}");
     $_SESSION['USER_ID'] = $rs_user['id'];
 	$_SESSION['USER_NAME'] = $rs_user['username'];
-    showmsg('登陆成功',"http://car.xqzqc.com/?m=user");
+    showmsg('登陆成功',"/?m=user");
 }
 
 $tpl -> display('default/'.$settings['templates'].'/login.html');
