@@ -110,7 +110,7 @@ if (empty($_FILES) === false) {
 	if (!file_exists($save_path)) {
 		mkdir($save_path);
 	}
-	
+
 	$rand_str = rand(10000, 99999);
 	//新文件名
 	$new_file_name = date("YmdHis") . '_' . $rand_str . '.' . $file_ext;
@@ -124,7 +124,7 @@ if (empty($_FILES) === false) {
 	@chmod($file_path, 0644);
 
 	$file_url = $save_path . $new_file_name;
-	
+
 	if(isImage($file_url) == false){
 		alert("不是真实图片，不允许上传！");
 		unlink($file_url);
@@ -134,11 +134,12 @@ if (empty($_FILES) === false) {
 	$t = new ThumbHandler();
 	$t -> setSrcImg($file_url);
 	$t -> setDstImg($file_url);
-	$t -> createImg(1000,1000);
+    $t -> createImg(1000,1000);
 
+    $lastfile_url = "/".$file_url;
 	header('Content-type: text/html; charset=UTF-8');
 	$json = new Services_JSON();
-	echo $json->encode(array('error' => 0, 'url' => $file_url));
+	echo $json->encode(array('error' => 0, 'url' => $lastfile_url));
 	exit;
 }
 

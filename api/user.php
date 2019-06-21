@@ -17,14 +17,14 @@ $array_transmission = arr_transmission();
 $userinfo = $db -> row_select_one('member', "id={$_SESSION['USER_ID']}");
 $userinfo['regtime'] = date("Y/m/d", $userinfo['regtime']);
 
-// 商铺统计
-$usercarcounts[0] = $db -> row_count('cars', 'uid=' . $_SESSION['USER_ID']);
-$usercarcounts[1] = $db -> row_count('cars', 'uid=' . $_SESSION['USER_ID'] . ' and issell=1');
-$usercarcounts[2] = $db -> row_count('cars', 'uid=' . $_SESSION['USER_ID'] . ' and issell=0');
+// // 商铺统计
+// $usercarcounts[0] = $db -> row_count('cars', 'uid=' . $_SESSION['USER_ID']);
+// $usercarcounts[1] = $db -> row_count('cars', 'uid=' . $_SESSION['USER_ID'] . ' and issell=1');
+// $usercarcounts[2] = $db -> row_count('cars', 'uid=' . $_SESSION['USER_ID'] . ' and issell=0');
 
-$userrentcarcounts[0] = $db -> row_count('rentcars', 'uid=' . $_SESSION['USER_ID']);
-$userrentcarcounts[1] = $db -> row_count('rentcars', 'uid=' . $_SESSION['USER_ID'] . ' and issell=1');
-$userrentcarcounts[2] = $db -> row_count('rentcars', 'uid=' . $_SESSION['USER_ID'] . ' and issell=0');
+// $userrentcarcounts[0] = $db -> row_count('rentcars', 'uid=' . $_SESSION['USER_ID']);
+// $userrentcarcounts[1] = $db -> row_count('rentcars', 'uid=' . $_SESSION['USER_ID'] . ' and issell=1');
+// $userrentcarcounts[2] = $db -> row_count('rentcars', 'uid=' . $_SESSION['USER_ID'] . ' and issell=0');
 
 // 允许操作
 if($userinfo['isdealer']==1){
@@ -34,88 +34,42 @@ else{
 	$ac_arr = array('index' => '欢迎登陆', 'logout' => '退出登录', 'upinfo' => '编辑个人信息', 'uppwd' => '修改密码','addlogo'=>'修改头像', 'addcar' => '添加车源', 'editcar' => '编辑车源', 'delcar' => '删除车源', 'refresh' => '刷新车源', 'sellcar' => '改变买卖状态','rentcarlist' => '租车信息列表', 'addrentcar' => '添加租车信息', 'editrentcar' => '编辑租车信息', 'delrentcar' => '删除租车信息', 'refreshrentcar' => '刷新租车信息', 'carlist' => '车源列表','editshop' => '店铺设置', 'asklist' => '问答列表', 'replyask' => '回复问答', 'delask' => '删除问答', 'newslist' => '促销信息列表', 'addnews' => '添加促销信息', 'editnews' => '编辑促销信息', 'delnews' => '删除促销信息', 'dealerlist' => '销售代表列表', 'adddealer' => '添加销售代表', 'editdealer' => '编辑销售代表', 'deldealer' => '删除销售代表','subscribelist'=>'预约管理','subscribelist'=>'预约管理','delsubscribe'=>'删除预约','inquirylist'=>'询价管理','delinquiry'=>'删除询价');
 }
 
-$ac_post_arr = ['updateMobilePhone' => '修改手机号'];
+$ac_post_arr = ['updateMobilePhone' => '修改手机号', 'save_safeguard' => '提交维权'];
 $ac_get_arr = [];
 // 当前操作
 $ac = $_REQUEST['a'];
 request_method_check($ac, $ac_get_arr, $ac_post_arr);
-// 修改密码处理ajax后台处理
-if (!empty($_GET['ajax']) && isset($_GET['oldpassword'])) {
-	if ($userinfo['password'] == md5($_GET['oldpassword'])) {
-		echo 1;
-	} else {
-		echo 0;
-	}
-	exit;
-}
-// 车源品牌处理ajax后台处理
-if (!empty($_GET['ajax']) && isset($_GET['p_brandid'])) {
-	header('Content-Type:text/plain; charset=gbk');
-	$arr = get_array_from_table('brand', 'b_id', 'b_name', "b_parent=" . intval($_GET['p_brandid']));
-	$str = '';
-	foreach ($arr as $k => $v) {
-		$str .= $k . '--' . $v . '||';
-	}
-	echo substr($str, 0, -2);
-	exit;
-}
-// 删除图片ajax
-if (!empty($_GET['ajax']) && isset($_GET['p_id'])) {
-	$str = $_GET['p_pic'];
-	$sstr = str_replace(".", "_small.", $str);
-	$arr_picid = explode("/", $str);
-	$arr_length = count($arr_picid);
-	$picstr = explode(".", $arr_picid[$arr_length-1]);
-	if (!empty($_GET['p_id'])) {
-		$picpath = substr($str, 1);
-		$spicpath = substr($sstr, 1);
-		if (file_exists($picpath)) unlink($picpath);
-		if (file_exists($spicpath)) unlink($spicpath);
-		$delstr = $str;
-		$arr = $db -> row_select_one('cars', "p_id=" . intval($_GET['p_id']));
-		if (!empty($arr['p_pics'])) {
-			$pic_list = array_flip(explode("|", $arr['p_pics']));
-			unset($pic_list[$delstr]);
-			$post['p_pics'] = implode("|", array_flip($pic_list));
-			$rs = $db -> row_update('cars', $post, "p_id=" . intval($_GET['p_id']));
-		}
-	}
-	echo $picstr[0];
-	exit;
-}
+if($ac == ''){
 
-// 删除图片ajax
-if (!empty($_GET['ajax']) && isset($_GET['rentid'])) {
-	$str = $_GET['p_pic'];
-	$sstr = str_replace(".", "_small.", $str);
-	$arr_picid = explode("/", $str);
-	$arr_length = count($arr_picid);
-	$picstr = explode(".", $arr_picid[$arr_length-1]);
-	if (!empty($_GET['p_id'])) {
-		$picpath = substr($str, 1);
-		$spicpath = substr($sstr, 1);
-		if (file_exists($picpath)) unlink($picpath);
-		if (file_exists($spicpath)) unlink($spicpath);
-		$delstr = $str;
-		$arr = $db -> row_select_one('rentcars', "p_id=" . intval($_GET['p_id']));
-		if (!empty($arr['p_pics'])) {
-			$pic_list = array_flip(explode("|", $arr['p_pics']));
-			unset($pic_list[$delstr]);
-			$post['p_pics'] = implode("|", array_flip($pic_list));
-			$rs = $db -> row_update('rentcars', $post, "p_id=" . intval($_GET['p_id']));
-		}
-	}
-	echo $picstr[0];
-	exit;
 }
+elseif($ac == 'save_safeguard'){
+    $arr_not_empty = [
+        'complain_company' => '请填写投诉单位',
+        'complain_cause' => '请填写投诉原因',
+        'subbrand_id' => '请选择车型',
+        'kilometre' => '请填写行驶里程',
+        'self_assessment' => '请选择车况',
+        'username' => '请填写姓名',
+        'mobile' => '请填写电话',
+    ];
+    api_can_not_be_empty($arr_not_empty, $_POST);
+    $post = post('complain_company', 'complain_cause', 'brand_id', 'subbrand_id', 'subsubbrand_id', 'kilometre', 'self_assessment', 'username', 'mobile', 'pics');
 
-// 登陆欢迎页面
-if ($ac == 'index') {
-	$userinfo['last_login_time'] = date("Y-m-d H:i:s", $userinfo['last_login_time']);
-	$tpl -> assign('user', $userinfo);
-
-	$tpl -> display('default/' . $settings['templates'] . '/user.html');
-	exit;
+    if (!preg_match('/^1\d{10}$/', $post['mobile'])) splash('', 100, '手机号码格式不正确');
+    $post['car_allname'] = brand_full_name($post['subbrand_id']);
+    $post['user_id'] = $userinfo['id'];
+    $post['status'] = 1;
+    $post['pics'] = json_encode($post['pics']);
+    $post['self_assessment'] = htmlspecialchars($post['self_assessment']);
+    $post['addtime'] = TIMESTAMP;
+    $rs = $db->row_insert('member_safeguard', $post);
+    if (!$rs) {
+        splash('', 1, '提交维权失败');
+	}
+	else{
+        // $insertid = $db->insert_id();
+        splash();
+	}
 }
 // 修改手机号
 elseif ($ac == 'updateMobilePhone') {

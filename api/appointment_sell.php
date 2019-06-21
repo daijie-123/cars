@@ -45,6 +45,6 @@ elseif ($ac == 'add') {
 	}
 	else{
         // $insertid = $db->insert_id();
-        splash();
+        splash('', 0, '卖车预约成功');
 	}
 }

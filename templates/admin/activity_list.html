@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title></title>
+<link href="static/css/admin/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="static/js/common.js"></script>
+</head>
+<body>
+<div class="colorarea01">
+	<div class="search clearfix">
+		<div class="searchL">
+			<ul class="menulist">
+				<li><a href="<{$adminpage}>?m=activity&a=add" class="add">添加活动</a></li>
+			</ul>
+		</div>
+	</div>
+	<form action="<{$adminpage}>?m=activity" method="post" name="form">
+		<table cellspacing="0" cellpadding="0" width="100%"  class="listtable">
+			<tr>
+				<th width="30">选择</th>
+				<th width="30">ID</th>
+				<th align="left">类型</th>
+				<th align="left">名称</th>
+				<th align="left">活动时间</th>
+				<th align="left">报名时间</th>
+				<th width="150">操作</th>
+			</tr>
+			<{foreach from=$sortlist item=sort_list}>
+			<tr>
+				<td align="center"><input type="checkbox" name="bulkid[]" value="<{$sort_list.id}>"></td>
+				<td align="center"><{$sort_list.id}></td>
+				<td align="left"><{$sort_list.type_name}></td>
+				<td align="left"><{$sort_list.title}></td>
+				<td align="left"><{$sort_list.start_time|date_format:"%Y-%m-%d %H:%M"}>-<{$sort_list.end_time|date_format:"%Y-%m-%d %H:%M"}><br><{$sort_list.activity_status}></td>
+				<td align="left"><{$sort_list.apply_start_time|date_format:"%Y-%m-%d %H:%M"}>-<{$sort_list.apply_end_time|date_format:"%Y-%m-%d %H:%M"}><br><{$sort_list.apply_status}></td>
+				<td align="center" class="rightmenu">
+                    <a href="<{$adminpage}>?m=activity&a=apply_list&id=<{$sort_list.id}>" class="edit">报名列表</a> |
+                    <a href="<{$adminpage}>?m=activity&a=edit&id=<{$sort_list.id}>" class="edit">编辑</a> |
+                    <a href="javascript:if(confirm('确实要删除吗?'))location='<{$adminpage}>?m=activity&a=del&id=<{$sort_list.id}>'" class="del">删除</a></td>
+			</tr>
+			<{/foreach}>
+			<tr>
+				<td colspan="7" class="buttontd"><a href="javascript:javascript:selectAll();" title="请选择后操作">全选</a> <a href="javascript:submitForm('<{$adminpage}>?m=activity&a=bulkdel','删除');" title="请选择后操作">删除</a> <a href="javascript:submitForm('<{$adminpage}>?m=activity&a=bulksort','更新排序');" title="请选择后操作">更新排序</a></td>
+			</tr>
+		</table>
+    </form>
+    <div class="listpage"><{$button_basic}><{$button_select}></div>
+</div>
+</body>
+</html>

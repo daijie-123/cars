@@ -665,6 +665,9 @@ function splash($data = '', $code = 0, $msg = '')
         7 => [
             'desc' => '来自该refer的请求无访问权限',
         ],
+        8 => [
+            'desc' => '逻辑错误',
+        ],
         100 => [
             'desc' => '请求参数无效',
         ],
@@ -692,6 +695,7 @@ function api_session_start()
 {
     ini_set('session.gc_maxlifetime', 7 * 24 * 60 * 60 ); // 设置为和“session.cookie_lifetime”一样的时间；(个人理解：设定session有效期)
     // ini_set("session.cookie_lifetime","60"); //这个代表SessionID在客户端Cookie储存的时间，默认是0，代表浏览器一关闭
+    // jj($_SERVER);
     $_COOKIE[API_SESSION_NAME] = $_SERVER['HTTP_' . strtoupper(API_SESSION_NAME)];
     session_name(API_SESSION_NAME);
     session_start();

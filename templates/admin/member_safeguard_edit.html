@@ -1,0 +1,148 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="static/css/admin/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="static/js/jquery.js"></script>
+    <script type="text/javascript" src="static/js/Validform_v5.3.2_min.js"></script>
+</head>
+<script type="text/javascript">
+    $(document).ready(function(){
+        //表单验证
+        $(".member_safeguard_form").Validform({
+            tiptype:3
+        });
+    });
+    </script>
+<body>
+    <div class="colorarea01">
+        <div class="search clearfix">
+            <div class="searchL">
+                <ul class="menulist">
+                    <li><a href="<{$adminpage}>?m=member_safeguard&a=list" class="list">返回维权列表</a></li>
+                </ul>
+            </div>
+        </div>
+        <form name="form" class="member_safeguard_form" method="post" enctype="multipart/form-data"
+            action="<{$adminpage}>?m=member_safeguard">
+            <table cellspacing="0" cellpadding="0" width="100%" class="maintable">
+                <tr>
+                    <th>投诉人姓名：</th>
+                    <td>
+                        <{$ask.username}>
+                    </td>
+                </tr>
+                <tr>
+                    <th>投诉人电话：</th>
+                    <td>
+                        <{$ask.mobile}>
+                    </td>
+                </tr>
+                <tr>
+                    <th>车型：</th>
+                    <td>
+                        <{$ask.car_allname}>
+                    </td>
+                </tr>
+                <tr>
+                    <th>行驶里程：</th>
+                    <td>
+                        <{$ask.kilometre}>
+                    </td>
+                </tr>
+                <tr>
+                    <th>车况自评：</th>
+                    <td>
+                        <{$ask.self_assessment}>
+                    </td>
+                </tr>
+                <tr>
+                    <th>图片：</th>
+                    <td colspan="3">
+                        <ul id="piclist" class="clearfix">
+                            <{foreach from=$ask.pics key=key item=pic_list}>
+                                <li id="">
+                                    <img src="<{php echo WEB_DOMAIN}><{$pic_list}>" class="img" />
+                                </li>
+                            <{/foreach}>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>被投诉商家：</th>
+                    <td>
+                        <{$ask.complain_company}>
+                    </td>
+                </tr>
+                <tr>
+                    <th>投诉时间：</th>
+                    <td>
+                        <{$ask.addtime}>
+                    </td>
+                </tr>
+                <tr>
+                    <th>投诉原因：</th>
+                    <td>
+                        <{$ask.complain_cause}>
+                    </td>
+                </tr>
+                <{if $ask.status == 1}>
+                    <tr>
+                        <th>沟通单位：</th>
+                        <td>
+                            <input type="text" name="mediate_company" value="" datatype="s" nullmsg="请填写沟通单位！">
+                            <input type="hidden" name="status" value="2">
+
+                        </td>
+                    </tr>
+                <{elseif $ask.status == 2}>
+                    <tr>
+                        <th>沟通单位：</th>
+                        <td>
+                            <{$ask.mediate_company}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>沟通结果：</th>
+                        <td>
+                            <textarea name="mediate_result" class="textarea01" datatype="s" nullmsg="请填写沟通结果！"></textarea>
+                            <input type="hidden" name="status" value="3">
+                        </td>
+                    </tr>
+                <{else}>
+                <tr>
+                    <th>沟通单位：</th>
+                    <td>
+                        <{$ask.mediate_company}>
+                    </td>
+                </tr>
+                <tr>
+                    <th>沟通结果：</th>
+                    <td>
+                        <{$ask.mediate_result}>
+                    </td>
+                </tr>
+                <{/if}>
+                <{if ($ask.status == 1) || ($ask.status == 2)}>
+                <tr>
+                    <th></th>
+                    <td>
+                        <div class="buttons">
+                            <input type="submit" name="thevaluesubmit" value="提交保存" class="submit">
+                            <input type="hidden" name="a" value="<{$ac}>">
+                            <input type="hidden" name="id" value="<{$ask.id}>">
+                            <input type="hidden" name="page" value="<{$page_g}>">
+                        </div>
+                    </td>
+                </tr>
+                <{/if}>
+
+            </table>
+        </form>
+    </div>
+</body>
+
+</html>

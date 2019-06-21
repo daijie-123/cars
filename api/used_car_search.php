@@ -196,7 +196,7 @@ foreach ($list as &$value) {
     // $value['listtime'] = date('Y-m-d H:i:s', $value['listtime']);
     // $value['p_addtime'] = date('Y-m-d H:i:s', $value['p_addtime']);
     $value['p_mainpic'] = upload_url_modify($value['p_mainpic'], 's');
-
+    // 是否收藏
     $value['is_collect'] = 0;
     // if (!empty($value['p_model'])) $value['p_modelname'] = $commoncache['modellist'][$value['p_model']];
     // $value['p_url'] = HTML_DIR . "buycars/" . date('Y/m/d', $value['p_addtime']) . "/" . $value['p_id'] . ".html";
