@@ -12,7 +12,7 @@ if (!defined('APP_IN')) exit('Access Denied');
 // 当前模块
 $m_name = '系统设置';
 // 允许操作
-$ac_arr = array('web' => '系统基本设置', 'contact' => '联系方式设置', 'car' => '车源相关设置', 'miniprogram' => '小程序配置');
+$ac_arr = array('web' => '系统基本设置', 'contact' => '联系方式设置', 'car' => '车源相关设置', 'miniprogram' => '小程序配置', 'car_service' => '车管服务配置');
 // 当前操作
 $ac = isset($_REQUEST['a']) && isset($ac_arr[$_REQUEST['a']]) ? $_REQUEST['a'] : 'default';
 
@@ -21,7 +21,7 @@ $tpl -> assign('ac_arr', $ac_arr);
 $tpl -> assign('ac', $ac);
 
 if (submitcheck('a')) {
-	$post = post('sitename', 'title', 'keywords', 'description', 'copyright', 'icp', 'address', 'postcode', 'fax', 'tel', 'email','htmldir','water','isdstimg','imgwidth','imgheight','thumbwidth','thumbheight','gas','transmission','color','year','issell','waterpic','logo','islimit','limitcount','position','contactman', 'miniprogram_app_id', 'miniprogram_app_secret');
+	$post = post('sitename', 'title', 'keywords', 'description', 'copyright', 'icp', 'address', 'postcode', 'fax', 'tel', 'email','htmldir','water','isdstimg','imgwidth','imgheight','thumbwidth','thumbheight','gas','transmission','color','year','issell','waterpic','logo','islimit','limitcount','position','contactman', 'miniprogram_app_id', 'miniprogram_app_secret', 'car_trade_contract', 'vehicle_evaluation_tel', 'query_traffic_violations_tel', 'accident_rescue_tel');
 
 	if(isset($post['issell'])){
 		$post['issell'] = 1;

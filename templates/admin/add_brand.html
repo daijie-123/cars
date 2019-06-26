@@ -18,9 +18,9 @@
 	});
 	KindEditor.ready(function(K) {
 		var editor = K.editor({
-			uploadJson : '<{$adminpage}>?m=upload',
+			uploadJson : '<{$adminpage}>?m=upload_brand',
 			fileManagerJson : '<{$adminpage}>?m=upload_manager',
-			allowFileManager : true
+			allowFileManager : false
 		});
 		K('#image1').click(function() {
 			editor.loadPlugin('image', function() {

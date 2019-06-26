@@ -29,7 +29,7 @@ if ($ac == 'index') {
 
     $where = "type={$_GET['type']}";
     include(INC_DIR . 'Page.class.php');
-    $Page = new Page($db->tb_prefix . 'activity', $where, 'id,title,sub_title,start_time,end_time,detail,mainpic,apply_maximum', $page_size, 'id desc');
+    $Page = new Page($db->tb_prefix . 'activity', $where, 'id,title,sub_title,start_time,end_time,detail,mainpic,apply_maximum,apply_start_time,apply_end_time', $page_size, 'id desc');
     $list = $Page->get_data();
     foreach ($list as &$activity) {
         if ($activity['mainpic']) {
@@ -68,7 +68,7 @@ if ($ac == 'index') {
     // 已经申请的人数
     $data['apply_mum'] = $db->row_count('activity_user',"activity_id='{$_GET['id']}'");
     // 是否收藏
-    $data['is_collect'] = 0;
+    $data['is_collect'] = $db->row_count('member_collect',"type='activity' and data_id={$_GET['id']} and user_id={$_SESSION['USER_ID']}");
     // 是否报名
     $data['is_apply'] = $db->row_count('activity_user',"activity_id={$_GET['id']} and user_id={$_SESSION['USER_ID']}");
 

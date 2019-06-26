@@ -140,7 +140,7 @@ elseif ($ac == 'add' || $ac == 'edit')
 				$post = post('username','mobilephone','email','nicname','isdealer');
 			}
 			else{
-				$post = post('username','mobilephone','email','nicname','company','address','tel','logo','shoptype','isdealer','isrecom','ishot','ischeck','checknotice','shopdetail', 'lat_lng', 'shop_score');
+				$post = post('username','mobilephone','email','nicname','company','address','tel','logo','shoptype','isdealer','isrecom','ishot','ischeck','checknotice','shopdetail', 'lat', 'lon', 'shop_score');
 			}
 			if ($settings['version'] == 3) {
 				$post['aid'] = intval($_POST['aid']);
@@ -176,7 +176,7 @@ elseif ($ac == 'add' || $ac == 'edit')
 				$post = post('username','mobilephone','email','nicname','isdealer');
 			}
 			else{
-				$post = post('username','mobilephone','email','nicname','company','address','tel','logo','shoptype','isdealer','isrecom','ishot','ischeck','checknotice','shopdetail', 'lat_lng', 'shop_score');
+				$post = post('username','mobilephone','email','nicname','company','address','tel','logo','shoptype','isdealer','isrecom','ishot','ischeck','checknotice','shopdetail', 'lat', 'lon', 'shop_score');
 			}
 
 			if($settings['version'] == 3) {
@@ -217,13 +217,9 @@ elseif ($ac == 'add' || $ac == 'edit')
         if (empty($_GET['id'])) $data = array('username'=>'','password'=>'','email'=>'','mobilephone '=>'','aid'=>'','cid'=>'');
         else $data = $db->row_select_one('member',"id=".intval($_GET['id']));
 
-        if($data['lat_lng']){
-            $lat_lng = explode(',', $data['lat_lng']);
-            $data['lat'] = $lat_lng[0];
-            $data['lng'] = $lat_lng[1];
-        }else{
+        if(!$data['lat'] || !$data['lon']){
             $data['lat'] = 0;
-            $data['lng'] = 0;
+            $data['lon'] = 0;
         }
 
 		$select_province = select_make($data['aid'],$commoncache['provincelist'],"请选择省份");

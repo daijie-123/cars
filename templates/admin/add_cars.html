@@ -101,13 +101,13 @@ KindEditor.ready(function(K) {
 		<table cellspacing="0" cellpadding="0" width="100%"  class="maintable">
 			<tr>
 				<th>推荐位：</th>
-				<td><input type="checkbox" name="isrecom" value="1" <{if $cars.isrecom==1}>checked<{/if}>> 推荐 &nbsp;&nbsp;<input type="checkbox" name="issprecom" value="1" <{if $cars.issprecom==1}>checked<{/if}>> 特荐 &nbsp;&nbsp; <input type="checkbox" name="ishot" value="1" <{if $cars.ishot==1}>checked<{/if}>> 热门 </td>
+				<td><input type="checkbox" name="isrecom" value="1" <{if $cars.isrecom==1}>checked<{/if}>> 优选 &nbsp;&nbsp;<input type="checkbox" name="issprecom" value="1" <{if $cars.issprecom==1}>checked<{/if}>> 精选 &nbsp;&nbsp; <input type="checkbox" name="ishot" value="1" <{if $cars.ishot==1}>checked<{/if}>> 热门 </td>
 				<th>浏览次数：</th>
 				<td><input type="text" name="p_hits" value="<{$cars.p_hits}>" size="6"></td>
 			</tr>
-            <{if $setting.version==3}>
+            <{if $setting.version==30}>
 			<tr>
-            <th>所在城市：</th>
+                <th>所在城市：</th>
 				<td colspan="3">
 					<select name="aid" id="province">
 						<{$selectprovince}>
@@ -116,8 +116,9 @@ KindEditor.ready(function(K) {
 						<{$selectcity}>
 					</select>
 				</td>
-                </tr><{/if}>
-                <tr>
+            </tr>
+            <{/if}>
+            <tr>
 				<th>品牌型号：</th>
 				<td colspan="3">
 					<select name="p_brand" id="brand" datatype="n" nullmsg="请选择品牌！">
@@ -130,9 +131,8 @@ KindEditor.ready(function(K) {
 					<option  value="">请选择款式</option>
 						<{$select_subsubbrand}>
 					</select>
-
-					<input type="text" name="p_name" value="<{$cars.p_name}>" size="10"></td>
-
+                    <input type="text" name="p_name" value="<{$cars.p_name}>" size="10">
+                </td>
 			</tr>
 			<tr>
 				<th>级别选择：</th>
@@ -143,21 +143,21 @@ KindEditor.ready(function(K) {
 				<td></td>
 			</tr>
 			<tr>
-				<th>预售价格：</th>
+				<th>售价（不含过户费）：</th>
 				<td><input type="text" name="p_price"  size="5" value="<{$cars.p_price}>" datatype="s" nullmsg="请填写价格！">
 					<span class="gray">(万元)</span></td>
-				<th>出厂报价：</th>
+				<th>新车含税价（参考）：</th>
 				<td><input type="text" name="p_newprice"  size="5" value="<{$cars.p_newprice}>">
 					<span class="gray">(万元)</span></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<th>购置税：</th>
 				<td><input type="text" name="p_tax"  size="5" value="<{$cars.p_tax}>">
 					<span class="gray">(万元)</span></td>
 				<th>为您节省：</th>
 				<td><input type="text" name="p_save"  size="5" value="<{$cars.p_save}>">
 					<span class="gray">(万元)</span></td>
-			</tr>
+			</tr> -->
 			<tr>
 				<th>车体颜色：</th>
 				<td width="180"><select name="p_color">

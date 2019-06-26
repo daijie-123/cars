@@ -20,7 +20,7 @@
 				<th width="30">选择</th>
 				<th>排序</th>
 				<th>图片</th>
-				<th>url</th>
+				<th>车源ID</th>
 				<th>操作</th>
 			</tr>
 			<{foreach from=$filmlist item=filmlist}>
@@ -35,7 +35,7 @@
 			<tr>
 				<td colspan="5" class="buttontd">
 					<a href="javascript:javascript:selectAll();" title="请选择后操作">全选</a>
-					<a href="javascript:submitForm('<{$adminpage}>?m=filmstrip&a=bulkdel&typeid=<{$typeid}>','删除');" title="请选择后操作">删除</a> 
+					<a href="javascript:submitForm('<{$adminpage}>?m=filmstrip&a=bulkdel&typeid=<{$typeid}>','删除');" title="请选择后操作">删除</a>
 					<a href="javascript:submitForm('<{$adminpage}>?m=filmstrip&a=bulksort&typeid=<{$typeid}>','更新排序');" title="请选择后操作">更新排序</a>
 				</td>
 			</tr>

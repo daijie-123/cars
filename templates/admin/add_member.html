@@ -42,18 +42,18 @@
             });
 
             var lat = <{$user.lat}>;
-            var lng = <{$user.lng}>;
+            var lon = <{$user.lon}>;
             var marker = 0;
 
             //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
             var map = new qq.maps.Map(document.getElementById("container"));
             map.zoomTo(10);
 
-            if (lat && lng) {
-                map.panTo(new qq.maps.LatLng(lat, lng));
+            if (lat && lon) {
+                map.panTo(new qq.maps.LatLng(lat, lon));
 
                 marker = new qq.maps.Marker({
-                    position: new qq.maps.LatLng(lat, lng),
+                    position: new qq.maps.LatLng(lat, lon),
                     map: map
                 });
             } else {
@@ -87,7 +87,9 @@
                     });
                 }
                 // latLng.getLat(), latLng.getLng()
-                $("#lat_lng").val(latLng.toString());
+                // $("#lat_lon").val(latLng.toString());
+                $("#lon").val(latLng.getLng())
+                $("#lat").val(latLng.getLat())
             }
 
         });
@@ -219,9 +221,15 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>经纬度：</th>
-                            <td><input id="lat_lng" type="text" name="lat_lng" value="<{$user.lat_lng}>" class="inp01"
-                                    size="50" datatype="*" nullmsg="请填写公司地址经纬度！" ignore="ignore" />
+                            <th>经度：</th>
+                            <td><input id="lon" type="text" name="lon" value="<{$user.lon}>" class="inp01"
+                                    size="50" datatype="*" nullmsg="请填写公司地址经度！" ignore="ignore" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>纬度：</th>
+                            <td><input id="lat" type="text" name="lat" value="<{$user.lat}>" class="inp01"
+                                    size="50" datatype="*" nullmsg="请填写公司地址纬度！" ignore="ignore" />
                             </td>
                         </tr>
                         <tr>
@@ -345,9 +353,15 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>经纬度：</th>
-                                <td><input id="lat_lng" type="text" name="lat_lng"
-                                        class="inp01" size="50" datatype="*" nullmsg="请填写公司地址经纬度！" ignore="ignore" />
+                                <th>经度：</th>
+                                <td><input id="lon" type="text" name="lon"
+                                        class="inp01" size="50" datatype="*" nullmsg="请填写公司地址经度！" ignore="ignore" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>纬度：</th>
+                                <td><input id="lat" type="text" name="lat"
+                                        class="inp01" size="50" datatype="*" nullmsg="请填写公司地址纬度！" ignore="ignore" />
                                 </td>
                             </tr>
                             <tr>

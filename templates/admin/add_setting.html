@@ -37,6 +37,17 @@
 				});
 			});
 		});
+		K('#car_trade_contract_image').click(function() {
+			editor.loadPlugin('image', function() {
+				editor.plugin.imageDialog({
+					imageUrl : K('#car_trade_contract_url').val(),
+					clickFn : function(url, title, width, height, border, align) {
+						K('#car_trade_contract_url').val(url);
+						editor.hideDialog();
+					}
+				});
+			});
+		});
 	});
 			function register(limittype)	{
 	     if(limittype==1)		{
@@ -76,6 +87,7 @@
 				<li><a href="<{$adminpage}>?m=settings&a=contact" class="list">联系方式设置</a></li>
 				<li><a href="<{$adminpage}>?m=settings&a=car" class="list">车源相关设置</a></li>
 				<li><a href="<{$adminpage}>?m=settings&a=miniprogram" class="list">小程序相关设置</a></li>
+				<li><a href="<{$adminpage}>?m=settings&a=car_service" class="list">车管服务配置</a></li>
 			</ul>
 		</div>
 	</div>
@@ -220,6 +232,27 @@
 		<tr>
 			<th>app_secret：</th>
 			<td><input name="miniprogram_app_secret" type="text" size="60"  value="<{$setting.miniprogram_app_secret}>" /></td>
+		</tr>
+		<{/if}>
+		<{if $ac=="car_service"}>
+		<tr>
+			<th>上传交易合同：</th>
+			<td>
+                <input type="text" name="car_trade_contract" id="car_trade_contract_url" value="<{$setting.car_trade_contract}>" />
+                <input type="button" id="car_trade_contract_image" value="选择图片" />
+            </td>
+		</tr>
+		<tr>
+			<th>评估报告电话：</th>
+			<td><input name="vehicle_evaluation_tel" type="text" size="60"  value="<{$setting.vehicle_evaluation_tel}>" /></td>
+		</tr>
+		<tr>
+			<th>违章查询电话：</th>
+			<td><input name="query_traffic_violations_tel" type="text" size="60"  value="<{$setting.query_traffic_violations_tel}>" /></td>
+		</tr>
+		<tr>
+			<th>事故救援电话：</th>
+			<td><input name="accident_rescue_tel" type="text" size="60"  value="<{$setting.accident_rescue_tel}>" /></td>
 		</tr>
 		<{/if}>
 		<tr>

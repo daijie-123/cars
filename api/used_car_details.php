@@ -5,7 +5,7 @@ $arr_not_empty = [
 ];
 api_can_not_be_empty($arr_not_empty, $_GET);
 $p_id = $_GET['id'];
-$data = $db->row_select_one('cars', "issell=0 and isshow=1 and p_id=" . $p_id, 'p_id,p_mainpic,p_pics,p_brand,p_subbrand,p_subsubbrand,p_allname,p_kilometre,p_year,p_month,isrecom,p_addtime,p_price,p_newprice,p_details,p_model,uid,p_color,p_gas,p_transmission,p_emission');
+$data = $db->row_select_one('cars', "issell=0 and isshow=1 and p_id=" . $p_id, 'p_id,p_mainpic,p_pics,p_brand,p_subbrand,p_subsubbrand,p_allname,p_kilometre,p_year,p_month,isrecom,p_addtime,p_price,p_newprice,p_details,p_model,uid,p_color,p_gas,p_transmission,p_emission,p_country');
 if (!$data) {
     splash('', 100);
 }
@@ -45,14 +45,11 @@ foreach ($paralist as $key => $value) {
 $data['para_list'] = $paralist;
 //商家信息
 if (!empty($data['uid'])) {
-    $shop = $db->row_select_one('member', 'id=' . $data['uid'], 'id,company,logo,address,mobilephone,shoptype,lat_lng,shop_score');
-    if($shop['lat_lng']){
-        $lat_lng = explode(',', $shop['lat_lng']);
-        $shop['lat'] = $lat_lng[0];
-        $shop['lng'] = $lat_lng[1];
-    }else{
+    $shop = $db->row_select_one('member', 'id=' . $data['uid'], 'id,company,logo,address,mobilephone,shoptype,lat,lon,shop_score');
+
+    if (!$shop['lat'] || !$shop['lon']) {
         $shop['lat'] = 0;
-        $shop['lng'] = 0;
+        $shop['lon'] = 0;
     }
     $shop['on_sale_count'] = $db->row_count('cars', 'uid=' . $data['uid'] . ' and issell=0 and isshow=1');
     $shop['logo'] = upload_url_modify($shop['logo']);
@@ -66,11 +63,11 @@ foreach ($recomm_list as &$value) {
         $value['p_mainpic'] = upload_url_modify($value['p_mainpic'], 's');
     }
 
-    $value['collect_count'] = 10;
+    $value['collect_count'] = $db->row_count('member_collect',"type='car' and data_id={$p_id}");
 }
 $data['recomm_list'] = $recomm_list;
 
 // 是否新上
 $data['new_arrival'] = ($data['p_addtime'] > (TIMESTAMP - (24 * 60 * 60))) ? 1 : 0;
-$data['is_collect'] = 0;
+$data['is_collect'] = is_user_login() ? ($db->row_count('member_collect',"type='car' and data_id={$p_id} and user_id={$_SESSION['USER_ID']}")) : 0;
 splash($data);

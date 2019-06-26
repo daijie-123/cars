@@ -54,7 +54,9 @@ elseif($ac == 'save_safeguard'){
     ];
     api_can_not_be_empty($arr_not_empty, $_POST);
     $post = post('complain_company', 'complain_cause', 'brand_id', 'subbrand_id', 'subsubbrand_id', 'kilometre', 'self_assessment', 'username', 'mobile', 'pics');
-
+    if(count($post['pics']) > 6){
+        splash('', 100, '图片最多可上传6张');
+    }
     if (!preg_match('/^1\d{10}$/', $post['mobile'])) splash('', 100, '手机号码格式不正确');
     $post['car_allname'] = brand_full_name($post['subbrand_id']);
     $post['user_id'] = $userinfo['id'];

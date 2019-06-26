@@ -63,7 +63,7 @@
 		<li><a href="<?php echo WEB_PATH?>?m=page&a=list" target="report_iframe">单页管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=feedback&a=list&typeid=1" target="report_iframe">留言管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=ad&a=list" target="report_iframe">广告管理</a></li>
-		<li><a href="<?php echo WEB_PATH?>?m=keywords&a=list" target="report_iframe">关键词管理</a></li>
+        <li><a href="<?php echo WEB_PATH?>?m=keywords&a=list" target="report_iframe">关键词管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=1" target="report_iframe">首页轮播广告</a></li>
 		<!-- <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=2" target="report_iframe">手机轮播广告</a></li> -->
         <!-- <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=3" target="report_iframe">周末集市轮播广告</a></li> -->
@@ -87,7 +87,8 @@
 		<li><a href="<?php echo WEB_PATH?>?m=selfdefine&a=list" target="report_iframe">二手车自定义参数</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=settings&a=web" target="report_iframe">系统基本设置</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=settings&a=car" target="report_iframe">车源相关设置</a></li>
-		<li><a href="<?php echo WEB_PATH?>?m=settings&a=contact" target="report_iframe">联系方式设置</a></li>
+        <li><a href="<?php echo WEB_PATH?>?m=settings&a=contact" target="report_iframe">联系方式设置</a></li>
+        <li><a href="<?php echo WEB_PATH?>?m=settings&a=car_service" target="report_iframe">车管服务配置</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=admingroup&a=list" target="report_iframe">管理员用户组</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=admin&a=list" target="report_iframe">管理员选项</a></li>
 	</ul>

@@ -119,7 +119,7 @@ if (empty($_FILES) === false) {
 	if (!file_exists($save_path)) {
 		mkdir($save_path);
 	}
-	
+
 	$rand_str = rand(10000, 99999);
 	//新文件名
 	$new_file_name = date("YmdHis") . '_' . $rand_str . '.' . $file_ext;
@@ -133,14 +133,14 @@ if (empty($_FILES) === false) {
 	@chmod($file_path, 0644);
 
 	$file_url = $save_path . $new_file_name;
-	
+
 	if(isImage($file_url) == false){
 		unlink($file_url);
 		alert("不是真实图片，不允许上传！");
 	}
 
 	$file_url_small = $save_path . $new_file_name_small;
-	
+
 	copy($file_url,$file_url_small);
 
 	require_once INC_DIR.'/img.class.php';
@@ -163,7 +163,7 @@ if (empty($_FILES) === false) {
 	}
 	else{
 	   $ts -> createImg($settings['thumbwidth'], $settings['thumbheight']);
-	 
+
 	}
 
 	// 加水印
@@ -177,7 +177,7 @@ if (empty($_FILES) === false) {
 		$ty -> createImg(100);
 	}
 
-	$lastfile_url = "/".$file_url;
+	$lastfile_url = "/" . $file_url;
 
 	header('Content-type: text/html; charset=UTF-8');
 	$json = new Services_JSON();

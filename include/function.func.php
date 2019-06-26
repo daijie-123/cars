@@ -799,6 +799,10 @@ function is_https() {
 
 function upload_url_modify($path, $size = 'l')
 {
+    if(substr($path, 0, 1) !== '/'){
+        $path = '/' . $path;
+    }
+
     if($size == 'l'){
         return WEB_DOMAIN . $path;
     }elseif($size == 's'){
@@ -806,4 +810,15 @@ function upload_url_modify($path, $size = 'l')
         return WEB_DOMAIN . $pic[0] . "_small" . "." . $pic[1];
     }
     return $path;
+}
+
+function brand_url_modify($path)
+{
+    if(!$path){
+        return '';
+    }
+    if(substr($path, 0, 1) !== '/'){
+        $path = '/' . $path;
+    }
+    return upload_url_modify('/upload/brand' . $path);
 }

@@ -31,7 +31,9 @@ elseif ($ac == 'add') {
     ];
     api_can_not_be_empty($arr_not_empty, $_POST);
     $post = post('contact_name', 'contact_tel', 'dealer_id', 'brand_id', 'subbrand_id', 'subsubbrand_id', 'car_license', 'add_license_time', 'kilometre', 'self_assessment');
-
+    $post['car_license'] = trim($post['car_license']);
+    $count = $db->row_count('appointment_sell', "car_license='{$post['car_license']}'");
+    if($count) splash('', 8, '此牌照已经提交过了。');
     if (!preg_match('/^1\d{10}$/', $post['contact_tel'])) splash('', 100, '手机号码格式不正确');
     $post['allname'] = brand_full_name($post['subsubbrand_id']);
     $post['user_id'] = $userinfo['id'];

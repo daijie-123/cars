@@ -23,10 +23,10 @@ $save_url ='/upload/';
 
 //定义允许上传的文件扩展名
 $ext_arr = array(
-	'image' => array( 'jpg', 'jpeg', 'png', 'bmp', 'pdf')
+	'brand' => array( 'jpg', 'jpeg', 'png', 'bmp')
 );
 //最大文件大小
-$max_size = 8388608;
+$max_size = 1000000;
 
 //$save_path = realpath($save_path) . '/';
 
@@ -90,7 +90,7 @@ if (empty($_FILES) === false) {
 		alert("上传文件大小超过限制。");
 	}
 	//检查目录名
-	$dir_name = empty($_GET['dir']) ? 'image' : trim($_GET['dir']);
+	$dir_name = 'brand';
 	if (empty($ext_arr[$dir_name])) {
 		alert("目录名不正确。");
 	}
@@ -113,17 +113,10 @@ if (empty($_FILES) === false) {
 			mkdir($save_path);
 		}
 	}
-	$ymd = date("Ymd");
-	$save_path .= $ymd . "/";
-	$save_url .= $ymd . "/";
-	if (!file_exists($save_path)) {
-		mkdir($save_path);
-	}
 
 	$rand_str = rand(10000, 99999);
 	//新文件名
 	$new_file_name = date("YmdHis") . '_' . $rand_str . '.' . $file_ext;
-	$new_file_name_small = date("YmdHis") . '_' . $rand_str . '_small.' . $file_ext;
 
 	//移动文件
 	$file_path = $save_path . $new_file_name;
@@ -134,15 +127,14 @@ if (empty($_FILES) === false) {
 
 	$file_url = $save_path . $new_file_name;
 
-	// if(isImage($file_url) == false){
-	// 	alert("不是真实图片，不允许上传！");
-	// 	unlink($file_url);
-	// }
-	$lastfile_url = "/" . $file_url;
+	if(isImage($file_url) == false){
+		alert("不是真实图片，不允许上传！");
+		unlink($file_url);
+	}
 
 	header('Content-type: text/html; charset=UTF-8');
 	$json = new Services_JSON();
-	echo $json->encode(array('error' => 0, 'url' => $lastfile_url));
+	echo $json->encode(array('error' => 0, 'url' => $new_file_name));
 	exit;
 }
 
