@@ -47,4 +47,5 @@ $tpl->assign( 'htmldir', HTML_DIR );
 $tpl->assign( 'setting', $settings );
 $tpl->assign( 'partlist', get_channel());
 $tpl->assign( 'adminpage', ADMIN_PAGE );
+$tpl->assign( 'webdomain', WEB_DOMAIN );
 ?>

@@ -48,7 +48,7 @@
 	<div class="topbox clearfix">
 		<div class="quickmenu">
 			<ul class="clearfix">
-				<li><a href="<?php echo WEB_PATH?>/" target="_blank">站点首页</a></li>
+				<!-- <li><a href="<?php echo WEB_PATH?>/" target="_blank">站点首页</a></li> -->
 				<li><a href="<?php echo ADMIN_PAGE?>?m=main">管理首页</a></li>
 				<li><a href="<?php echo ADMIN_PAGE?>?m=cache&a=del">清除缓存</a></li>
 				<li><a href="<?php echo ADMIN_PAGE?>?m=login&a=logout">安全退出</a></li>

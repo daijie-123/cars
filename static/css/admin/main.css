@@ -3,14 +3,14 @@
 /*全站链接样式*/
 body{color:#333; font-size:12px;font-family:"微软雅黑";background:#eeeeee url(../../img/admin/left.jpg) repeat-y;}
 a{ color:#333; text-decoration:none;}
-a:hover{ color:#ff6600; text-decoration:none;} 
+a:hover{ color:#ff6600; text-decoration:none;}
 .blank{height:10px;}
 .blank{ height:10px;}
 
 
 /*整体框架*/
 .top{height:45px;position:relative;background:#1f262d;}
-.top .topbox{height:45px;padding-left:160px;background:url(../../img/admin/adminlogo.gif) no-repeat 20px 8px;}
+.top .topbox{height:45px;padding-left:160px;background:url(../../img/admin/adminlogo.png) no-repeat 20px 8px;}
 .top .topbox .topmenu{float:left;}
 .top .topbox .topmenu li{float:left;padding:0 25px;height:35px;line-height:35px;overflow:hidden;text-align:center;font-size:14px;font-weight:bold;color:#ccc;background:url(../../img/admin/topmenuline.gif) no-repeat right 0;cursor:pointer;}
 .top .topbox .topmenu li.here{background:#333;color:#fff;}

@@ -15,8 +15,8 @@
 $(document).ready(function() {
     //品牌选择
 	$("#brand").change(function(){
-		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", { 
-			brandid :  $("#brand").val() 
+		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", {
+			brandid :  $("#brand").val()
 		}, function (data, textStatus){
                $("#subbrand").html(data); // 把返回的数据添加到页面上
 			}
@@ -24,18 +24,18 @@ $(document).ready(function() {
 	});
 	//品牌选择
 	$("#subbrand").change(function(){
-		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", { 
-			subbrandid :  $("#subbrand").val() 
+		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", {
+			subbrandid :  $("#subbrand").val()
 		}, function (data, textStatus){
                $("#subsubbrand").html(data); // 把返回的数据添加到页面上
 			}
 		);
 	});
-	<{if $setting.version==3}>
+	<{if $setting.version==30}>
 	   //城市选择
 	$("#province").change(function(){
-		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", { 
-			cityid :  $("#province").val() 
+		$.get("<{$weburl}>/index.php?m=ajax&ajax=1", {
+			cityid :  $("#province").val()
 		}, function (data, textStatus){
                $("#city").html(data); // 把返回的数据添加到页面上
 			}
@@ -108,7 +108,7 @@ KindEditor.ready(function(K) {
 				<th>推荐位：</th>
 				<td><input type="checkbox" name="isrecom" value="1" <{if $rentcars.isrecom==1}>checked<{/if}>> 推荐 &nbsp;&nbsp;<input type="checkbox" name="issprecom" value="1" <{if $rentcars.issprecom==1}>checked<{/if}>> 特荐 &nbsp;&nbsp; <input type="checkbox" name="ishot" value="1" <{if $rentcars.ishot==1}>checked<{/if}>> 热门 </td>
 			</tr>
-			<{if $setting.version==3}>
+			<{if $setting.version==30}>
 			<tr>
             <th>所在城市：</th>
 				<td colspan="3">
@@ -132,10 +132,10 @@ KindEditor.ready(function(K) {
 					</select>
 					<select class="subbrand" id="subbrand" name="p_subbrand" datatype="n" nullmsg="请选择车系！">
 						<option  value="">请选择车系</option>
-						<{$select_subbrand}>                    
+						<{$select_subbrand}>
 					</select> &nbsp;<select class="subbrand" id="subsubbrand" name="p_subsubbrand" datatype="n" nullmsg="请选择款式！">
 					<option  value="">请选择款式</option>
-						<{$select_subsubbrand}>	
+						<{$select_subsubbrand}>
 					</select>
 					<input type="text" name="p_name" value="<{$rentcars.p_name}>" size="10"></td>
 			</tr>
@@ -172,7 +172,7 @@ KindEditor.ready(function(K) {
 				<th>补充描述：</th>
 				<td colspan="5"><textarea  name="p_details" rows="2" cols="90" class="textarea01"><{$rentcars.p_details}></textarea></td>
 			</tr>
-			
+
 			<tr>
 				<th></th>
 				<td colspan="5"><div class="buttons">

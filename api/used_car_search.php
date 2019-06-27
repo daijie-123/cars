@@ -66,6 +66,13 @@ if (isset($_GET['price']) and $_GET['price'] <> 0) {
         default:
             $where .= "";
     }
+}else{
+    if(isset($_GET['price_max']) and is_numeric($_GET['price_max'])){
+        $where .= " and p_price <= {$_GET['price_max']}";
+    }
+    if(isset($_GET['price_min']) and is_numeric($_GET['price_min'])){
+        $where .= " and p_price >= {$_GET['price_min']}";
+    }
 }
 
 if (isset($_GET['age']) and $_GET['age'] <> 0) {

@@ -27,7 +27,7 @@ if (submitcheck('username'))
     can_not_be_empty($arr_not_empty,$_POST);
 
 	//if (trim($_POST['authcode']) != $_SESSION['authcode']) showmsg('验证码不正确',-1);
-    $rs_user = $db->row_select_one('member',"username='".trim($_POST['username'])."' AND password='".md5(trim($_POST['password']))."'");
+    $rs_user = $db->row_select_one('member',"username='".trim($_POST['username'])."' AND isdealer = 2 AND password='".md5(trim($_POST['password']))."'");
     if (!$rs_user) showmsg('用户不存在或密码错误',-1);
     //if (!$rs_user['status']) showmsg('此账户已被禁用',-1);
     $db->row_update('member',array('last_login_time'=>TIMESTAMP,'last_login_ip'=>get_client_ip(),'login_count'=>$rs_user['login_count']+1),"id={$rs_user['id']}");

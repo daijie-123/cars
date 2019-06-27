@@ -130,11 +130,11 @@
         <div class="search clearfix">
             <div class="searchL">
                 <ul class="menulist">
-                    <li><a href="<{$adminpage}>?m=member&a=list" class="list">返回会员列表</a></li>
+                    <li><a href="<{$adminpage}>?m=dealer&a=list" class="list">返回会员列表</a></li>
                 </ul>
             </div>
         </div>
-        <form name="form1" class="addmember" method="post" action="<{$adminpage}>?m=member">
+        <form name="form1" class="addmember" method="post" action="<{$adminpage}>?m=dealer">
             <{if $ac=="edit" }>
                 <table cellspacing="0" cellpadding="0" width="100%" class="maintable">
                     <{if $setting.version==30}>
@@ -161,7 +161,7 @@
                             <tr>
                                 <th>用户名：</th>
                                 <td colspan="3"><input type="text" name="username" value="<{$user.username}>"
-                                        ajaxurl="<{$adminpage}>?m=member&ajax=1&id=<{$user.id}>" datatype="s6-60"
+                                        ajaxurl="<{$adminpage}>?m=dealer&ajax=1&id=<{$user.id}>" datatype="s6-18"
                                         errormsg="用户名至少6个字符,最多18个字符！"></td>
                             </tr>
                             <tr>
@@ -172,21 +172,21 @@
                                 <th>邮箱地址：</th>
                                 <td colspan="3">
                                     <input type="text" name="email" value="<{$user.email}>" size="30" class="inp01"
-                                        datatype="e" ajaxurl="<{$adminpage}>?m=member&ajax=1&id=<{$user.id}>"
+                                        datatype="e" ajaxurl="<{$adminpage}>?m=dealer&ajax=1&id=<{$user.id}>"
                                         nullmsg="请输入邮箱地址！" errormsg="请输入正确的邮箱地址！" />
                                 </td>
                             </tr>
                             <tr>
-                                <th>昵称：</th>
+                                <th>联系人：</th>
                                 <td><input type="text" name="nicname" value="<{$user.nicname}>" class="inp01"
-                                        datatype="s" nullmsg="请填写昵称！" /></td>
+                                        datatype="s" nullmsg="请填写联系人！" /></td>
                             </tr>
                             <tr>
                                 <th>手机号码：</th>
                                 <td colspan="3">
                                     <input type="text" name="mobilephone" value="<{$user.mobilephone}>" size="20"
                                         class="inp01" datatype="m"
-                                        ajaxurl="<{$adminpage}>?m=member&ajax=1&id=<{$user.id}>" nullmsg="请输入手机号！"
+                                        ajaxurl="<{$adminpage}>?m=dealer&ajax=1&id=<{$user.id}>" nullmsg="请输入手机号！"
                                         errormsg="请输入正确的手机号！" />
                                 </td>
                             </tr>
@@ -270,7 +270,7 @@
                 <{else}>
                     <table cellspacing="0" cellpadding="0" width="100%" class="maintable">
                         <{if $setting.version==30}>
-                            <tr>
+                            <!-- <tr>
                                 <th>所在城市：</th>
                                 <td colspan="3">
                                     <select name="aid" id="province">
@@ -280,20 +280,20 @@
                                         <{$selectcity}>
                                     </select>
                                 </td>
-                            </tr>
+                            </tr> -->
                             <{/if}>
                                 <!-- <tr>
-                                    <th>会员类型：</th>
-                                    <td>
-                                        <select name="isdealer" id="usertype">
-                                            <{$selectisdealer}>
-                                        </select>
-                                    </td>
+                                <th>会员类型：</th>
+                                <td>
+                                    <select name="isdealer" id="usertype">
+                                        <{$selectisdealer}>
+                                    </select>
+                                </td>
                                 </tr> -->
                                 <tr>
                                     <th>用户名：</th>
                                     <td colspan="3"><input type="text" name="username" value="<{$user.username}>"
-                                            ajaxurl="index.php?m=register&ajax=1" datatype="s6-60"
+                                            ajaxurl="index.php?m=register&ajax=1" datatype="s6-18"
                                             errormsg="用户名至少6个字符,最多18个字符！"></td>
                                 </tr>
                                 <tr>
@@ -310,9 +310,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>昵称：</th>
+                                    <th>联系人：</th>
                                     <td><input type="text" name="nicname" value="<{$user.nicname}>" class="inp01"
-                                            datatype="s" nullmsg="请填写昵称！" /></td>
+                                            datatype="s" nullmsg="请填写联系人！" /></td>
                                 </tr>
                                 <tr>
                                     <th>手机号码：</th>
@@ -323,7 +323,7 @@
                                     </td>
                                 </tr>
                     </table>
-                    <table cellspacing="0" cellpadding="0" width="100%" class="maintable" id="dealer" style="display:none;" <{if
+                    <table cellspacing="0" cellpadding="0" width="100%" class="maintable" id="dealer" <{if
                         $user.isdealer==1}>style="display:none;"<{/if}>> <tr>
                             <th>推荐位：</th>
                             <td><input type="checkbox" name="isrecom" value="1" <{if $user.isrecom==1}>checked<{/if}>>
@@ -409,7 +409,7 @@
                                     <input type="hidden" name="a" value="<{$ac}>">
                                     <input type="hidden" name="id" value="<{$user.id}>">
                                     <input type="hidden" name="page" value="<{$page_g}>">
-                                    <input type="hidden" name="isdealer" value="1">
+                                    <input type="hidden" name="isdealer" value="2">
                                 </div>
                             </td>
                         </tr>

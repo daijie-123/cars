@@ -3,8 +3,8 @@
 $(function(){
 	//品牌选择
 	$("#brand").change(function(){
-		$.get("/?m=ajax&ajax=1", { 
-			brandid :  $("#brand").val() 
+		$.get("/?m=ajax&ajax=1", {
+			brandid :  $("#brand").val()
 		}, function (data, textStatus){
                $("#subbrand").html(data); // 把返回的数据添加到页面上
 			}
@@ -12,18 +12,18 @@ $(function(){
 	});
 	//品牌选择
 	$("#subbrand").change(function(){
-		$.get("/?m=ajax&ajax=1", { 
-			subbrandid :  $("#subbrand").val() 
+		$.get("/?m=ajax&ajax=1", {
+			subbrandid :  $("#subbrand").val()
 		}, function (data, textStatus){
                $("#subsubbrand").html(data); // 把返回的数据添加到页面上
 			}
 		);
 	});
-	<{if $setting.version==3}>
+	<{if $setting.version==30}>
 	//城市选择
 	$("#province").change(function(){
-		$.get("/?m=ajax&ajax=1", { 
-			cityid :  $("#province").val() 
+		$.get("/?m=ajax&ajax=1", {
+			cityid :  $("#province").val()
 		}, function (data, textStatus){
 			$("#city").html(data); // 把返回的数据添加到页面上
 					}
@@ -73,18 +73,19 @@ $(function(){
 				}
 			});
 		});
-	});	
+	});
 	});
 });
 </script>
 <form name="form1" class="carform" enctype="multipart/form-data" method="post" action="index.php?m=user">
     <table cellspacing="0" cellpadding="0" width="100%"  class="maintable">
+            <{if 1==2}>
 			<tr style="background-color:#13D407;height:60px">
 				<th style="color:#ffffff;font-size:18px;"><b>新车/二手车：</b></th>
 				<td style="color:#ffffff;font-size:16px;" colspan="3">
 				<input type="radio" name="p_gas" value="新车" >新车&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="p_gas" value="二手车"  checked="checked">二手车&nbsp;&nbsp;&nbsp;* 重要(车型展现的位置不一样)</td>
 			</tr>
-
+            <{/if}>
 			<tr>
 				<th>品牌型号：</th>
 				<td colspan="3">
@@ -93,15 +94,15 @@ $(function(){
 					</select>
 					<select class="subbrand" id="subbrand" name="p_subbrand" datatype="n" nullmsg="请选择车系！">
 						<option  value="">请选择车系</option>
-						<{$select_subbrand}>                    
+						<{$select_subbrand}>
 					</select> &nbsp;<select class="subbrand" id="subsubbrand" name="p_subsubbrand" datatype="n" nullmsg="请选择款式！">
 						<option  value="">请选择款式</option>
-						<{$select_subsubbrand}>	
+						<{$select_subsubbrand}>
 					</select>
 				</td>
 			</tr>
-    
-    <{if $setting.version==3}>
+
+    <{if $setting.version==30}>
 			<tr>
 				<th>所在城市：</th>
 				<td colspan="3">
@@ -122,28 +123,32 @@ $(function(){
 				<td></td>
 			</tr>
 			<tr>
-				<th>预售价格：</th>
+				<th>售价（不含过户费）：</th>
 				<td><input type="text" name="p_price"  size="5" value="<{$cars.p_price}>" datatype="s" nullmsg="请填写价格！">
 					<span class="gray">(万元)</span></td>
-				<th>出厂报价：</th>
+				<th>新车含税价（参考）：</th>
 				<td><input type="text" name="p_newprice"  size="5" value="<{$cars.p_newprice}>">
 					<span class="gray">(万元)</span></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<th>购置税：</th>
 				<td><input type="text" name="p_tax"  size="5" value="<{$cars.p_tax}>">
 					<span class="gray">(万元)</span></td>
 				<th>为您节省：</th>
 				<td><input type="text" name="p_save"  size="5" value="<{$cars.p_save}>">
 					<span class="gray">(万元)</span></td>
-			</tr>
+			</tr> -->
 			<tr>
 				<th>车体颜色：</th>
 				<td width="180"><select name="p_color">
 						<{$select_color}>
 					</select></td>
-				<th width="50"> </th>
-				<td> </td>
+				<th>排量：</th>
+				<td>
+                        <select name="p_gas">
+                                <{$select_gas}>
+                            </select>
+                </td>
 			</tr>
 			<tr>
 				<th>变速箱：</th>
@@ -174,13 +179,13 @@ $(function(){
 				<td>
 				<{if $paralist.type_name=='input'}>
 					<input name="para<{$paralist.id}>" type="text" size="50" value="<{$paralist.c_value}>"/>
-				<{elseif $paralist.type_name=='textarea' }>	
+				<{elseif $paralist.type_name=='textarea' }>
 					<textarea name="para<{$paralist.id}>" ><{$paralist.c_value}></textarea>
-				<{elseif $paralist.type_name=='select' }>	
+				<{elseif $paralist.type_name=='select' }>
 					<select name="para<{$paralist.id}>"><{$paralist.select}></select>
-				<{elseif $paralist.type_name=='time' }>	
+				<{elseif $paralist.type_name=='time' }>
 					<input name="para<{$paralist.id}>" type="text" size="20" class="laydate-icon" value="<{$paralist.c_value}>" onclick="laydate()"/>
-				<{elseif $paralist.type_name=='checkbox' }>	
+				<{elseif $paralist.type_name=='checkbox' }>
 					<{$checkbox_str}>
 				<{/if}>
 				</td>
@@ -196,7 +201,7 @@ $(function(){
 					</ul>
 					<input type="button" id="J_selectImage" value="批量上传图片" class="uploadbut"/>
 					<div id="mainpic">
-						
+
 					</div>
 				</td>
 			</tr>

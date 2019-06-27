@@ -56,6 +56,8 @@ car数据库类型 utf8 导入的时候注意一下
 修改教程:
 模版位置:templates/default/default/
 
+http://car.test.com/?m=register
+http://car.test.com/?m=login
 对应模版:
 首页:index.html
 选车:carlist.html

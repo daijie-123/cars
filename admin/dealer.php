@@ -1,19 +1,11 @@
 <?php
-/*
- 本软件版权归作者所有,在投入使用之前注意获取许可
- 作者：北京市普艾斯科技有限公司
- 项目：simcms_锐车1.0
- 电话：010-58480317
- Q  Q: 228971357
- 网址：http://www.simcms.net
- simcms.net保留全部权力，受相关法律和国际公约保护，请勿非法修改、转载、散播，或用于其他赢利行为，并请勿删除版权声明。
-*/
+
 if (!defined('APP_IN')) exit('Access Denied');
 
 //当前模块
-$mod_name = '用户管理';
+$mod_name = '商家管理';
 //允许操作
-$ac_arr = array('list'=>'用户列表','add'=>'添加用户','edit'=>'编辑用户','del'=>'删除用户','bulkdel'=>'批量删除','mail'=>'发送邮件');
+$ac_arr = array('list'=>'商家列表','add'=>'添加商家','edit'=>'编辑商家','del'=>'删除商家','bulkdel'=>'批量删除','mail'=>'发送邮件');
 //当前操作
 $ac = isset($_REQUEST['a']) && isset($ac_arr[$_REQUEST['a']]) ? $_REQUEST['a'] : 'default';
 
@@ -21,15 +13,15 @@ $tpl->assign( 'mod_name', $mod_name );
 $tpl->assign( 'ac_arr', $ac_arr );
 $tpl->assign( 'ac', $ac );
 
-//验证用户名
+//验证商家名
 if (!empty($_POST['param']) and $_POST['name']=="username")
 {
 	$data = $db->row_count('member',"username='".$_POST['param']."' and id<>".intval($_GET['id']));
     if($data==0){
-		echo '{"info":"用户名验证成功！","status":"y"}';
+		echo '{"info":"商家名验证成功！","status":"y"}';
 	}
 	else{
-		echo '{"info":"用户名已存在！","status":"n"}';
+		echo '{"info":"商家名已存在！","status":"n"}';
 	}
 	exit;
 }
@@ -71,7 +63,7 @@ $array_dealer_category = arr_dealer_category();
 //列表
 if ($ac == 'list')
 {
-	$where = 'isdealer=1';
+	$where = 'isdealer=2';
     //搜索条件
     if (!empty($_GET['keywords']))
     {
@@ -110,7 +102,7 @@ if ($ac == 'list')
     $tpl->assign( 'button_basic', $button_basic );
     $tpl->assign( 'button_select', $button_select );
 	$tpl->assign( 'page', $page );
-    $tpl->display( 'admin/member_list.html' );
+    $tpl->display( 'admin/dealer_list.html' );
     exit;
 }
 //单条删除
@@ -134,7 +126,7 @@ elseif ($ac == 'add' || $ac == 'edit')
     {
         if ($ac == 'add')
         {
-			$arr_not_empty = array('username'=>'用户名不可为空','password'=>'密码不能为空');
+			$arr_not_empty = array('username'=>'商家名不可为空','password'=>'密码不能为空');
 			can_not_be_empty($arr_not_empty,$_POST);
 			if($_POST['isdealer']==1){
 				$post = post('username','mobilephone','email','nicname','isdealer');
@@ -170,7 +162,7 @@ elseif ($ac == 'add' || $ac == 'edit')
         }
         else
         {
-			$arr_not_empty = array('username'=>'用户名不可为空');
+			$arr_not_empty = array('username'=>'商家名不可为空');
 			can_not_be_empty($arr_not_empty,$_POST);
 			if($_POST['isdealer']==1){
 				$post = post('username','mobilephone','email','nicname','isdealer');
@@ -232,7 +224,7 @@ elseif ($ac == 'add' || $ac == 'edit')
 		$tpl -> assign('select_dealer_category', $select_dealer_category);
         $tpl->assign( 'user', $data );
 		$tpl->assign( 'sessionid', session_id() );
-        $tpl->display( 'admin/add_member.html' );
+        $tpl->display( 'admin/add_dealer.html' );
         exit;
     }
 }

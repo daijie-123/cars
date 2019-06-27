@@ -26,6 +26,7 @@
 							<li><a href="/?m=user&a=upinfo">修改资料</a></li>
 							<li><a href="/?m=user&a=uppwd">修改密码</a></li>
 							<li><a href="/?m=user&a=addlogo">修改头像</a></li>
+							<li><a href="/?m=user&a=editshop">商家信息</a></li>
 						</ul>
 					</div>
 				</div>
@@ -33,34 +34,36 @@
 			<p class="mt10 gray01 pl5">注册日期：<{$user.regtime}></p>
 		</div>
 		<div class="usermenu">
-            <h3><a href="/?m=user">会员中心首页</a></h3>
+            <h3><a href="/?m=user">商家中心首页</a></h3>
 		</div>
 		<div class="usermenu">
             <h3>我的车辆</h3>
-            <ul>            
-                <li><a href="/?m=user&a=addcar">添加车辆</a></li>            
+            <ul>
+                <li><a href="/?m=user&a=addcar">添加车辆</a></li>
                 <li><a href="/?m=user&a=carlist">管理车辆</a></li>
-				<li><a href="/?m=user&a=rentcarlist">租车管理</a></li>
+				<!-- <li><a href="/?m=user&a=rentcarlist">租车管理</a></li> -->
             </ul>
         </div>
-		<div class="usermenu">
-            <h3>商机管理</h3>
-            <ul>
-				<li><a href="/?m=user&a=subscribelist">查看预约</a></li>
-				<li><a href="/?m=user&a=inquirylist">询价管理</a></li>
-            </ul>
-        </div>
-        <{if $user.isdealer==2}>
-		<div class="usermenu">
-            <h3>店铺管理</h3>
-            <ul>
-                <li><a href="/?m=user&a=addnews">发布优惠促销</a></li>
-                <li><a href="/?m=user&a=newslist">优惠促销管理</a></li>
-				<li><a href="/?m=user&a=dealerlist">销售代表管理</a></li>
-				<li><a href="/?m=user&a=asklist">问答管理</a></li>
-				<li><a href="/?m=user&a=editshop">资料修改</a></li>
-            </ul>
-        </div>
+        <{if 1==2}>
+            <div class="usermenu">
+                <h3>商机管理</h3>
+                <ul>
+                    <li><a href="/?m=user&a=subscribelist">查看预约</a></li>
+                    <li><a href="/?m=user&a=inquirylist">询价管理</a></li>
+                </ul>
+            </div>
+            <{if $user.isdealer==2}>
+            <div class="usermenu">
+                <h3>店铺管理</h3>
+                <ul>
+                    <li><a href="/?m=user&a=addnews">发布优惠促销</a></li>
+                    <li><a href="/?m=user&a=newslist">优惠促销管理</a></li>
+                    <li><a href="/?m=user&a=dealerlist">销售代表管理</a></li>
+                    <li><a href="/?m=user&a=asklist">问答管理</a></li>
+                    <li><a href="/?m=user&a=editshop">资料修改</a></li>
+                </ul>
+            </div>
+            <{/if}>
         <{/if}>
 		<div class="usermenu">
             <h3><a href="<{$weburl}>/index.php?m=user&a=logout">退出</a></h3>

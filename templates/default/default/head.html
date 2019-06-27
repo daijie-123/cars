@@ -1,3 +1,4 @@
+<{if 1==2}>
 <{include file="default/`$setting.templates`/top.html"}>
 <div class="headw">
 	<div class="heada">
@@ -6,7 +7,7 @@
 				<a href="/?m=citylist"><div class="topcitybox"><i></i><script src="/?m=city"></script></a><div class=clear></div>
 				<span><a href="/?m=city&cid=0">总站</a> <a href="/?m=city&cid=2">泉州</a> <a href="/?m=city&cid=3">南安</a> <a href="/?m=city&cid=10">其他</a> <span>
 				</div>
-				</div>		
+				</div>
 		<div class="topsearch">
 			<div class="topsearchbox">
 			<form method="get" action="<{$weburl}>/index.php">
@@ -25,8 +26,9 @@
 	<ul class="clearfix">
 <{foreach from=$partlist key=key item=part}>
 <li><a href="<{if $part.c_target==2}><{$part.c_url}><{else}><{$part.c_url}><{/if}>" title="<{$part.c_name}>" <{if $menustate==$part.c_id}>class="here"<{/if}> <{if $part.c_target==2}>target="_blank"<{/if}>><{$part.c_name}></a></li>
-<{/foreach}>	
+<{/foreach}>
 	</ul>
 </div>
 </div>
 <div class="ads"></div>
+<{/if}>

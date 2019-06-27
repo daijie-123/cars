@@ -428,7 +428,8 @@ elseif ($ac == 'addcar' || $ac == 'editcar') {
 		$select_year = select_make($data['p_year'], $array_year, '请选择年份');
 		$select_color = select_make($data['p_color'], $array_color, '请选择颜色');
 		$select_month = select_make($data['p_month'], array('01' => '01月', '02' => '02月', '03' => '03月', '04' => '04月', '05' => '05月', '06' => '06月', '07' => '07月', '08' => '08月', '09' => '09月', '10' => '10月', '11' => '11月', '12' => '12月'), '请选择月份', '');
-		$select_gas = select_make($data['p_gas'], $array_gas, '车辆属性');
+        // $select_gas = select_make($data['p_gas'], $array_gas, '车辆属性');
+        $select_gas = select_make($data['p_gas'], $commoncache['gaslist'], '排量');
 		$select_transmission = select_make($data['p_transmission'], $array_transmission, '请选择变速箱');
 		$select_country = select_make($data['p_country'], array('国产' => '国产', '进口' => '进口'), '请选择');
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>会员中心 - <{$setting.title}></title>
+<title>商家中心 - <{$setting.title}></title>
 <meta content="<{$setting.keywords}>"  name="keywords"/>
 <meta content="<{$setting.description}>" name="description"/>
 <script type="text/javascript" src="/static/js/jquery.js"></script>
@@ -35,10 +35,10 @@ $(document).ready(function() {
 <div class="userhead">
 	<div class="usertop">
 		<div class="usertop_left">
-			会员中心
+			商家中心
 		</div>
 		<div class="usertop_right">
-		<{if $smarty.session.USER_NAME<>''}><{$smarty.session.USER_NAME}>| <a href='<{$weburl}>/index.php?m=user'>会员中心</a> |  <a href="<{$weburl}>/index.php?m=shop&id=<{$user.id}>" target="_blank">我的店铺</a> | <a href='<{$weburl}>/index.php?m=user&a=logout'>退出</a> | <a href='<{$weburl}>/'>选车中心</a>  | <a href='/'>泉州汽车首页</a> <{/if}>
+		<{if $smarty.session.USER_NAME<>''}><{$smarty.session.USER_NAME}>| <a href='<{$weburl}>/index.php?m=user'>商家中心</a> | <a href='<{$weburl}>/index.php?m=user&a=logout'>退出</a><{/if}>
 		</div>
 	</div>
 </div>

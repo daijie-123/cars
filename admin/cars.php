@@ -123,7 +123,7 @@ if ($ac == 'list') {
     $tpl->assign('arr_gas', $arr_g);
     $arr_b = arr_brand_recom();
     $tpl->assign('arr_brand', $arr_b);
-    $arr_t = array('1' => '特荐', '2' => '推荐', '3' => '热门');
+    $arr_t = array('1' => '精选', '2' => '优选', '3' => '热门');
     $tpl->assign('arr_recom', $arr_t);
     $arr_s = array('1' => '未卖', '2' => '已卖');
     $tpl->assign('arr_status', $arr_s);

@@ -10,11 +10,11 @@
 <body>
 <div class="colorarea01">
 <div class="search clearfix">
-	<!-- <div class="searchL">
+	<div class="searchL">
 		<ul class="menulist">
-			<li><a href="<{$adminpage}>?m=member&a=add" class="add">添加会员</a></li>
+			<li><a href="<{$adminpage}>?m=dealer&a=add" class="add">添加商家</a></li>
 		</ul>
-	</div> -->
+	</div>
 	<div class="searchR">
 		<form action="<{$adminpage}>" method="get" name="form2">
 		<table cellspacing="0" cellpadding="0" class="toptable">
@@ -25,7 +25,7 @@
 							<{$select_isdealer}>
 						</select>
                     </span> -->
-                    用户名：
+                    商家公司名称：
 					<input type="text" name="keywords" id="searchkey" value="" class="inp01"> &nbsp;<input type="submit" name="filtersubmit" value="查询" class="combutton02"><input type="hidden" name="m" value="member">
 					<input type="hidden" name="a" value="list">
 				</td>
@@ -34,7 +34,7 @@
 		</form>
 	</div>
 </div>
-<form action="<{$adminpage}>?m=member" method="post" name="form">
+<form action="<{$adminpage}>?m=dealer" method="post" name="form">
 <table cellspacing="0" cellpadding="0" width="100%"  class="listtable">
 <tr><th>选择</th><th>ID</th><th>用户名</th><th>邮箱</th><th>联系人</th><{if $setting.version==30}><th>城市</th><{/if}><th>会员类型</th><th>状态</th><th>注册时间</th><th>操作</th></tr>
 <{foreach from=$userlist item=user}>
@@ -50,15 +50,15 @@
 <td align="center"><{if $user.isdealer==2}>商家<{else}>个人<{/if}></td>
 <td align="center"><{if $user.isdealer==2}><{if $user.ischeck==1}>已通过审核<{else}><span class="orange01">未通过审核</span><{/if}><{else}>--<{/if}></td>
 <td align="center"><{$user.regtime}></td>
-<td width="150" align="center" class="rightmenu"><a href="<{$adminpage}>?m=member&a=edit&id=<{$user.id}>&page=<{$page}>">编辑</a> | <a href="javascript:if(confirm('确实要删除吗?'))location='<{$adminpage}>?m=member&a=del&id=<{$user.id}>&page=<{$page}>'">删除</a>
-     <!-- | <a href="<{$adminpage}>?m=member&a=edit&id=<{$user.id}>">审核</a> -->
+<td width="150" align="center" class="rightmenu"><a href="<{$adminpage}>?m=dealer&a=edit&id=<{$user.id}>&page=<{$page}>">编辑</a> | <a href="javascript:if(confirm('确实要删除吗?'))location='<{$adminpage}>?m=dealer&a=del&id=<{$user.id}>&page=<{$page}>'">删除</a>
+    <!-- | <a href="<{$adminpage}>?m=dealer&a=edit&id=<{$user.id}>">审核</a> -->
 </td>
 </tr>
 <{/foreach}>
 <tr>
     <td colspan="11" class="buttontd" style="text-align:left;">
 	<a href="javascript:javascript:selectAll();" title="请选择后操作">全选</a>
-    <a href="javascript:submitForm('<{$adminpage}>?m=member&a=bulkdel&page=<{$page}>','删除');" title="请选择后操作">删除</a>
+    <a href="javascript:submitForm('<{$adminpage}>?m=dealer&a=bulkdel&page=<{$page}>','删除');" title="请选择后操作">删除</a>
 	</td>
 </tr>
 </table>

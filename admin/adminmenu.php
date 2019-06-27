@@ -5,21 +5,23 @@
 		<li><a href="<?php echo WEB_PATH?>?m=brand&a=list" target="report_iframe">品牌管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=carmodel&a=list" target="report_iframe">车型管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=model&a=list" target="report_iframe">级别管理</a></li>
-		<li><a href="<?php echo WEB_PATH?>?m=cars&a=list&clear=1" target="report_iframe">车源列表</a></li>
-		<li><a href="<?php echo WEB_PATH?>?m=assesscars&a=list" target="report_iframe">车源评估</a></li>
+        <li><a href="<?php echo WEB_PATH?>?m=cars&a=list&clear=1" target="report_iframe">车源列表</a></li>
+
+        <!-- <li><a href="<?php echo WEB_PATH?>?m=assesscars&a=list" target="report_iframe">车源评估</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=buycars&a=list" target="report_iframe">求购信息</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=subscribe&a=list" target="report_iframe">预约看车</a></li>
-		<li><a href="<?php echo WEB_PATH?>?m=appointment_sell&a=list" target="report_iframe">预约卖车</a></li>
-		<li><a href="<?php echo WEB_PATH?>?m=inquiry&a=list" target="report_iframe">询价管理</a></li>
+        <li><a href="<?php echo WEB_PATH?>?m=inquiry&a=list" target="report_iframe">询价管理</a></li> -->
+
+        <li><a href="<?php echo WEB_PATH?>?m=appointment_sell&a=list" target="report_iframe">预约卖车</a></li>
 	</ul>
 </div>
-<div class="sidebar">
+<!-- <div class="sidebar">
 	<h3><span class="title">租车管理</span></h3>
 	<ul class="hide">
 		<li><a href="<?php echo WEB_PATH?>?m=rentmodel&a=list" target="report_iframe">级别管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=rentcars&a=list&clear=1" target="report_iframe">车源列表</a></li>
 	</ul>
-</div>
+</div> -->
 <div class="sidebar">
 	<h3><span class="title">活动管理</span></h3>
 	<ul class="hide">
@@ -27,22 +29,29 @@
 		<li><a href="<?php echo WEB_PATH?>?m=activity&a=add" target="report_iframe">添加活动</a></li>
 	</ul>
 </div>
-<div class="sidebar">
+<!-- <div class="sidebar">
 	<h3><span class="title">新闻管理</span></h3>
 	<ul class="hide">
 		<li><a href="<?php echo WEB_PATH?>?m=news_category&a=list" target="report_iframe">分类管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=news&a=list" target="report_iframe">新闻管理</a></li>
 	</ul>
-</div>
+</div> -->
 <div class="sidebar">
 	<h3><span class="title">会员管理</span></h3>
 	<ul class="hide">
 		<li><a href="<?php echo WEB_PATH?>?m=member&a=list" target="report_iframe">会员管理</a></li>
-		<li><a href="<?php echo WEB_PATH?>?m=dealer_category&a=list" target="report_iframe">商家类型管理</a></li>
+		<!-- <li><a href="<?php echo WEB_PATH?>?m=dealer_category&a=list" target="report_iframe">商家类型管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=member_dealer&a=list" target="report_iframe">销售代表管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=member_news&a=list" target="report_iframe">促销信息管理</a></li>
-		<li><a href="<?php echo WEB_PATH?>?m=member_ask&a=list" target="report_iframe">问答管理</a></li>
+		<li><a href="<?php echo WEB_PATH?>?m=member_ask&a=list" target="report_iframe">问答管理</a></li> -->
 		<li><a href="<?php echo WEB_PATH?>?m=member_safeguard&a=list" target="report_iframe">维权管理</a></li>
+	</ul>
+</div>
+<div class="sidebar">
+	<h3><span class="title">商家管理</span></h3>
+	<ul class="hide">
+		<li><a href="<?php echo WEB_PATH?>?m=dealer&a=list" target="report_iframe">商家管理</a></li>
+		<li><a href="<?php echo WEB_PATH?>?m=dealer_category&a=list" target="report_iframe">商家类型管理</a></li>
 	</ul>
 </div>
 <div class="sidebar">
@@ -75,12 +84,12 @@
 		<li><a href="<?php echo WEB_PATH?>?m=flink&a=list" target="report_iframe">友情链接</a></li>
 	</ul>
 </div>
-<div class="sidebar">
+<!-- <div class="sidebar">
 	<h3><span class="title">模版管理</span></h3>
 	<ul class="hide">
 		<li><a href="<?php echo WEB_PATH?>?m=templates_category&a=list" target="report_iframe">模版管理</a></li>
 	</ul>
-</div>
+</div> -->
 <div class="sidebar">
 	<h3><span class="title">系统设置</span></h3>
 	<ul class="hide">

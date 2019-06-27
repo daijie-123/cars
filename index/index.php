@@ -1,5 +1,7 @@
 <?php
 if (!defined('APP_IN')) exit('Access Denied');
+// header("Location: /{$admin_url}");exit;
+redirect('',"/?m=login");
 
 $tpl -> assign('menustate', 1);
 
@@ -35,20 +37,20 @@ if($settings['version']==2 or $settings['version']==3){
 
 	//个人推荐二手车
 	$carlist['grcar'] = get_carlist($_COOKIE['city'],"isrecom=1 and issell=0  and isshow=1 and (uid in( select id from " . $db_config['TB_PREFIX'] . "member where isdealer=1) or uid=0)", '8', 'listtime desc');
-	$tpl -> assign('car_list', $carlist); 
+	$tpl -> assign('car_list', $carlist);
 
 	// 推荐商家
 	$tpl -> assign('comdealer', get_comshop($_COOKIE['city']));
 
 	// 热门商家
-	$tpl -> assign('hotdealer', get_hotshop($_COOKIE['city'])); 
+	$tpl -> assign('hotdealer', get_hotshop($_COOKIE['city']));
 }
 else{
 	//个人推荐二手车
 	$carlist['grcar'] = get_carlist($_COOKIE['city'],"isrecom=1 and issell=0 and p_mainpic!='' and isshow=1", '8', 'listtime desc');
 }
 
-$tpl -> assign('car_list', $carlist); 
+$tpl -> assign('car_list', $carlist);
 
 
 // 热门关键词

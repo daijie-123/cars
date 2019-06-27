@@ -2,26 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>会员注册_泉州汽车网|泉州二手车|泉州车市|泉州汽车报价|泉州汽车团购服务_泉州汽车网_QZQCW.COM</title>
-<meta name="keywords" content="泉州汽车网,泉州二手车,泉州车市,泉州汽车报价,泉州汽车团购服务,泉州二手汽车,泉州二手车网,泉州二手车市场,泉州旧车,泉州卖车,泉州买车,泉州购车,泉州二手车价格,泉州二手车参考价,泉州经销商,泉州二手车报价,泉州二手货车,泉州二手面包车,泉州二手出租车,泉州二手车求购,泉州二手车置换,泉州二手车评估,泉州二手车保险,泉州二手车检测,泉州二手车资讯,泉州二手车新闻,泉州二手车杂志,泉州二手车网，泉州汽车网,泉州二手车,泉州二手车网,大泉州二手车,泉州二手估价,泉州二手买卖,二手车报价,二手车交易市场,大泉州汽车网" />
-<meta name="description" content="泉州汽车网,泉州二手车,泉州车市,泉州汽车报价,泉州汽车团购服务,泉州二手汽车,泉州二手车网,泉州二手车市场,泉州旧车,泉州卖车,泉州买车,泉州购车,泉州二手车价格,泉州二手车参考价,泉州经销商,泉州二手车报价,泉州二手货车,泉州二手面包车,泉州二手出租车,泉州二手车求购,泉州二手车置换,泉州二手车评估,泉州二手车保险,泉州二手车检测,泉州二手车资讯,泉州二手车新闻,泉州二手车杂志,泉州二手车网，泉州汽车网,泉州二手车,泉州二手车网,大泉州二手车,泉州二手估价,泉州二手买卖,二手车报价,二手车交易市场,大泉州汽车网" />
+		<title>会员注册</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
 		<link href="/css/css/user.css" rel="stylesheet" type="text/css"/>
 		<script type="text/javascript" src="/static/js/jquery.js"></script>
 		<script type="text/javascript" src="/static/js/Validform_v5.3.2_min.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function() {
 			//城市选择
-			<{if $setting.version==3}>	
+			<{if $setting.version==30}>
 			$("#province").bind("change", function(){
-				$.get("/?m=ajax&ajax=1", { 
-					cityid :  $("#province").val() 
+				$.get("/?m=ajax&ajax=1", {
+					cityid :  $("#province").val()
 				}, function (data, textStatus){
 					$("#city").html(data); // 把返回的数据添加到页面上
 				}) ;
 			})   ;
 			$("#province2").bind("change", function(){
-				$.get("/?m=ajax&ajax=1", { 
-					cityid :  $("#province2").val() 
+				$.get("/?m=ajax&ajax=1", {
+					cityid :  $("#province2").val()
 				}, function (data, textStatus){
 					$("#city2").html(data); // 把返回的数据添加到页面上
 				}) ;
@@ -43,15 +43,15 @@
 	<body>
 		<!--内容-->
 		<{include file="default/`$setting.templates`/head.html"}>
-		<div class="login_main mt10 clearfix">
+		<div class="login_main mt10 clearfix" style="margin-top: 100px;">
 			<div class="login_left">
-				<div class="title">注册</div>
-				<ul class="clearfix reg_tab">
+				<div class="title">商家注册</div>
+				<!-- <ul class="clearfix reg_tab">
 					<li class="here">个人注册</li>
 					<li>商家注册</li>
-				</ul>
+				</ul> -->
 				<div class="regbox mt20">
-					<div>
+					<div  class="hide">
 					<form name="loginform" class="resform" id="loginform" method="post" action="/?m=register" >
 					<table class="logintable">
 						<tr>
@@ -62,7 +62,7 @@
 							<th>密码：</th>
 							<td><input type="password"  name="password" class="inp01"/></td>
 						</tr>
-						<{if $setting.version==3}>
+						<{if $setting.version==30}>
 						<tr>
 						<th> 所在城市：</th>
 						<td colspan="3">
@@ -94,7 +94,7 @@
 					</table>
 					</form>
 					</div>
-					<div class="hide">
+					<div>
 						<form name="loginform" class="resform" id="loginform" method="post" action="/?m=register" >
 						<table class="logintable">
 						<tr>
@@ -105,7 +105,7 @@
 							<th>密码：</th>
 							<td><input type="password"  name="password" class="inp01"/></td>
 						</tr>
-						<{if $setting.version==3}>
+						<{if $setting.version==30}>
 						<tr>
 						<th> 所在城市：</th>
 						<td colspan="3">
@@ -152,11 +152,11 @@
 				</div>
 			</div>
 			<div class="login_right">
-				<p class="f14 mt20">已是泉州汽车网会员？</p>
+				<p class="f14 mt20">已是<{$cache.settings.sitename}>商家会员？</p>
 				<p class="mt20"><a href="/?m=login" class="register_but">我要登录</a></p>
 			</div>
 		</div>
 		<!--版权-->
-		<{include file="default/`$setting.templates`/foot.html"}>
+		<{*include file="default/`$setting.templates`/foot.html"*}>
 	</body>
 </html>
