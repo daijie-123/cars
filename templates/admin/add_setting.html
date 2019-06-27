@@ -118,11 +118,11 @@
 			<th>网站description：</th>
 			<td><textarea name="description" rows="5" cols="90" class="textarea01"><{$setting.description}></textarea></td>
 		</tr>
-		<tr>
+		<!-- <tr>
 			<th>上传网站logo：</th>
 			<td><input type="text" name="logo" id="url2" value="<{$setting.logo}>" />
 					<input type="button" id="image2" value="选择图片" /> <span class="gray01">[280px*70px]</span></td>
-		</tr>
+		</tr> -->
 		<tr>
 			<th>开启水印：</th>
 		<td><input type="radio" name="water" onclick="register2(1);"  value="1" <{if $setting.water==1}>checked<{/if}>> 是&nbsp;&nbsp;水印位置：<select id="count2" name="position"  <{if $setting.water==0}>disabled="disabled"<{/if}> ><option value="1" <{if $setting.position==1}>selected="selected"<{/if}>>左上</option><option value="2" <{if $setting.position==2}>selected="selected"<{/if}>>左下
@@ -153,14 +153,14 @@
 				<input type="text" size="5" name="imgheight" <{if $setting.imgwidth!=''}>value="<{$setting.imgwidth}>"<{else}>value="600"<{/if}>></td>
 		</tr>
 		<{if $setting.version!=1}>
-        <tr>
+        <!-- <tr>
 			<th>限制个人发布二手车：</th>
             <td>
             <input type="radio" name="islimit" onclick="register(1);" value="1" <{if $setting.islimit==1}>checked<{/if}>> 是
             <input type="text" id="count" name="limitcount"  size="5" value="<{$setting.limitcount}>"  <{if $setting.islimit==0}>disabled="disabled"<{/if}>>条
             <input type="radio" name="islimit" onclick="register(2);" value="0" <{if $setting.islimit==0}>checked<{/if}>> 否
             </td>
-		</tr>
+		</tr> -->
 		<{/if}>
 		<{/if}>
 		<{if $ac=="contact"}>

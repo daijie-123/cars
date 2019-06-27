@@ -35,18 +35,18 @@ if ($ac == 'list') {
 	$tpl -> assign('button_select', $button_select);
 	$tpl -> display('admin/admingroup_list.html');
 	exit;
-} 
+}
 // 单条删除
 elseif ($ac == 'del') {
 	$id = isset($_GET['id']) ? intval($_GET['id']) : showmsg('缺少ID', -1);
 	$rs = $db -> row_delete('admingroup', "id=$id");
-} 
+}
 // 批量删除
 elseif ($ac == 'bulkdel') {
 	if (empty($_POST['bulkid'])) showmsg('没有选中任何项', -1);
 	$str_id = return_str_id($_POST['bulkid']);
 	$rs = $db -> row_delete('admingroup', "id in($str_id)");
-} 
+}
 // 添加
 elseif ($ac == 'add' || $ac == 'edit') {
 	// 添加或修改
@@ -59,26 +59,26 @@ elseif ($ac == 'add' || $ac == 'edit') {
 			$str_permission = '';
 			foreach ($_POST['permission'] as $v) {
 				$str_permission .= intval($v) . ',';
-			} 
+			}
 			$post['permission'] = rtrim($str_permission, ',');
-		} 
-		
+		}
+
 		if ($ac == 'add') {
 			$rs = $db -> row_insert('admingroup', $post);
 		} else {
 			$rs = $db -> row_update('admingroup', $post, "id=" . intval($_POST['id']));
-		} 
-	} 
+		}
+	}
 	// 转向添加或修改页面
 	else {
-		$rs_permission = $db -> row_select('permission');
+		$rs_permission = $db -> row_select('permission', 'enable=1');
 		$arr_permission = array();
 		if (empty($_GET['id'])) $data = array('id' => '', 'groupname' => '');
 		else {
 			$data = $db -> row_select_one('admingroup', "id=" . intval($_GET['id']));
 			if (!$data) showmsg('错误的ID', -1);
 			$arr_permission = explode(',', $data['permission']);
-		} 
+		}
 		$permissionlist = "<div class='permissionbox'>";
 		foreach ($rs_permission as $val) {
 			if ($val['pid'] != 0) continue;
@@ -90,22 +90,22 @@ elseif ($ac == 'add' || $ac == 'edit') {
 				$checked = '';
 				if (in_array($v['id'], $arr_permission)) $checked = 'checked';
 				$permissionlist .= "<input type=checkbox name=permission[] value={$v['id']} $checked class='pid_{$v['pid']}'> {$v['name']}&nbsp;&nbsp;&nbsp;";
-			} 
+			}
 			$permissionlist .= "</div>";
 			$permissionlist .= "</div>";
-		} 
+		}
 		$permissionlist .= "</div>";
 		$tpl -> assign('permissionlist', $permissionlist);
 
 		$tpl -> assign('admin', $data);
 		$tpl -> display('admin/add_admingroup.html');
 		exit;
-	} 
-} 
+	}
+}
 // 默认操作
 else {
 	showmsg('非法操作', -1);
-} 
+}
 
 showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), ADMIN_PAGE."?m=$m&a=list");
 ?>

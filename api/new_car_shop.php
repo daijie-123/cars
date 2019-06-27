@@ -26,7 +26,7 @@ if ($ac == 'index') {
             $shop['lat'] = 0;
             $shop['lon'] = 0;
         }
-        $shop['logo'] = upload_url_modify($shop['logo'], 's');
+        $shop['logo'] = upload_url_modify($shop['logo']);
         $shop['on_sale_count'] = $db->row_count('cars', 'uid=' . $shop['id'] . ' and issell=0 and isshow=1');
     }
     $total_num = $Page->total_num;

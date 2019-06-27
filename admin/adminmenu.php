@@ -54,7 +54,7 @@
 		<li><a href="<?php echo WEB_PATH?>?m=dealer_category&a=list" target="report_iframe">商家类型管理</a></li>
 	</ul>
 </div>
-<div class="sidebar">
+<!-- <div class="sidebar">
 	<h3><span class="title">生成静态</span></h3>
 	<ul class="hide">
 		<li><a href="<?php echo WEB_PATH?>?m=create_html&a=cars" target="report_iframe">更新二手车</a></li>
@@ -63,25 +63,26 @@
 		<li><a href="<?php echo WEB_PATH?>?m=create_html&a=news" target="report_iframe">更新新闻</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=create_html&a=page" target="report_iframe">更新单页</a></li>
 	</ul>
-</div>
+</div> -->
 <div class="sidebar">
 	<h3><span class="title">模块管理</span></h3>
 	<ul class="hide">
-		<li><a href="<?php echo WEB_PATH?>?m=area&a=list" target="report_iframe">省市管理</a></li>
+		<!-- <li><a href="<?php echo WEB_PATH?>?m=area&a=list" target="report_iframe">省市管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=channel&a=list" target="report_iframe">栏目管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=page&a=list" target="report_iframe">单页管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=feedback&a=list&typeid=1" target="report_iframe">留言管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=ad&a=list" target="report_iframe">广告管理</a></li>
         <li><a href="<?php echo WEB_PATH?>?m=keywords&a=list" target="report_iframe">关键词管理</a></li>
-		<li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=1" target="report_iframe">首页轮播广告</a></li>
+		<li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=1" target="report_iframe">首页轮播广告</a></li> -->
 		<!-- <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=2" target="report_iframe">手机轮播广告</a></li> -->
-        <!-- <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=3" target="report_iframe">周末集市轮播广告</a></li> -->
+        <!-- <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=3" target="report_iframe">周末集市轮播广告</a></li>
+    	<li><a href="<?php echo WEB_PATH?>?m=flink&a=list" target="report_iframe">友情链接</a></li> -->
         <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=4" target="report_iframe">首页轮播图</a></li>
         <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=5" target="report_iframe">新车页轮播图</a></li>
         <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=6" target="report_iframe">维权专区页轮播图</a></li>
         <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=7" target="report_iframe">金标公益轮播图</a></li>
         <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=8" target="report_iframe">自驾俱乐部轮播图</a></li>
-		<li><a href="<?php echo WEB_PATH?>?m=flink&a=list" target="report_iframe">友情链接</a></li>
+
 	</ul>
 </div>
 <!-- <div class="sidebar">
