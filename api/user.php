@@ -61,7 +61,7 @@ elseif($ac == 'save_safeguard'){
     $post['car_allname'] = brand_full_name($post['subbrand_id']);
     $post['user_id'] = $userinfo['id'];
     $post['status'] = 1;
-    $post['pics'] = json_encode($post['pics']);
+    $post['pics'] = $post['pics'];
     $post['self_assessment'] = htmlspecialchars($post['self_assessment']);
     $post['addtime'] = TIMESTAMP;
     $rs = $db->row_insert('member_safeguard', $post);
