@@ -4,7 +4,7 @@
 
 /*全站链接样式*/
 a{ color:#333; text-decoration:none;}
-a:hover{ color:#ff6600; text-decoration:none;} 
+a:hover{ color:#ff6600; text-decoration:none;}
 .blank{height:10px;}
 body{ color:#333; font-size:14px;}
 .blank{ height:10px;}
@@ -36,7 +36,7 @@ a.register_but:hover{color:#fff;}
 
 
 /*会员中心*/
-.userhead{height:45px;background:#fc7000;}
+.userhead{height:45px;background:rgb(0, 78, 251);}
 .userhead .usertop{margin-left:auto;margin-right:auto;width:1200px;line-height:45px;color:#fff;}
 .userhead .usertop .usertop_left{float:left;width:200px;font-size:18px;}
 .userhead .usertop .usertop_right{float:right;width:500px;text-align:right;font-weight:bold;}
@@ -89,7 +89,7 @@ a.register_but:hover{color:#fff;}
 .maintable .inp01{border:1px solid #d8d8d8;height:35px;line-height:35px;}
 .maintable .textarea01{border:1px solid #d8d8d8;}
 .buttons {clear:both;text-align:center;}
-.buttons input{display:block;width:100px;font-size:16px;font-family:"微软雅黑";font-weight:bold;padding:8px 0;text-align:center;color:#fff;background:#fd6f01;border:none;}
+.buttons input{display:block;width:100px;font-size:16px;font-family:"微软雅黑";font-weight:bold;padding:8px 0;text-align:center;color:#fff;background:rgb(0, 78, 251);border:none;}
 
 .uploadbut02{width:80px;height:25px;font-size:14px;font-weight:bold;text-align:center;color:#fff;background:#fd6f01;border:none;font-family:"微软雅黑";}
 

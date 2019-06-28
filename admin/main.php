@@ -59,7 +59,7 @@
 <div class="mainw">
 	<div class="main">
 		<div class="mainleft">
-			<div class="mt20"></div>
+			<!-- <div class="mt20"></div> -->
             <?php include('adminmenu.php');?>
 		</div>
 		<div class="mainright">
