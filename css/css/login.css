@@ -1,0 +1,114 @@
+.m-login {
+  width: 100%;
+  height: 100%;
+}
+.m-login .login-contaner {
+  width: 1180px;
+  height: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+.m-login .login-header {
+  width: 100%;
+  height: 12%;
+}
+.m-login .login-header .login-contaner {
+  padding-top: 1.2%;
+}
+.m-login .login-header .login-contaner img {
+  display: inline-block;
+}
+.m-login .login-header .login-contaner p {
+  position: relative;
+  top: 12px;
+  font-size: 24px;
+  display: inline-block;
+}
+.m-login .login-content {
+  width: 100%;
+  height: 76%;
+}
+.m-login .login-content .banner {
+  position: absolute;
+  left: 50%;
+  margin-left: -960px;
+  width: 1920px;
+  min-height: 100%;
+  height: 100%;
+}
+.m-login .login-content .loginBox {
+  padding: 25px 35px;
+  width: 336px;
+  height: 340px;
+  background: #fff;
+  z-index: 999;
+  position: absolute;
+  top: 15%;
+  right: 20px;
+}
+.m-login .login-content .loginBox h2 {
+  font-size: 24px;
+  text-align: center;
+  color: #204ff6;
+  margin-bottom: 30px;
+}
+.m-login .login-content .loginBox .loginBox-li {
+  height: 58px;
+  line-height: 58px;
+  padding: 0 10px;
+  font-size: 16px;
+  border-bottom: 1px solid #eeeeee;
+}
+.m-login .login-content .loginBox .loginBox-li input {
+  border: 0;
+  font-size: 16px;
+  height: 53px;
+  line-height: 56px;
+  outline: none;
+}
+.m-login .login-content .loginBox .checkWapper {
+  /* display: flex; */
+  margin: 20px 0;
+  padding-left: 10px;
+  text-align: right;
+}
+.m-login .login-content .loginBox .checkWapper input {
+  outline: none;
+  position: relative;
+  top: 5px;
+  margin-right: 5px;
+}
+.m-login .login-content .loginBox .checkWapper a {
+    color: #204ff6;
+    /* position: absolute;
+    right: 0;
+    top: 0; */
+  }
+.m-login .login-content .loginBox button {
+  outline: none;
+  background: #204ff6;
+  border: 0;
+  color: #fff;
+  width: 100%;
+  border-radius: 5px;
+  height: 38px;
+  line-height: 38px;
+  text-align: center;
+  /* margin-top: 50px; */
+}
+.m-login .login-footer {
+  width: 100%;
+  height: 12%;
+  text-align: center;
+  font-size: 16px;
+  padding-top: 2.4%;
+}
+@media screen and (max-width: 1366px) {
+  .m-login .login-header {
+    width: 100%;
+    height: 12%;
+  }
+  .m-login .login-header .login-contaner {
+    padding-top: .7%;
+  }
+}

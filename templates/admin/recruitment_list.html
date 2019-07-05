@@ -11,7 +11,7 @@
 	<div class="search clearfix">
 		<div class="searchL">
 			<ul class="menulist">
-				<li><a href="<{$adminpage}>?m=news&a=add" class="add">添加新闻</a></li>
+				<li><a href="<{$adminpage}>?m=dealer_recruitment&a=add" class="add">添加招聘</a></li>
 			</ul>
 		</div>
 		<div class="searchR">
@@ -27,35 +27,32 @@
 		</form>
 		</div>
 	</div>
-	<form action="<{$adminpage}>?m=news" method="POST" name="form">
+	<form action="<{$adminpage}>?m=dealer_recruitment" method="POST" name="form">
 	<table cellspacing="0" cellpadding="0" class="listtable">
 	<tr>
 		<th width="30">选择</th>
 		<th width="30">ID</th>
-		<th>标题</th>
-		<th>分类</th>
+		<th>招聘标题</th>
+		<th>公司</th>
 		<th>发布时间</th>
-		<th>浏览</th>
 		<th width="160">操作</th>
 	</tr>
-	<{foreach from=$newslist item=news}>
+	<{foreach from=$recruitmentlist item=recruitment}>
 	<tr>
-		<td align="center"><input type="checkbox" name="bulkid[]" value="<{$news.n_id}>"></td>
-		<td align="center"><{$news.n_id}></td>
-		<td><a _href="<{$htmldir}>news/<{$news.n_date}>/<{$news.n_id}>.html" target="_blank"/><{$news.n_title}></a> <{if $news.n_pic<>''}><span class="red">图</span><{/if}> <{if $news.isrecom==1}><span class="red">推荐</span><{/if}>  </td>
-		<td align="center"><{$news.n_category}></td>
-		<td align="center"><{$news.n_addtime}></td>
-		<td align="center" class="orange01"><{$news.n_hits}></td>
+		<td align="center"><input type="checkbox" name="bulkid[]" value="<{$recruitment.id}>"></td>
+		<td align="center"><{$recruitment.id}></td>
+		<td align="center"><{$recruitment.title}></td>
+		<td align="center"><{$recruitment.company}></td>
+		<td align="center"><{$recruitment.addtime|date_format:"%Y-%m-%d %H:%M"}></td>
 		<td align="center" class="rightmenu">
-            <!-- <a href="<{$adminpage}>?m=news&a=html&id=<{$news.n_id}>&page=<{$page}>" class="html">生成静态</a> | -->
-            <a href="<{$adminpage}>?m=news&a=edit&id=<{$news.n_id}>&page=<{$page}>" class='edit'>编辑</a> | <a href="javascript:if(confirm('确实要删除吗?'))location='<{$adminpage}>?m=news&a=del&id=<{$news.n_id}>&page=<{$page}>'" class="del">删除</a>
+            <a href="<{$adminpage}>?m=dealer_recruitment&a=edit&id=<{$recruitment.id}>&page=<{$page}>" class='edit'>编辑</a> | <a href="javascript:if(confirm('确实要删除吗?'))location='<{$adminpage}>?m=dealer_recruitment&a=del&id=<{$recruitment.n_id}>&page=<{$page}>'" class="del">删除</a>
 	</td>
 	</tr>
 	<{/foreach}>
 	<tr>
 		<td colspan="9" class="buttontd" style="text-align:left;">
 			<a href="javascript:javascript:selectAll();" title="请选择后操作">全选</a>
-			<a href="javascript:submitForm('<{$adminpage}>?m=news&a=bulkdel&page=<{$page}>','删除');" title="请选择后操作">删除</a>
+			<a href="javascript:submitForm('<{$adminpage}>?m=dealer_recruitment&a=bulkdel&page=<{$page}>','删除');" title="请选择后操作">删除</a>
 		</td>
 	</tr>
 	</table>

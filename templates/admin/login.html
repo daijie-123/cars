@@ -1,60 +1,76 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
-<title></title>
-<link href="static/css/admin/login.css" rel="stylesheet" type="text/css" />
-<SCRIPT LANGUAGE="JavaScript">
-<!--
-function checknull()
-{
-	if(document.form1.username.value=='')
-		{
-		alert("请输入用户名");
-		document.form1.username.focus();
-		return false;
-		}
-    else if(document.form1.password.value=='')
-		{
-		alert("请输入密码");
-		document.form1.password.focus();
-		return false;
-		}
-	else{
-		window.document.form1.submit();
-		}
+<!DOCTYPE html>
+<html lang="en">
 
-}
-function onkeypressed()
-{
-	if(event.keyCode==13)
-	{
-		checknull();
-	}
-}
-//-->
-</SCRIPT>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/css/public.css">
+    <link rel="stylesheet" href="/css/css/login.css">
+    <title>
+        <{$cache.settings.sitename}>
+    </title>
+    <script src="/static/js/jquery.js"></script>
+    <!-- <script src="../lib/common/flexible.js"></script> -->
+    <script type="text/javascript" src="/static/js/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript">
+        function checknull() {
+            if (document.form1.username.value == '') {
+                alert("请输入用户名");
+                document.form1.username.focus();
+                return false;
+            } else if (document.form1.password.value == '') {
+                alert("请输入密码");
+                document.form1.password.focus();
+                return false;
+            } else {
+                window.document.form1.submit();
+            }
+
+        }
+    </script>
 </head>
+
 <body>
- <form name="form1" method="post" action="<{$adminpage}>?m=login">
- <div id="warp">
-	 <div id="login">
-		<div id="right">
-			<p>
-				<input type="text" name="username" class="input1 username">
-			</p>
-			<p>
-				<input type="password" name="password" class="input1 password">
-			</p>
-			<!-- <p class="clearfix">
-				<input type="text" name="authcode" class="input2"> <img src="<{$weburl}>/include/kcaptcha/" width="100" height="45" onclick="this.src='<{$weburl}>/include/kcaptcha/?'+Math.random();" title="点击刷新验证码" align="absmiddle" style="cursor:pointer"/>
-			</p> -->
-			<p class="clearfix">
-				<input type="button" name="Submit" value="登 录" class="btn" onclick="checknull()">
-			</p>
-		</div>
-	 </div>
- </div>
- </form>
- </body>
- </html>
+    <div class="m-login">
+        <div class="login-header">
+            <div class="login-contaner">
+                <img src="/static/img/logo.png" alt="">
+                <p>青岛车生活</p>
+            </div>
+        </div>
+        <div class="login-content">
+            <div class="login-contaner">
+                <img class="banner" src="/static/img/banner.png" alt="">
+                <form name="form1" method="post" action="<{$adminpage}>?m=login">
+
+                    <div class="loginBox">
+                        <h2>欢迎登录</h2>
+                        <div class="loginBox-li">
+                            <!-- <input type="text" placeholder="请输入账号"> -->
+                            <input type="text" name="username" class="inp01" placeholder="请输入账号" />
+                        </div>
+                        <div class="loginBox-li">
+                            <input type="password" name="password" class="inp01" placeholder="请输入密码">
+                        </div>
+                        <!-- <div class="checkWapper">
+                        <input type="checkbox">
+                        记住用户名
+                    </div> -->
+                        <button type="submit" class="login_but" onclick="return checknull()" style="margin-top: 50px;">登陆</button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div class="login-footer">
+            <div class="login-contaner">
+                技术支持 青岛广电传媒电子商务有限公司
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

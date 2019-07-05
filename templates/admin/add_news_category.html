@@ -34,7 +34,7 @@ $(function() {
 				<th>名称</th>
 				<td><input name="catname" type="text"  size="30" value="<{$category.catname}>" datatype="s" nullmsg="请填写名称！"/></td>
 			</tr>
-         	<tr>
+         	<!-- <tr>
 			    <th>网站keywords：</th>
 			   <td><input name="keywords" type="text" size="50"  value="<{$category.keywords}>" /></td>
 		   </tr>
@@ -45,7 +45,7 @@ $(function() {
 			<tr>
 				<th>链接地址</th>
 				<td><input name="url" type="text"  size="60" value="<{$category.url}>" /></td>
-			</tr>
+			</tr> -->
 			<tr>
 				<th>是否显示</th>
 				<td><input type="radio" name="isshow" value="1" <{if $category.isshow==1 or $category.isshow==''}>checked<{/if}>> 是 <input type="radio" name="isshow" value="0" <{if $category.isshow==0 and $ac=='edit'}>checked<{/if}>> 否</td>

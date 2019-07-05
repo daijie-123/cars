@@ -39,8 +39,30 @@ $ac_get_arr = [];
 // 当前操作
 $ac = $_REQUEST['a'];
 request_method_check($ac, $ac_get_arr, $ac_post_arr);
-if($ac == ''){
+if($ac == 'my_apply'){
+    $page_size = isset($_REQUEST['page_size']) ? intval($_REQUEST['page_size']) : 20;
+    if(!in_array($_GET['type'], [1, 2])) splash('', 100, 'type参数不合法');
 
+    $where = "type={$_GET['type']}";
+    include(INC_DIR . 'Page.class.php');
+    $Page = new Page($db->tb_prefix . 'activity', $where, 'id,title,sub_title,start_time,end_time,detail,mainpic,apply_maximum,apply_start_time,apply_end_time', $page_size, 'id desc');
+    $list = $Page->get_data();
+    foreach ($list as &$activity) {
+        if ($activity['mainpic']) {
+            $activity['mainpic'] = upload_url_modify($activity['mainpic']);
+        }
+        // 已经申请的人数
+        $activity['apply_mum'] = $db->row_count('activity_user',"activity_id='{$activity['id']}'");
+    }
+    $total_num = $Page->total_num;
+    $current_page = $Page->page;
+    $total_page = $Page->total_page;
+    splash([
+        'data_list' => $list,
+        'total_num' => $total_num,
+        'current_page' => $current_page,
+        'total_page' => $total_page,
+    ]);
 }
 elseif($ac == 'save_safeguard'){
     $arr_not_empty = [

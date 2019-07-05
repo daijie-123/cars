@@ -7,6 +7,8 @@ $ac_get_arr = [
     'car_model_list' => '车型列表',
     'dealer_list' => '商家列表',
     'car_service' => '车管服务',
+    'agency_service' => '代办服务',
+    'check_login' => '是否登录',
 ];
 $ac_post_arr = [
     'collect' => '收藏'
@@ -95,7 +97,7 @@ if($ac == 'mark_brand_list'){
         'data_id' => '数据id不能为空',
         'collect' => '收藏操作不能为空',
     ];
-    api_can_not_be_empty($arr_not_empty, $_POST); 
+    api_can_not_be_empty($arr_not_empty, $_POST);
     if(!in_array($_POST['type'], ['car', 'activity'])) splash('', 100, 'type值不合法');
 
     $is_collect = $db->row_count('member_collect',"type='{$_POST['type']}' and data_id={$_POST['data_id']} and user_id={$_SESSION['USER_ID']}");
@@ -129,4 +131,28 @@ if($ac == 'mark_brand_list'){
             splash('', 0, '已取消收藏');
         }
     }
+}else if($ac == 'agency_service'){
+    $page_size = isset($_REQUEST['page_size']) ? intval($_REQUEST['page_size']) : 20;
+    $where = "1=1";
+    include(INC_DIR . 'Page.class.php');
+    $Page = new Page($db->tb_prefix . 'agency_service', $where, '*', $page_size, 'orderid desc, id desc');
+    $list = $Page->get_data();
+    foreach ($list as &$safeguard) {
+        if ($safeguard['logo']) {
+            $safeguard['logo'] = upload_url_modify($safeguard['logo']);
+        }
+    }
+    $total_num = $Page->total_num;
+    $current_page = $Page->page;
+    $total_page = $Page->total_page;
+    splash([
+        'data_list' => $list,
+        'total_num' => $total_num,
+        'current_page' => $current_page,
+        'total_page' => $total_page,
+    ]);
+}else if($ac == 'check_login'){
+    splash([
+        'is_login' => is_user_login() ? 1 : 0,
+    ]);
 }

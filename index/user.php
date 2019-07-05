@@ -46,7 +46,10 @@ if (!is_user_login()) showmsg('请先登陆', '/?mod=login');
 // 个人信息
 $userinfo = $db -> row_select_one('member', "id={$_SESSION['USER_ID']}");
 $userinfo['regtime'] = date("Y/m/d", $userinfo['regtime']);
-
+if(!$userinfo['lat'] || !$userinfo['lon']){
+    $userinfo['lat'] = 0;
+    $userinfo['lon'] = 0;
+}
 // 商铺统计
 $usercarcounts[0] = $db -> row_count('cars', 'uid=' . $_SESSION['USER_ID']);
 $usercarcounts[1] = $db -> row_count('cars', 'uid=' . $_SESSION['USER_ID'] . ' and issell=1');
@@ -198,7 +201,7 @@ elseif ($ac == 'upinfo') {
 // 修改店铺资料
 elseif ($ac == 'editshop') {
 	if (submitcheck('a')) {
-		$arr_not_empty = array('company' => '公司名称不能为空', 'nicname' => '联系人不能为空', 'mobilephone' => '手机号不能为空', 'address' => '公司地址不能为空');
+		$arr_not_empty = array('company' => '公司名称不能为空', 'nicname' => '联系人不能为空', 'mobilephone' => '手机号不能为空', 'address' => '公司地址不能为空', 'lat' => '请点选地址经纬度', 'lon' => '请点选地址经纬度');
 		can_not_be_empty($arr_not_empty, $_POST);
 		if (!preg_match('/^1\d{10}$/', $_POST['mobilephone'])) showmsg('错误的手机格式', -1);
 		$post = post('company', 'nicname', 'mobilephone', 'tel', 'address', 'shopdetail', 'shoptype');
@@ -207,7 +210,8 @@ elseif ($ac == 'editshop') {
 		$post['address'] = htmlspecialchars($post['address']);
 		$post['shopdetail'] = htmlspecialchars($post['shopdetail']);
 		$post['shoptype'] = intval($post['shoptype']);
-		$post['checkshop'] = 1;
+		$post['lat'] = $_POST['lat'];
+		$post['lon'] = $_POST['lon'];
 		$rs = $db -> row_update('member', $post, "id={$_SESSION['USER_ID']}");
 		showmsg($ac_arr[$ac] . ($rs ? '成功' : '失败'), "/?m=user&a=editshop");
 	} else {

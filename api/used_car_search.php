@@ -2,9 +2,6 @@
 if (!defined('APP_IN')) exit('Access Denied');
 $page_size = isset($_REQUEST['page_size']) ? intval($_REQUEST['page_size']) : 20;
 
-// 总数
-$pagecount = $db->row_count('cars');
-
 $where = 'issell=0 and isshow=1';
 
 $arr_p = array('1' => '3万以下', '2' => '3-5万', '3' => '5-10万', '4' => '10-15万', '5' => '15-20万', '6' => '20-30万', '7' => '30-50万', '8' => '50万以上');

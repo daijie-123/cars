@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="static/css/admin/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="static/js/jquery.js"></script>
+<link rel="stylesheet" href="admin/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="admin/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="admin/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript" src="static/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		//表单验证
+		$(".newsform").Validform({
+			tiptype:3
+		});
+	});
+	KindEditor.ready(function(K) {
+		editor1 = K.create('textarea[name="desc"]', {
+		resizeType : 1,
+		allowPreviewEmoticons : false,
+		allowImageUpload : false,
+		uploadJson : 'index.php?m=upload',
+		fileManagerJson : '<{$adminpage}>?m=upload_manager',
+		allowFileManager : true,
+		items : [
+                'undo', 'redo', '|', 'justifyleft', 'justifycenter', 'justifyright',
+				'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', '|', 'bold',
+				'italic', 'underline']
+		});
+	});
+	KindEditor.ready(function(K) {
+		var editor = K.editor({
+			uploadJson : 'index.php?m=upload',
+			fileManagerJson : '<{$adminpage}>?m=upload_manager',
+			allowFileManager : true,
+		});
+		K('#image1').click(function() {
+			editor.loadPlugin('image', function() {
+				editor.plugin.imageDialog({
+					imageUrl : K('#url1').val(),
+					clickFn : function(url, title, width, height, border, align) {
+						K('#url1').val(url);
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+	});
+</script>
+</head>
+<body>
+<div class="colorarea01">
+	<div class="search clearfix">
+		<div class="searchL">
+			<ul class="menulist">
+				<li><a href="<{$adminpage}>?m=dealer_recruitment&a=list" class="list">返回招聘列表</a></li>
+			</ul>
+		</div>
+	</div>
+	<form name="form" class="newsform" method="post" action="<{$adminpage}>?m=dealer_recruitment">
+		<table cellspacing="0" cellpadding="0" width="100%"  class="maintable">
+			<tr>
+				<th>招聘商家：</th>
+				<td>
+                    <select name="user_id" datatype="n" nullmsg="请选择商家！">
+                        <{$select_dealer}>
+                    </select>
+                </td>
+			</tr>
+			<tr>
+				<th>招聘标题：</th>
+				<td><input name="title" type="text" size="80" value="<{$recruitment.title}>"/></td>
+			</tr>
+			<tr>
+				<th>标签：</th>
+				<td><input name="label" type="text" size="80" value="<{$recruitment.label}>"/><span class="gray">多个标签以'|'分隔</span></td>
+			</tr>
+			<tr>
+                <th>工作经验：</th>
+                <td>
+                    <select name="experience" datatype="n" nullmsg="请选择工作经验！">
+                        <{$select_experience}>
+                    </select>
+                </td>
+            </tr>
+			<tr>
+                <th>学历要求：</th>
+                <td>
+                    <select name="education" datatype="n" nullmsg="请选择学历要求！">
+                        <{$select_education}>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>月薪范围：</th>
+                <td width="180">
+                    <input id="" name="wage_min" type="number" value="<{$recruitment.wage_min}>"> 至
+                    <input id="" name="wage_max" type="number" value="<{$recruitment.wage_max}>">
+                    <span class="gray">单位k, 不填则是面议</span>
+                </td>
+            </tr>
+            <tr>
+                <th>联系电话：</th>
+                <td><input name="tel" type="number" size="20" value="<{$recruitment.tel}>"/></td>
+            </tr>
+			<tr>
+				<th>内容：</th>
+				<td><textarea id="editor1" cols="80" name="desc" rows="20" style="width:800px;height:300px;"><{$recruitment.desc}></textarea></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><div class="buttons">
+						<input type="submit" name="thevaluesubmit" value="提交保存" class="submit">
+						<input type="hidden" name="a" value="<{$ac}>">
+						<input type="hidden" name="id" value="<{$recruitment.id}>">
+						<input type="hidden" name="page" value="<{$page_g}>">
+					</div></td>
+			</tr>
+		</table>
+	</form>
+</div>
+</body>
+</html>

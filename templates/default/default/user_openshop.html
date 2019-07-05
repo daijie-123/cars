@@ -1,3 +1,64 @@
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=UFUBZ-D7F6F-BWKJS-J4AN5-A5V72-KWBYX&libraries=place"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#codeAddress').click(function () {
+                var address = document.getElementById("address").value;
+                //通过getLocation();方法获取位置信息值
+                geocoder.getLocation(address);
+            });
+
+            var lat = <{$user.lat}>;
+            var lon = <{$user.lon}>;
+            var marker = 0;
+
+            //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
+            var map = new qq.maps.Map(document.getElementById("container"));
+            map.zoomTo(10);
+
+            if (lat && lon) {
+                map.panTo(new qq.maps.LatLng(lat, lon));
+
+                marker = new qq.maps.Marker({
+                    position: new qq.maps.LatLng(lat, lon),
+                    map: map
+                });
+            } else {
+                map.panTo(new qq.maps.LatLng(36.06190827662768, 120.38500785827637));
+            }
+
+            qq.maps.event.addListener(
+                map,
+                'click',
+                function (event) {
+                    // alert('您点击的位置为:[' + event.latLng.getLng() +
+                    // ',' + event.latLng.getLat() + ']');
+                    getLatLng(new qq.maps.LatLng(event.latLng.getLat(), event.latLng.getLng()))
+                }
+            );
+            //调用地址解析类
+            geocoder = new qq.maps.Geocoder({
+                complete: function (result) {
+                    map.setCenter(result.detail.location);
+                    getLatLng(result.detail.location)
+                }
+            });
+
+            function getLatLng(latLng) {
+                if (marker) {
+                    marker.setPosition(latLng)
+                } else {
+                    marker = new qq.maps.Marker({
+                        position: latLng,
+                        map: map
+                    });
+                }
+                // latLng.getLat(), latLng.getLng()
+                // $("#lat_lon").val(latLng.toString());
+                $("#lon").val(latLng.getLng())
+                $("#lat").val(latLng.getLat())
+            }
+        })
+</script>
 <form name="form1" class="carform" method="post" action="index.php?m=user">
                 <table width="100%" border="0" cellpadding="5" cellspacing="0" class="maintable">
 					<tr>
@@ -14,7 +75,27 @@
                     </tr>
 					<tr>
                         <td align="right">公司地址：</td>
-                        <td><input name="address" type="text" value="<{$user.address}>" size="50" class="inp01"  datatype="s" nullmsg="请填写公司地址！"/></td>
+                        <td><input id="address" name="address" type="text" value="<{$user.address}>" size="50" class="inp01"  datatype="s" nullmsg="请填写公司地址！"/>
+                        <button id="codeAddress" type="button">搜索</button></td>
+                    </tr>
+                    <tr>
+                        <th>地图定位：</th>
+                        <td>
+                            <!--   定义地图显示容器   -->
+                            <div id="container" style="width:500px; height:300px"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>经度：</th>
+                        <td><input id="lon" type="text" name="lon" value="<{$user.lon}>" class="inp01"
+                                size="50" datatype="*" nullmsg="请填写公司地址经度！" ignore="ignore" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>纬度：</th>
+                        <td><input id="lat" type="text" name="lat" value="<{$user.lat}>" class="inp01"
+                                size="50" datatype="*" nullmsg="请填写公司地址纬度！" ignore="ignore" />
+                        </td>
                     </tr>
                     <tr>
                         <td align="right">联系人：</td>

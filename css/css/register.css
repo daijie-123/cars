@@ -1,0 +1,117 @@
+.m-register {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+.m-register .register-head {
+  width: 100%;
+  height: 12%;
+  border-bottom: 2px solid #204ff6;
+  position: relative;
+}
+.m-register .register-head .register-head-img {
+  display: inline-block;
+  height: 60%;
+  width: auto;
+  left: 2%;
+  top: 50%;
+  transform: translate(0%, -50%);
+  position: absolute;
+}
+.m-register .register-head .register-head-text {
+  display: inline-block;
+  height: auto;
+  width: auto;
+  right: 2%;
+  top: 50%;
+  transform: translate(0%, -50%);
+  position: absolute;
+  font-size: 14px;
+  color: #666;
+}
+.m-register .register-head .register-head-text a {
+  color: #204ff6;
+}
+.m-register .register-content {
+  width: 100%;
+  height: auto;
+  min-height: 75%;
+  border-bottom: 1px solid #eee;
+}
+.m-register .register-content .register-content-title {
+  width: 100%;
+  height: auto;
+  padding: 30px;
+  color: #204ff6;
+  font-size: 24px;
+  text-align: center;
+  padding-bottom: 15px;
+}
+.m-register .register-content .register-content-into {
+  width: 325px;
+  height: auto;
+
+  margin: 0 auto;
+  position: relative;
+}
+.m-register .register-content .register-content-into input,
+.m-register .register-content .register-content-into select {
+  width: 100%;
+  display: block;
+  font-size: 16px;
+  border: 0;
+  height: 40px;
+  outline: none;
+  border-bottom: 1px solid #eee;
+}
+.m-register .register-content .register-content-into span {
+  display: block;
+  height: 30px;
+  line-height: 42px;
+  font-size: 14px;
+  color: #666;
+  opacity: 1;
+}
+.m-register .register-content .register-content-into span i {
+  color: #e21515;
+}
+.m-register .register-content .register-content-into p {
+  font-size: 12px;
+  color: #e21515;
+  position: absolute;
+  right: -30%;
+  top: 50%;
+  transform: translate(0%, 50%);
+  display: none;
+}
+.m-register .register-content .warn {
+  border-bottom: 1px solid #e21515;
+}
+.m-register .register-content .register-content-btn {
+  display: block;
+  width: 275px;
+  height: 40px;
+  color: #fff;
+  background: #204ff6;
+  text-align: center;
+  line-height: 40px;
+  margin: 30px auto;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.m-register .register-footer {
+  width: 100%;
+  height: 12%;
+  text-align: center;
+  font-size: 14px;
+  padding-top: 2.4%;
+}
+@media screen and (max-width: 1366px) {
+  .m-register .register-header {
+    width: 100%;
+    height: 12%;
+  }
+  .m-register .register-header .register-contaner {
+    padding-top: .7%;
+  }
+}

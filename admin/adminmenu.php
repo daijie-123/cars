@@ -29,13 +29,13 @@
 		<li><a href="<?php echo WEB_PATH?>?m=activity&a=add" target="report_iframe">添加活动</a></li>
 	</ul>
 </div>
-<!-- <div class="sidebar">
+<div class="sidebar">
 	<h3><span class="title">新闻管理</span></h3>
 	<ul class="hide">
 		<li><a href="<?php echo WEB_PATH?>?m=news_category&a=list" target="report_iframe">分类管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=news&a=list" target="report_iframe">新闻管理</a></li>
 	</ul>
-</div> -->
+</div>
 <div class="sidebar">
 	<h3><span class="title">会员管理</span></h3>
 	<ul class="hide">
@@ -52,6 +52,7 @@
 	<ul class="hide">
 		<li><a href="<?php echo WEB_PATH?>?m=dealer&a=list" target="report_iframe">商家管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=dealer_category&a=list" target="report_iframe">商家类型管理</a></li>
+		<li><a href="<?php echo WEB_PATH?>?m=dealer_recruitment&a=list" target="report_iframe">招聘管理</a></li>
 	</ul>
 </div>
 <!-- <div class="sidebar">
@@ -82,6 +83,7 @@
         <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=6" target="report_iframe">维权专区页轮播图</a></li>
         <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=7" target="report_iframe">金标公益轮播图</a></li>
         <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=8" target="report_iframe">自驾俱乐部轮播图</a></li>
+        <li><a href="<?php echo WEB_PATH?>?m=agency_service&a=list" target="report_iframe">车管服务</a></li>
 
 	</ul>
 </div>

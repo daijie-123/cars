@@ -104,10 +104,10 @@ function showmsg($msg, $url = -1, $is_frame = 0, $time = 2) {
     <h1>提示信息</h1>
     <p class=\"msgp\"><span class=\"msg\"> {$msg}</span> </p>
     <p class=\"notice\"><a href=\"{$url}\">如果{$time}秒后您的浏览器没有自动跳转，请点击这里</a></p>
+	<script language=\"javascript\">setTimeout(\"{$func}\",{$time}*1000);<{$addslashes}/script>
     </div>
 	</div>
     </body>";
-	// <script language=\"javascript\">setTimeout(\"{$func}\",{$time}*1000);<{$addslashes}/script>
 	$str = str_replace(array("\r", "\n"), '', $str);
 	if ($is_frame) {
 		echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
