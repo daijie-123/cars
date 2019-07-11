@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="static/css/admin/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="static/js/jquery.js"></script>
+<link rel="stylesheet" href="admin/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="admin/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="admin/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript" src="static/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		//表单验证
+		$(".newsform").Validform({
+			tiptype:3
+		});
+	});
+	KindEditor.ready(function(K) {
+		editor1 = K.create('textarea[name="info"]', {
+		resizeType : 1,
+		allowPreviewEmoticons : false,
+		allowImageUpload : false,
+		uploadJson : 'index.php?m=upload',
+		fileManagerJson : '<{$adminpage}>?m=upload_manager',
+		allowFileManager : true,
+		items : [
+				'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+				'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+				'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+				'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+				'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+				'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+				'anchor', 'link', 'unlink', '|', 'about']
+		});
+	});
+	KindEditor.ready(function(K) {
+		var editor = K.editor({
+			uploadJson : 'index.php?m=upload',
+			fileManagerJson : '<{$adminpage}>?m=upload_manager',
+			allowFileManager : true,
+		});
+		K('#image1').click(function() {
+			editor.loadPlugin('image', function() {
+				editor.plugin.imageDialog({
+					imageUrl : K('#url1').val(),
+					clickFn : function(url, title, width, height, border, align) {
+						K('#url1').val(url);
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+	});
+</script>
+</head>
+<body>
+<div class="colorarea01">
+	<div class="search clearfix">
+		<div class="searchL">
+			<ul class="menulist">
+				<li><a href="<{$adminpage}>?m=talents&a=list" class="list">返回人才列表</a></li>
+			</ul>
+		</div>
+	</div>
+	<form name="form" class="newsform" method="post" enctype="multipart/form-data" action="<{$adminpage}>?m=talents">
+		<table cellspacing="0" cellpadding="0" width="100%"  class="maintable">
+            <tr>
+                <th>所属公司：</th>
+                <td>
+                    <select name="user_id" datatype="n" nullmsg="请选择商家！">
+                    <{$select_dealer}>
+                    </select>
+                </td>
+            </tr>
+			<tr>
+				<th>类型：</th>
+				<td>
+                    <select name="type_id" datatype="n" nullmsg="请选择人才类型！">
+                    <{$select_talents_type}>
+                    </select>
+                </td>
+			</tr>
+			<tr>
+				<th>姓名：</th>
+				<td><input type="text" name="name" value="<{$talents.name}>" class="inp01"
+                    datatype="s" nullmsg="请填写姓名！" /></td>
+			</tr>
+            <tr>
+				<th>电话：</th>
+				<td><input type="text" name="tel" value="<{$talents.tel}>" size="20"
+                    class="inp01" datatype="m" nullmsg="请输入手机号！" errormsg="请输入正确的手机号！" /></td>
+			</tr>
+            <tr>
+				<th>从业时间：</th>
+				<td><input type="text" name="experience" value="<{$talents.experience}>" size="20"
+                    class="inp01" datatype="s" nullmsg="请输入从业时间！"/>
+                    <span class="gray">单位年</span>
+                </td>
+			</tr>
+			<tr>
+				<th>证件编号：</th>
+				<td><input name="cert_no" type="text" size="30" value="<{$talents.cert_no}>" datatype="s" nullmsg="请填写证书编号！"/></td>
+			</tr>
+			<tr>
+				<th>头像：</th>
+				<td><input type="text" name="logo" id="url1" value="<{$talents.logo}>" />
+                    <input type="button" id="image1" value="选择图片" />
+                    <span class="gray">建议 80*80px</span>
+                </td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><div class="buttons">
+						<input type="submit" name="thevaluesubmit" value="提交保存" class="submit">
+						<input type="hidden" name="a" value="<{$ac}>">
+						<input type="hidden" name="id" value="<{$talents.id}>">
+						<input type="hidden" name="page" value="<{$page_g}>">
+					</div></td>
+			</tr>
+		</table>
+	</form>
+</div>
+</body>
+</html>

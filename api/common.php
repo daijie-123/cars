@@ -98,7 +98,7 @@ if($ac == 'mark_brand_list'){
         'collect' => '收藏操作不能为空',
     ];
     api_can_not_be_empty($arr_not_empty, $_POST);
-    if(!in_array($_POST['type'], ['car', 'activity'])) splash('', 100, 'type值不合法');
+    if(!in_array($_POST['type'], ['car', 'activity', 'recruitment'])) splash('', 100, 'type值不合法');
 
     $is_collect = $db->row_count('member_collect',"type='{$_POST['type']}' and data_id={$_POST['data_id']} and user_id={$_SESSION['USER_ID']}");
 

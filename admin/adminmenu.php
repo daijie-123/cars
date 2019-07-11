@@ -32,7 +32,7 @@
 <div class="sidebar">
 	<h3><span class="title">新闻管理</span></h3>
 	<ul class="hide">
-		<li><a href="<?php echo WEB_PATH?>?m=news_category&a=list" target="report_iframe">分类管理</a></li>
+		<!-- <li><a href="<?php echo WEB_PATH?>?m=news_category&a=list" target="report_iframe">分类管理</a></li> -->
 		<li><a href="<?php echo WEB_PATH?>?m=news&a=list" target="report_iframe">新闻管理</a></li>
 	</ul>
 </div>
@@ -52,6 +52,13 @@
 	<ul class="hide">
 		<li><a href="<?php echo WEB_PATH?>?m=dealer&a=list" target="report_iframe">商家管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=dealer_category&a=list" target="report_iframe">商家类型管理</a></li>
+	</ul>
+</div>
+<div class="sidebar">
+	<h3><span class="title">人才管理</span></h3>
+	<ul class="hide">
+		<li><a href="<?php echo WEB_PATH?>?m=talents&a=list" target="report_iframe">人才管理</a></li>
+		<li><a href="<?php echo WEB_PATH?>?m=talents_type&a=list" target="report_iframe">人才类型管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=dealer_recruitment&a=list" target="report_iframe">招聘管理</a></li>
 	</ul>
 </div>

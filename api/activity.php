@@ -29,7 +29,7 @@ if ($ac == 'index') {
 
     $where = "type={$_GET['type']}";
     include(INC_DIR . 'Page.class.php');
-    $Page = new Page($db->tb_prefix . 'activity', $where, 'id,title,sub_title,start_time,end_time,detail,mainpic,apply_maximum,apply_start_time,apply_end_time', $page_size, 'id desc');
+    $Page = new Page($db->tb_prefix . 'activity', $where, 'id,title,sub_title,start_time,end_time,detail,mainpic,apply_maximum,apply_start_time,apply_end_time', $page_size, 'end_time desc,id desc');
     $list = $Page->get_data();
     foreach ($list as &$activity) {
         if ($activity['mainpic']) {

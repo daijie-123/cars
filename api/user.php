@@ -35,23 +35,20 @@ else{
 }
 
 $ac_post_arr = ['updateMobilePhone' => '修改手机号', 'save_safeguard' => '提交维权'];
-$ac_get_arr = [];
+$ac_get_arr = ['my_apply' => '我的报名列表', 'my_safeguard' => '我的维权列表', 'my_collect' => '我的收藏'];
 // 当前操作
 $ac = $_REQUEST['a'];
 request_method_check($ac, $ac_get_arr, $ac_post_arr);
+// 我的报名
 if($ac == 'my_apply'){
     $page_size = isset($_REQUEST['page_size']) ? intval($_REQUEST['page_size']) : 20;
-    if(!in_array($_GET['type'], [1, 2])) splash('', 100, 'type参数不合法');
-
-    $where = "type={$_GET['type']}";
     include(INC_DIR . 'Page.class.php');
-    $Page = new Page($db->tb_prefix . 'activity', $where, 'id,title,sub_title,start_time,end_time,detail,mainpic,apply_maximum,apply_start_time,apply_end_time', $page_size, 'id desc');
+    $Page = new Page($db->tb_prefix . 'activity_user', "user_id={$_SESSION['USER_ID']}", 'activity_id', $page_size, 'created_time desc');
     $list = $Page->get_data();
+
     foreach ($list as &$activity) {
-        if ($activity['mainpic']) {
-            $activity['mainpic'] = upload_url_modify($activity['mainpic']);
-        }
-        // 已经申请的人数
+        $activity = $db -> row_select_one('activity', "id={$activity['activity_id']}", 'id,title,sub_title,start_time,end_time,detail,mainpic,apply_maximum,apply_start_time,apply_end_time');
+        $activity['mainpic'] = upload_url_modify($activity['mainpic']);
         $activity['apply_mum'] = $db->row_count('activity_user',"activity_id='{$activity['id']}'");
     }
     $total_num = $Page->total_num;
@@ -94,6 +91,90 @@ elseif($ac == 'save_safeguard'){
         // $insertid = $db->insert_id();
         splash();
 	}
+}
+elseif ($ac == "my_safeguard") {
+    $page_size = isset($_REQUEST['page_size']) ? intval($_REQUEST['page_size']) : 20;
+    $where = "user_id={$userinfo['id']}";
+    include(INC_DIR . 'Page.class.php');
+    $Page = new Page($db->tb_prefix . 'member_safeguard', $where, 'id,complain_company,car_allname,pics,addtime,status,kilometre,mediate_company', $page_size, 'id desc');
+    $list = $Page->get_data();
+    foreach ($list as &$safeguard) {
+        if ($safeguard['pics']) {
+            $safeguard['pics'] = json_decode($safeguard['pics'], true);
+            foreach ($safeguard['pics'] as &$value) {
+                $value = upload_url_modify($value);
+            }
+        }
+    }
+    $total_num = $Page->total_num;
+    $current_page = $Page->page;
+    $total_page = $Page->total_page;
+    splash([
+        'data_list' => $list,
+        'total_num' => $total_num,
+        'current_page' => $current_page,
+        'total_page' => $total_page,
+    ]);
+}
+// 我的收藏
+elseif ($ac == "my_collect") {
+    $page_size = isset($_REQUEST['page_size']) ? intval($_REQUEST['page_size']) : 20;
+    $arr_not_empty = [
+        'type' => '类型不能为空',
+    ];
+    api_can_not_be_empty($arr_not_empty, $_GET);
+    $type = $_GET['type'];
+    $where = "user_id={$userinfo['id']} and type='{$type}'";
+    include(INC_DIR . 'Page.class.php');
+    $Page = new Page($db->tb_prefix . 'member_collect', $where, 'id,data_id,addtime', $page_size, 'addtime desc,id desc');
+    $list = $Page->get_data();
+    $ids = implode(',', array_column($list, 'data_id'));
+    $addtime_list = array_column($list, 'addtime', 'data_id');
+
+    if($list){
+        if($type == 'car'){
+            $data_list = $db->row_select('cars', "p_id in ($ids)", 'p_id,p_mainpic,p_allname,p_kilometre,p_year,p_month,isrecom,p_addtime,p_price,p_newprice');
+
+            foreach ($data_list as &$value) {
+                // 是否新上
+                $value['new_arrival'] = ($value['p_addtime'] > (TIMESTAMP - (24 * 60 * 60))) ? 1 : 0;
+                $value['p_mainpic'] = upload_url_modify($value['p_mainpic'], 's');
+                $value['collect_addtime'] = $addtime_list[$value['p_id']];
+            }
+        }elseif($type == 'activity'){
+            $data_list = $db->row_select('activity', "id in ($ids)", 'id,title,sub_title,start_time,end_time,detail,mainpic,apply_maximum,apply_start_time,apply_end_time');
+
+            foreach ($data_list as &$value) {
+                if ($value['mainpic']) {
+                    $value['mainpic'] = upload_url_modify($value['mainpic']);
+                }
+                // 已经申请的人数
+                $value['apply_mum'] = $db->row_count('activity_user',"activity_id='{$value['id']}'");
+                $value['collect_addtime'] = $addtime_list[$value['id']];
+            }
+        }elseif($type == 'recruitment'){
+            $data_list = $db->row_select('dealer_recruitment', "id in ($ids)", 'id,user_id,title,wage_min,wage_max,experience,education,label,addtime');
+
+            foreach ($data_list as &$value) {
+                $value['label'] = explode('|', $value['label']);
+                $company = $db->row_select_one('member', "id={$value['user_id']}", 'company');
+                $value['company'] = $company['company'];
+                $value['collect_addtime'] = $addtime_list[$value['id']];
+            }
+        }
+
+        $addtime_list = array_column($data_list, 'collect_addtime');
+        array_multisort($addtime_list, SORT_DESC, $data_list);
+    }
+    $total_num = $Page->total_num;
+    $current_page = $Page->page;
+    $total_page = $Page->total_page;
+    splash([
+        'data_list' => $data_list,
+        'total_num' => $total_num,
+        'current_page' => $current_page,
+        'total_page' => $total_page,
+    ]);
 }
 // 修改手机号
 elseif ($ac == 'updateMobilePhone') {
