@@ -30,10 +30,19 @@
 	</ul>
 </div>
 <div class="sidebar">
-	<h3><span class="title">新闻管理</span></h3>
+	<h3><span class="title">红色驿站</span></h3>
 	<ul class="hide">
 		<!-- <li><a href="<?php echo WEB_PATH?>?m=news_category&a=list" target="report_iframe">分类管理</a></li> -->
-		<li><a href="<?php echo WEB_PATH?>?m=news&a=list" target="report_iframe">新闻管理</a></li>
+		<li><a href="<?php echo WEB_PATH?>?m=news&a=list" target="report_iframe">红色驿站</a></li>
+	</ul>
+</div>
+<div class="sidebar">
+	<h3><span class="title">特色青岛</span></h3>
+	<ul class="hide">
+		<li><a href="<?php echo WEB_PATH?>?m=restaurant_category&a=list" target="report_iframe">美食店分类</a></li>
+        <li><a href="<?php echo WEB_PATH?>?m=restaurant&a=list" target="report_iframe">美食店管理</a></li>
+        <li><a href="<?php echo WEB_PATH?>?m=filmstrip&a=list&typeid=9" target="report_iframe">特色青岛轮播图</a></li>
+
 	</ul>
 </div>
 <div class="sidebar">

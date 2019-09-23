@@ -11,7 +11,7 @@ $iv = $_POST['iv'];
 if (!$code || !$encrypted_data || !$iv) {
     splash('', 100, '参数不合法');
 }
-
+ 
 $params = [
     'appid' => $commoncache['settings']['miniprogram_app_id'],
     'secret' => $commoncache['settings']['miniprogram_app_secret'],

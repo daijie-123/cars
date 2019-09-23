@@ -1,0 +1,234 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title></title>
+    <link href="static/css/admin/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="static/js/common.js"></script>
+    <script type="text/javascript" src="static/js/jquery.js"></script>
+    <script type="text/javascript" src="static/js/Validform_v5.3.2_min.js"></script>
+    <link rel="stylesheet" href="admin/kindeditor/themes/default/default.css" />
+    <script charset="utf-8" src="admin/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="admin/kindeditor/lang/zh_CN.js"></script>
+
+    <link rel="stylesheet" href="/static/datetimepicker/jquery.datetimepicker.css" />
+    <script type="text/javascript" src="/static/datetimepicker/jquery.datetimepicker.js"></script>
+
+    <script charset="utf-8"
+        src="https://map.qq.com/api/js?v=2.exp&key=UFUBZ-D7F6F-BWKJS-J4AN5-A5V72-KWBYX&libraries=place"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // $('#opening_time').datetimepicker(
+            //     {
+            //         format: 'H:i',
+            //         value : <{if $activity.opening_time}>'<{$activity.opening_time|date_format:"%Y-%m-%d %H:%M"}>'<{else}>false<{/if}>
+            //     }
+            // );
+            // $('#closing_time').datetimepicker(
+            //     {
+            //         format: 'H:i',
+            //         // showupdown: true,
+            //         value : <{if $activity.closing_time}>'<{$activity.closing_time|date_format:"%Y-%m-%d %H:%M"}>'<{else}>false<{/if}>
+
+            //     }
+            // );
+            //表单验证
+            $(".addmember").Validform({
+                tiptype: 3
+            });
+            $('#codeAddress').click(function () {
+                var address = document.getElementById("address").value;
+                //通过getLocation();方法获取位置信息值
+                geocoder.getLocation(address);
+            });
+
+            var lat = <{
+                $restaurant.lat
+            }>;
+            var lon = <{
+                $restaurant.lon
+            }>;
+            var marker = 0;
+
+            //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
+            var map = new qq.maps.Map(document.getElementById("container"));
+            map.zoomTo(10);
+
+            if (lat && lon) {
+                map.panTo(new qq.maps.LatLng(lat, lon));
+
+                marker = new qq.maps.Marker({
+                    position: new qq.maps.LatLng(lat, lon),
+                    map: map
+                });
+            } else {
+                map.panTo(new qq.maps.LatLng(36.06190827662768, 120.38500785827637));
+            }
+
+            qq.maps.event.addListener(
+                map,
+                'click',
+                function (event) {
+                    // alert('您点击的位置为:[' + event.latLng.getLng() +
+                    // ',' + event.latLng.getLat() + ']');
+                    getLatLng(new qq.maps.LatLng(event.latLng.getLat(), event.latLng.getLng()))
+                }
+            );
+            //调用地址解析类
+            geocoder = new qq.maps.Geocoder({
+                complete: function (result) {
+                    map.setCenter(result.detail.location);
+                    getLatLng(result.detail.location)
+                }
+            });
+
+            function getLatLng(latLng) {
+                if (marker) {
+                    marker.setPosition(latLng)
+                } else {
+                    marker = new qq.maps.Marker({
+                        position: latLng,
+                        map: map
+                    });
+                }
+                // latLng.getLat(), latLng.getLng()
+                // $("#lat_lon").val(latLng.toString());
+                $("#lon").val(latLng.getLng())
+                $("#lat").val(latLng.getLat())
+            }
+
+        });
+        KindEditor.ready(function (K) {
+            var editor = K.editor({
+                uploadJson: '<{$adminpage}>?m=upload',
+                fileManagerJson: '<{$adminpage}>?m=upload_manager',
+                allowFileManager: true,
+            });
+            K('#image1').click(function () {
+                editor.loadPlugin('image', function () {
+                    editor.plugin.imageDialog({
+                        imageUrl: K('#url1').val(),
+                        clickFn: function (url, title, width, height, border, align) {
+                            K('#url1').val(url);
+                            editor.hideDialog();
+                        }
+                    });
+                });
+            });
+            K('#image2').click(function () {
+                editor.loadPlugin('image', function () {
+                    editor.plugin.imageDialog({
+                        imageUrl: K('#url2').val(),
+                        clickFn: function (url, title, width, height, border, align) {
+                            K('#url2').val(url);
+                            editor.hideDialog();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="colorarea01">
+        <div class="search clearfix">
+            <div class="searchL">
+                <ul class="menulist">
+                    <li><a href="<{$adminpage}>?m=restaurant&a=list" class="list">返回美食店列表</a></li>
+                </ul>
+            </div>
+        </div>
+        <form name="form1" class="addmember" method="post" action="<{$adminpage}>?m=restaurant">
+
+            <table cellspacing="0" cellpadding="0" width="100%" class="maintable">
+                <tr>
+                    <th>名称：</th>
+                    <td>
+                        <input type="text" name="name" value="<{$restaurant.name}>" datatype="s2-60" errormsg="名称至少2个字符,最多18个字符！">
+                    </td>
+                </tr>
+                <tr>
+                    <th>分类：</th>
+                    <td>
+                        <{foreach from=$select_category item=category}>
+                        <input type="checkbox" name="category_id[]" value="<{$category.id}>" <{if in_array($category.id, $is_select_category)}>checked<{/if}>> <{$category.name}> &nbsp;&nbsp;
+                        <{/foreach}>
+                    </td>
+                </tr>
+                <tr>
+                    <th>店铺logo：</th>
+                    <td><input type="text" name="logo" id="url2" value="<{$restaurant.logo}>" />
+                        <input type="button" id="image2" value="选择图片" class="uploadbutton" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>人均消费：</th>
+                    <td><input type="text" name="consume" value="<{$restaurant.consume}>" datatype="*" nullmsg="请填写人均消费！"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>营业时间：</th>
+                    <td width="180">
+                        <input id="" name="opening_time" value="<{$restaurant.opening_time}>" type="time" >
+                        至
+                        <input id="" name="closing_time" value="<{$restaurant.closing_time}>" type="time" >
+                    </td>
+                </tr>
+                <tr>
+                    <th>店铺地址：</th>
+                    <td><input id="address" type="text" name="address" value="<{$restaurant.address}>" class="inp01" size="50"
+                            datatype="*" nullmsg="请填写公司地址！" ignore="ignore" />
+                        <button id="codeAddress" type="button">搜索</button></td>
+                </tr>
+                <tr>
+                    <th>地图定位：</th>
+                    <td>
+                        <!--   定义地图显示容器   -->
+                        <div id="container" style="width:500px; height:300px"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>经度：</th>
+                    <td><input id="lon" type="text" name="lon" value="<{$restaurant.lon}>" class="inp01" size="50"
+                            datatype="*" nullmsg="请填写公司地址经度！" ignore="ignore" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>纬度：</th>
+                    <td><input id="lat" type="text" name="lat" value="<{$restaurant.lat}>" class="inp01" size="50"
+                            datatype="*" nullmsg="请填写公司地址纬度！" ignore="ignore" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>联系电话：</th>
+                    <td colspan="3">
+                        <input type="text" name="tel" value="<{$restaurant.tel}>" size="20" class="inp01"
+                            datatype="m" errormsg="请输入正确的手机号！" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>是否推荐：</th>
+                    <td><input type="radio" name="isrecom" value="1" <{if $restaurant.isrecom==1}>checked<{/if}>>是&nbsp;&nbsp;
+                    <input type="radio" name="isrecom" value="0" <{if empty($restaurant.isrecom)}>checked<{/if}>>否
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <div class="buttons">
+                            <input type="submit" name="thevaluesubmit" value="提交保存" class="submit">
+                            <input type="hidden" name="a" value="<{$ac}>">
+                            <input type="hidden" name="id" value="<{$restaurant.id}>">
+                            <input type="hidden" name="page" value="<{$page_g}>">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+
+</html>
