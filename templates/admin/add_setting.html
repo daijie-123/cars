@@ -4,6 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 <link href="static/css/admin/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="static/js/jquery.js"></script>
+<script type="text/javascript" src="static/js/common.js"></script>
 <script charset="utf-8" src="admin/kindeditor/kindeditor-min.js"></script>
 <link rel="stylesheet" href="admin/kindeditor/themes/default/default.css" />
 <script charset="utf-8" src="admin/kindeditor/lang/zh_CN.js"></script>
@@ -43,6 +45,17 @@
 					imageUrl : K('#car_trade_contract_url').val(),
 					clickFn : function(url, title, width, height, border, align) {
 						K('#car_trade_contract_url').val(url);
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+		K('#car_assessment_report_image').click(function() {
+			editor.loadPlugin('image', function() {
+				editor.plugin.imageDialog({
+					imageUrl : K('#car_assessment_report_url').val(),
+					clickFn : function(url, title, width, height, border, align) {
+						K('#car_assessment_report_url').val(url);
 						editor.hideDialog();
 					}
 				});
@@ -243,6 +256,13 @@
             </td>
 		</tr>
 		<tr>
+			<th>上传评估报告：</th>
+			<td>
+                <input type="text" name="car_assessment_report" id="car_assessment_report_url" value="<{$setting.car_assessment_report}>" />
+                <input type="button" id="car_assessment_report_image" value="选择图片" />
+            </td>
+		</tr>
+		<tr>
 			<th>评估报告电话：</th>
 			<td><input name="vehicle_evaluation_tel" type="text" size="60"  value="<{$setting.vehicle_evaluation_tel}>" /></td>
 		</tr>
@@ -265,4 +285,12 @@
 	</table>
 </div>
 </body>
+<script type="text/javascript">
+    function chksubmit()
+    {
+        var a = new Array();
+        // a['username'] = '请填写用户名';
+        return arr_not_empty(a);
+    }
+    </script>
 </html>

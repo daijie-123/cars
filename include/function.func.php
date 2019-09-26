@@ -681,6 +681,7 @@ function splash($data = '', $code = 0, $msg = '')
             'desc' => '无效的操作方法',
         ],
     ];
+    header('Content-Type: application/json;charset=UTF-8');
 
     echo json_encode([
         'code' => $code,

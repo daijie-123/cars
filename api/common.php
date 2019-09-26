@@ -85,6 +85,7 @@ if($ac == 'mark_brand_list'){
     $settings  = $commoncache['settings'];
     splash([
         'car_trade_contract' => upload_url_modify($settings['car_trade_contract']),
+        'car_assessment_report' => upload_url_modify($settings['car_assessment_report']),
         'vehicle_evaluation_tel' => $settings['vehicle_evaluation_tel'],
         'query_traffic_violations_tel' => $settings['query_traffic_violations_tel'],
         'accident_rescue_tel' => $settings['accident_rescue_tel'],
@@ -132,8 +133,12 @@ if($ac == 'mark_brand_list'){
         }
     }
 }else if($ac == 'agency_service'){
+    $arr_not_empty = [
+        'type' => 'type不能为空',
+    ];
+    api_can_not_be_empty($arr_not_empty, $_GET);
     $page_size = isset($_REQUEST['page_size']) ? intval($_REQUEST['page_size']) : 20;
-    $where = "1=1";
+    $where = "type={$_GET['type']}";
     include(INC_DIR . 'Page.class.php');
     $Page = new Page($db->tb_prefix . 'agency_service', $where, '*', $page_size, 'orderid desc, id desc');
     $list = $Page->get_data();

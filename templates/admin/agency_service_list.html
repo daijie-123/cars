@@ -18,6 +18,7 @@
 		<table cellspacing="0" cellpadding="0" width="100%" class="listtable">
 			<tr>
 				<th width="30">选择</th>
+				<th>类型</th>
 				<th>排序</th>
 				<th>图标</th>
 				<th>名称</th>
@@ -27,7 +28,8 @@
 			</tr>
 			<{foreach from=$filmlist item=filmlist}>
 			<tr>
-				<td align="center"><input type="checkbox" name="bulkid[]" value="<{$filmlist.id}>"></td>
+                <td align="center"><input type="checkbox" name="bulkid[]" value="<{$filmlist.id}>"></td>
+                <td align="left"><{if $filmlist.type == 1}>代办服务<{elseif $filmlist.type == 2}>检车服务<{elseif $filmlist.type == 3}>保险服务<{elseif $filmlist.type == 4}>金融服务<{elseif $filmlist.type == 5}>洗车服务<{/if}></td>
 				<td align="center" width="50"><input type="text" size="5" name="orderid[<{$filmlist.id}>]" value="<{$filmlist.orderid}>" class="ip01"/></td>
 				<td align="center"><{if $filmlist.logo != "" }><img src="<{$filmlist.logo}>" width="100"/><{else}><{/if}></td>
 				<td align="left"><{$filmlist.name}></td>

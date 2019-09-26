@@ -54,7 +54,7 @@ elseif ($ac == 'add' || $ac == 'edit')
     //添加或修改
     if (submitcheck('a'))
     {
-        $post = post('logo','name', 'tel', 'address', 'orderid');
+        $post = post('logo','name', 'tel', 'address', 'orderid', 'type');
         // if(!empty($_FILES['upload']['name'])){
         //     $newname = time();
 		// 	$post['pic'] = upload_pic($newname,1,'common/');

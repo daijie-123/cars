@@ -26,6 +26,9 @@ if ($ac == 'list')
     $list = $Page->get_data();
 	$page = $Page -> page;
 	foreach($list as &$value){
+        $type = $db->row_select_one('talents_type', "id={$value['type_id']}", 'name');
+        $value['type'] = $type['name'];
+        
         $company = $db->row_select_one('member', "id={$value['user_id']}", 'company');
         $value['company'] = $company['company'];
 	}
@@ -78,7 +81,7 @@ elseif ($ac == 'add' || $ac == 'edit')
         // {
         //     $_POST[$v] = htmlspecialchars($_POST[$v]);
         // }
-        $post = post('title','user_id','n_author','label','experience','education','wage_min','wage_max', 'desc', 'tel');
+        $post = post('title','user_id','n_author','label','experience','education','wage_min','wage_max', 'desc', 'tel', 'type_id');
 
         if ($ac == 'add')
         {
@@ -107,6 +110,9 @@ elseif ($ac == 'add' || $ac == 'edit')
 
         $select_education = select_make($data['education'], [0 => '全部', 1 => '不限', 2 => '初中', 3 => '中技', 4 => '高中', 5 => '中专', 6 => '大专', 7 => '本科', 8 => '硕士', 9 => '博士'], "请选择学历要求");
 
+        $talents_type = $db->row_select('talents_type', "1=1", 'id,name', 0, 'id desc');
+        $select_talents_type = select_make($data['type_id'], get_array($talents_type, 'id', 'name'), "请选择人才类型");
+		$tpl->assign( 'select_talents_type', $select_talents_type );
 		$tpl->assign( 'select_dealer', $select_dealer );
 		$tpl->assign( 'select_experience', $select_experience );
 		$tpl->assign( 'select_education', $select_education );

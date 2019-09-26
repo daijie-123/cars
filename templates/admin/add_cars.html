@@ -139,8 +139,13 @@ KindEditor.ready(function(K) {
 				<td><select name="p_model">
 						<{$select_model}>
 					</select></td>
-				<th></th>
-				<td></td>
+				<th>质保认证</th>
+				<td>
+                    <select name="certification">
+                        <option value="0" <{if !$cars.certification}>selected<{/if}>>否</option>
+                        <option value="1" <{if $cars.certification}>selected<{/if}>>是</option>
+                    </select>
+                </td>
 			</tr>
 			<tr>
 				<th>售价（不含过户费）：</th>

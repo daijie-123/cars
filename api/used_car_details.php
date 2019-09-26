@@ -5,7 +5,7 @@ $arr_not_empty = [
 ];
 api_can_not_be_empty($arr_not_empty, $_GET);
 $p_id = $_GET['id'];
-$data = $db->row_select_one('cars', "issell=0 and isshow=1 and p_id=" . $p_id, 'p_id,p_mainpic,p_pics,p_brand,p_subbrand,p_subsubbrand,p_allname,p_kilometre,p_year,p_month,isrecom,p_addtime,p_price,p_newprice,p_details,p_model,uid,p_color,p_gas,p_transmission,p_emission,p_country,p_hits');
+$data = $db->row_select_one('cars', "issell=0 and isshow=1 and p_id=" . $p_id, 'p_id,p_mainpic,p_pics,p_brand,p_subbrand,p_subsubbrand,p_allname,p_kilometre,p_year,p_month,isrecom,p_addtime,p_price,p_newprice,p_details,p_model,uid,p_color,p_gas,p_transmission,p_emission,p_country,p_hits,certification');
 if (!$data) {
     splash('', 100);
 }

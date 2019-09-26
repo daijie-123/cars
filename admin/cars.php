@@ -557,7 +557,7 @@ elseif ($ac == 'add' || $ac == 'edit') {
         can_not_be_empty($arr_not_empty, $_POST);
 
 
-        $post = post('p_no', 'p_brand', 'p_subbrand', 'p_subsubbrand', 'p_name', 'p_allname', 'p_price', 'p_newprice', 'p_tax', 'p_save', 'p_color', 'p_country', 'p_transmission', 'p_year', 'p_month', 'p_details', 'p_model', 'p_hits', 'p_gas', 'p_kilometre', 'p_addtime', 'listtime', 'issell', 'isshow', 'isrecom', 'issprecom', 'ishot', 'p_username', 'p_tel', 'p_emission');
+        $post = post('p_no', 'p_brand', 'p_subbrand', 'p_subsubbrand', 'p_name', 'p_allname', 'p_price', 'p_newprice', 'p_tax', 'p_save', 'p_color', 'p_country', 'p_transmission', 'p_year', 'p_month', 'p_details', 'p_model', 'p_hits', 'p_gas', 'p_kilometre', 'p_addtime', 'listtime', 'issell', 'isshow', 'isrecom', 'issprecom', 'ishot', 'p_username', 'p_tel', 'p_emission', 'certification');
 
         if ($settings['version'] == 3) {
             $post['aid'] = intval($_POST['aid']);

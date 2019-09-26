@@ -24,6 +24,10 @@ if ($ac == 'recruitment_list') {
     if (isset($_GET['education']) and $_GET['education'] <> 0) {
         $where .= " and education = " . $_GET['education'];
     }
+    
+    if (isset($_GET['type_id']) and $_GET['type_id'] <> 0) {
+        $where .= " and type_id = " . $_GET['type_id'];
+    }
 
     if (!empty($_GET['keywords'])) {
         $where .= " AND (`title` like '%" . $_GET['keywords'] . "%')";

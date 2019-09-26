@@ -1,5 +1,6 @@
 <?php
 $db_config['DB_HOST'] = '127.0.0.1'; //数据库地址
+$db_config['DB_PORT'] = '3306'; //数据库地址
 $db_config['DB_USER'] = 'root'; //mysql帐号
 $db_config['DB_PASS'] = 'asdf1234'; //mysql密码
 $db_config['DB_NAME'] = 'qzqcw'; //数据库名称

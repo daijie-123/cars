@@ -51,6 +51,19 @@
         <form name="form1" class="filmstripform" method="post" action="<{$adminpage}>?m=agency_service">
             <table cellspacing="0" cellpadding="0" width="100%" class="maintable">
                 <tr>
+                    <th>类型：</th>
+                    <td>
+                        <select name="type">
+                            <option value="">请选择</option>
+                            <option value="1" <{if $filmstrip.type == 1}>selected<{/if}>>代办服务</option>
+                            <option value="2" <{if $filmstrip.type == 2}>selected<{/if}>>检车服务</option>
+                            <option value="3" <{if $filmstrip.type == 3}>selected<{/if}>>保险服务</option>
+                            <option value="4" <{if $filmstrip.type == 4}>selected<{/if}>>金融服务</option>
+                            <option value="5" <{if $filmstrip.type == 5}>selected<{/if}>>洗车服务</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <th>图标：</th>
                     <td>
                         <input type="text" name="logo" id="url1" value="<{$filmstrip.logo}>" datatype="*"

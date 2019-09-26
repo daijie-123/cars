@@ -12,7 +12,7 @@ $tpl -> assign('ac_arr', $ac_arr);
 $tpl -> assign('ac', $ac);
 
 if (submitcheck('a')) {
-	$post = post('sitename', 'title', 'keywords', 'description', 'copyright', 'icp', 'address', 'postcode', 'fax', 'tel', 'email','htmldir','water','isdstimg','imgwidth','imgheight','thumbwidth','thumbheight','gas','transmission','color','year','issell','waterpic','logo','islimit','limitcount','position','contactman', 'miniprogram_app_id', 'miniprogram_app_secret', 'car_trade_contract', 'vehicle_evaluation_tel', 'query_traffic_violations_tel', 'accident_rescue_tel');
+	$post = post('sitename', 'title', 'keywords', 'description', 'copyright', 'icp', 'address', 'postcode', 'fax', 'tel', 'email','htmldir','water','isdstimg','imgwidth','imgheight','thumbwidth','thumbheight','gas','transmission','color','year','issell','waterpic','logo','islimit','limitcount','position','contactman', 'miniprogram_app_id', 'miniprogram_app_secret', 'car_trade_contract', 'vehicle_evaluation_tel', 'query_traffic_violations_tel', 'accident_rescue_tel', 'car_assessment_report');
 
 	if(isset($post['issell'])){
 		$post['issell'] = 1;
@@ -22,9 +22,15 @@ if (submitcheck('a')) {
 	}
 	foreach ($post as $k => $v) {
 		if (!in_array($k, array('smtp_port', 'smtp_password'))) {
-			$post[$k] = htmlspecialchars($v);
-		} elseif ($k == 'smtp_port') $post[$k] = intval($v);
-		$rs = $db -> row_update('settings', array('v' => $v), "k='{$k}'");
+			$v = htmlspecialchars($v);
+        } elseif ($k == 'smtp_port') $v = intval($v);
+
+        $keyCount = $db->row_count('settings', "k='{$k}'");
+        if($keyCount){
+            $rs = $db -> row_update('settings', array('v' => $v), "k='{$k}'");
+        }else{
+            $rs = $db->row_insert('settings', ['k' => $k, 'v' => $v]);
+        }
 		if (!$rs) showmsg("更新系统配置 {$k} 失败", -1);
     }
     clear_all_fzz_cache();

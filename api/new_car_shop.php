@@ -18,6 +18,9 @@ if ($ac == 'index') {
 } elseif ($ac == "shop_list") {
     $page_size = isset($_REQUEST['page_size']) ? intval($_REQUEST['page_size']) : 20;
     $where  = "isdealer=2 and shoptype=2 and ischeck=1";
+    if (!empty($_REQUEST['keywords'])) {
+        $where .= " AND (`nicname` like '%" . $_GET['keywords'] . "%' or `company` like '%" . $_GET['keywords'] . "%' or `shopdetail` like '%" . $_GET['keywords'] . "%')";
+    }
     include(INC_DIR . 'Page.class.php');
     $Page = new Page($db->tb_prefix . 'member', $where, 'id,company,logo,address,lat,lon,shop_score,shop_score', $page_size, 'id desc');
     $list = $Page->get_data();

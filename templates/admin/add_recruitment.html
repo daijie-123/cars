@@ -72,6 +72,14 @@
 			<tr>
 				<th>招聘标题：</th>
 				<td><input name="title" type="text" size="80" value="<{$recruitment.title}>"/></td>
+            </tr>
+            <tr>
+				<th>人才类型：</th>
+				<td>
+                    <select name="type_id" datatype="n" nullmsg="请选择人才类型！">
+                    <{$select_talents_type}>
+                    </select>
+                </td>
 			</tr>
 			<tr>
 				<th>标签：</th>
