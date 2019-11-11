@@ -1,4 +1,11 @@
 <div class="sidebar">
+	<h3><span class="title">新车管理</span></h3>
+	<ul class="hide">
+		<!-- <li><a href="<?php echo WEB_PATH?>?m=brand&a=add" target="report_iframe">品牌添加</a></li> -->
+		<li><a href="<?php echo WEB_PATH?>?m=cars&a=list&clear=1" target="report_iframe">新车列表</a></li>
+	</ul>
+</div>
+<div class="sidebar">
 	<h3><span class="title">二手车管理</span></h3>
 	<ul class="hide">
 		<!-- <li><a href="<?php echo WEB_PATH?>?m=brand&a=add" target="report_iframe">品牌添加</a></li> -->
@@ -69,6 +76,7 @@
 		<li><a href="<?php echo WEB_PATH?>?m=talents&a=list" target="report_iframe">人才管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=talents_type&a=list" target="report_iframe">人才类型管理</a></li>
 		<li><a href="<?php echo WEB_PATH?>?m=dealer_recruitment&a=list" target="report_iframe">招聘管理</a></li>
+		<li><a href="<?php echo WEB_PATH?>?m=dealer_recruitment&a=list" target="report_iframe">职业技能认证</a></li>
 	</ul>
 </div>
 <!-- <div class="sidebar">
