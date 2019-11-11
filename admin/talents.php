@@ -39,6 +39,7 @@ if ($ac == 'list')
 
         $company = $db->row_select_one('member', "id={$value['user_id']}", 'company');
         $value['company'] = $company['company'];
+        $value['golden'] = $value['golden']==1?'是':'否';
 	}
     $button_basic = $Page->button_basic();
     $button_select = $Page->button_select();
@@ -94,7 +95,7 @@ elseif ($ac == 'add' || $ac == 'edit')
         ];
         can_not_be_empty($arr_not_empty, $_POST);
 
-        $post = post('name','user_id','type_id','tel','experience','cert_no','logo');
+        $post = post('name','user_id','type_id','tel','experience','cert_no','golden','logo');
 
         if ($ac == 'add')
         {
